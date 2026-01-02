@@ -4,12 +4,6 @@
 #include <sstream>
 
 namespace breadbin::core {
-    std::string LoafFile::get_summary() const {
-        std::stringstream ss;
-        ss << "App: " << app_name << " (" << args.size() << " arguments) ";
-        return ss.str();
-    }
-
     bool LoafFile::save_to_file(const std::filesystem::path& path) const {
         YAML::Emitter out;
 
@@ -29,7 +23,7 @@ namespace breadbin::core {
 
             out << YAML::Key << "target" << YAML::Value << action.target;
 
-            out << YAML::Key << "args" << YAML::Value << action.BeginSeq;
+            out << YAML::Key << "args" << YAML::Value << YAML::BeginSeq;
             for (const auto& arg : action.args) {
                 out << arg;
             }
