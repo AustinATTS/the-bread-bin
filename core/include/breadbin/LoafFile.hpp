@@ -1,8 +1,13 @@
-//
-// Created by austin on 02/01/2026.
-//
+#pragma once
+#include <string>
+#include <vector>
 
-#ifndef THE_BREAD_BIN_LOAFFILE_HPP
-#define THE_BREAD_BIN_LOAFFILE_HPP
+namespace breadbin::core {
+    struct LoafFile {
+        std::string app_name;
+        std::vector<std::string> args;
 
-#endif //THE_BREAD_BIN_LOAFFILE_HPP
+        // Generic function to simulate use
+        std::string get_summary() const;
+    };
+} // namespace breadbin::core
