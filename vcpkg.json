@@ -12,6 +12,7 @@
         "opengl3-binding"
       ]
     },
-    "yaml-cpp"
+    "yaml-cpp",
+    "nativefiledialog-extended"
   ]
 }
