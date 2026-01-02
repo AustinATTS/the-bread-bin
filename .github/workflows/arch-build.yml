@@ -16,7 +16,7 @@ jobs:
       - name: Install System Dependencies
         run: |
           pacman -Syu --noconfirm
-          pacman -S --noconfirm base-devel cmake git glfw-x11 mesa yaml-cpp vcpkg ninja
+          pacman -S --noconfirm base-devel python python-pip cmake git glfw-x11 mesa yaml-cpp vcpkg ninja
 
       - name: Verify Ninja
         run: ninja --version
