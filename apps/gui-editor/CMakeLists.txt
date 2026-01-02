@@ -4,8 +4,10 @@ add_executable(breadbin-gui
 
 target_link_libraries(breadbin-gui PRIVATE
         breadbin_core
+        imgui::imgui
         glfw
-        OpenGL::GL)
+        OpenGL::GL
+)
 
 find_package(glfw3 REQUIRED)
 find_package(OpenGL REQUIRED)

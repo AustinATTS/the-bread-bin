@@ -8,6 +8,9 @@ set(CMAKE_CXX_COMPILER_LAUNCHER ccache)
 
 # Find external dependencies
 find_package(yaml-cpp REQUIRED)
+find_package(imgui CONFIG REQUIRED)
+find_package(glfw3 CONFIG REQUIRED)
+find_package(OpenGL REQUIRED)
 
 # Add modules
 add_subdirectory(core)
