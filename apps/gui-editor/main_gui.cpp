@@ -58,24 +58,73 @@ int main ( ) {
 
         ImGui::Begin("Bread Bin Editor");
 
-        if (ImGui::InputText("Application Name", name_buf, sizeof(name_buf))) {
-            current_loaf.app_name = name_buf;
+        if (ImGui::Button("+ Add Action")) {
+            current_loaf.actions.push_back({
+            breadbin::core::ActionType::App,
+            "",
+            {}
+            });
         }
 
-        if (ImGui::Button("+ Add Arg")) {
-            current_loaf.args.push_back("new_argument");
-        }
+        for (size_t i = 0; i < current_loaf.actions.size(); i++) {
+            auto& action = current_loaf.actions[i];
 
-        for (size_t i = 0; i < current_loaf.args.size(); i++) {
-            char arg_buf[128];
-            std::snprintf(arg_buf, sizeof(arg_buf), "%s", current_loaf.args[i].c_str());
-            if (ImGui::InputText(("##arg" + std::to_string(i)).c_str(), arg_buf, sizeof(arg_buf))) {
-                current_loaf.args[i] = arg_buf;
+            ImGui::PushID(static_cast<int>(i));
+
+            const char* type_labels[] = {"App", "File", "Link"};
+            int type_index = static_cast<int>(action.type);
+
+            std::string header = type_labels[type_index] + std::string(": ") + (action.target.empty() ? "<unset>" : action.target);
+
+            if (ImGui::CollapsingHeader(header.c_str(), ImGuiTreeNodeFlags_DefaultOpen)) {
+
+                if (ImGui::Combo("Type", &type_index, type_labels, IM_ARRAYSIZE(type_labels))) {
+                    action.type = static_cast<breadbin::core::ActionType>(type_index);
+                }
+
+                static char target_buf[256];
+                std::snprintf(target_buf, sizeof(target_buf), "%s", action.target.c_str());
+
+                if (ImGui::InputText("Target", target_buf, sizeof(target_buf))) {
+                    action.target = target_buf;
+                }
+
+                ImGui::Separator();
+                ImGui::Text("Arguments");
+
+                if (ImGui::Button("+ Add Arguments")) {
+                    action.args.push_back("");
+                }
+
+                for (size_t a = 0; a < action.args.size(); ++a) {
+                    ImGui::PushID(static_cast<int>(a));
+
+                    char arg_buf[128];
+                    std::snprintf(arg_buf, sizeof(arg_buf), "%s", action.args[a].c_str());
+
+                    if (ImGui::InputText("##arg", arg_buf, sizeof(arg_buf))) {
+                        action.args[a] = arg_buf;
+                    }
+
+                    ImGui::SameLine();
+                    if (ImGui::Button("Remove")) {
+                        action.args.erase(action.args.begin() + a);
+                        ImGui::PopID();
+                        break;
+                    }
+
+                    ImGui::PopID();
+                }
+
+                ImGui::Separator();
+                if (ImGui::Button("Remove Action")) {
+                    current_loaf.actions.erase(current_loaf.actions.begin() + i);
+                    ImGui::PopID();
+                    break;
+                }
             }
-            ImGui::SameLine();
-            if (ImGui::Button(("Remove##" + std::to_string(i)).c_str())) {
-                current_loaf.args.erase(current_loaf.args.begin() + i);
-            }
+
+            ImGui::PopID();
         }
 
         if (ImGui::Button("Save Loaf File")) {
