@@ -6,7 +6,6 @@
 #include <breadbin/LoafFile.hpp>
 #include <cstdio>
 #include <iostream>
-#include <stdio.h>
 
 int main ( ) {
     if (! glfwInit()) {
