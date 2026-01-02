@@ -1,8 +1,7 @@
 #include <iostream>
 #include <breadbin/LoafFile.hpp>
 
-int main()
-{
+int main() {
     // Create a LOAF object using the defined struct
     breadbin::core::LoafFile my_app;
     my_app.app_name = "The Bread Bin Editor";
