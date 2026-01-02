@@ -1,0 +1,92 @@
+Package: vcpkg-cmake-config
+Version: 2024-05-23
+Architecture: x64-linux
+Multi-Arch: same
+Abi: a74a68f637443a4c9114e8241c1188c97e5bff62ced9f1e6ad75174ce99d5c01
+Status: install ok installed
+
+Package: vcpkg-cmake
+Version: 2024-04-23
+Architecture: x64-linux
+Multi-Arch: same
+Abi: f7a89341b52c5705605f21355579f9ef25827840d871d58a144647d76a906f45
+Status: install ok installed
+
+Package: egl-registry
+Version: 2025-05-27
+Architecture: x64-linux
+Multi-Arch: same
+Abi: 08c8d3d7033d4022d8a366ff5c49da284fed1593fccf0bbbca74c343905a94cf
+Description: EGL API and Extension Registry
+Status: install ok installed
+
+Package: opengl-registry
+Version: 2025-10-23
+Depends: egl-registry
+Architecture: x64-linux
+Multi-Arch: same
+Abi: 74058ab63f9403b2a5757f3951d12e9f771eeac4841b5ceeee49b0e5160e537e
+Description: OpenGL, OpenGL ES, and OpenGL ES-SC API and Extension Registry
+Status: install ok installed
+
+Package: glad
+Version: 0.1.36
+Depends: egl-registry, opengl-registry, vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-linux
+Multi-Arch: same
+Abi: a4d12404986382644d2e651913fc0702c08e4854d3207d71df002e7195101218
+Description: Multi-Language Vulkan/GL/GLES/EGL/GLX/WGL Loader-Generator based on the official specs.
+Default-Features: loader
+Status: install ok installed
+
+Package: glad
+Feature: loader
+Architecture: x64-linux
+Multi-Arch: same
+Description: Generate loader logic.
+Status: install ok installed
+
+Package: glfw3
+Version: 3.4
+Port-Version: 1
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-linux
+Multi-Arch: same
+Abi: fa14cc449b3fd150eef1b9d0d2df8f7c41f6a7c25abf99c234e2ce5e30c9f508
+Description: GLFW is a free, Open Source, multi-platform library for OpenGL, OpenGL ES and Vulkan application development. It provides a simple, platform-independent API for creating windows, contexts and surfaces, reading input, handling events, etc.
+Status: install ok installed
+
+Package: imgui
+Version: 1.91.9
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-linux
+Multi-Arch: same
+Abi: 57db75de48669f61627a3fa179b5136205b74bc480f9f67c0fc6978640f93a80
+Description: Bloat-free Immediate Mode Graphical User interface for C++ with minimal dependencies.
+Status: install ok installed
+
+Package: imgui
+Feature: glfw-binding
+Depends: glfw3
+Architecture: x64-linux
+Multi-Arch: same
+Description: Make available GLFW binding
+Status: install ok installed
+
+Package: imgui
+Feature: opengl3-binding
+Architecture: x64-linux
+Multi-Arch: same
+Description: Make available OpenGL3/ES/ES2 (modern) binding
+Status: install ok installed
+
+Package: yaml-cpp
+Version: 0.8.0
+Port-Version: 3
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-linux
+Multi-Arch: same
+Abi: 6e6b3540173bb443e8e9afe00b2036cc07a011d8c593a72259b431655496c122
+Description: yaml-cpp is a YAML parser and emitter in C++ matching the YAML 1.2 spec.
+Status: install ok installed
+
