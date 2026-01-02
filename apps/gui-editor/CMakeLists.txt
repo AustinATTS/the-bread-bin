@@ -6,12 +6,6 @@ target_link_libraries(breadbin-gui PRIVATE
         breadbin_core
         imgui::imgui
         glfw
+        glad::glad
         OpenGL::GL
-)
-
-find_package(glfw3 REQUIRED)
-find_package(OpenGL REQUIRED)
-
-add_executable(breadbing-gui
-        main_gui.cpp
 )

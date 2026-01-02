@@ -7,5 +7,5 @@ target_include_directories(breadbin_core PUBLIC
 )
 
 target_link_libraries(breadbin_core PUBLIC
-        yaml-cpp
+        yaml-cpp::yaml-cpp
 )
