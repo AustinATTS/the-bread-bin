@@ -6,8 +6,8 @@
 #include <breadbin/LoafFile.hpp>
 #include <cstdio>
 
-int main() {
-    if (!glfwInit()) {
+int main ( ) {
+    if (! glfwInit()) {
         return -1;
     }
 
@@ -15,8 +15,8 @@ int main() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    GLFWwindow* window = glfwCreateWindow(1280, 720, "The Bread Bin - Editor", nullptr, nullptr);
-    if (!window) {
+    GLFWwindow * window = glfwCreateWindow(1280, 720, "The Bread Bin - Editor", nullptr, nullptr);
+    if (! window) {
         glfwTerminate();
         return -1;
     }
@@ -24,7 +24,7 @@ int main() {
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
 
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+    if (! gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         glfwDestroyWindow(window);
         glfwTerminate();
         return -1;
@@ -43,14 +43,14 @@ int main() {
     static char buf[128] = {};
     static bool initialized = false;
 
-    while (!glfwWindowShouldClose(window)) {
+    while (! glfwWindowShouldClose(window)) {
         glfwPollEvents();
 
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        if (!initialized) {
+        if (! initialized) {
             std::snprintf(buf, sizeof(buf), "%s", current_loaf.app_name.c_str());
             initialized = true;
         }
@@ -69,7 +69,7 @@ int main() {
         ImGui::Render();
 
         int display_w, display_h;
-        glfwGetFramebufferSize(window, &display_w, &display_h);
+        glfwGetFramebufferSize(window, & display_w, & display_h);
         glViewport(0, 0, display_w, display_h);
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
