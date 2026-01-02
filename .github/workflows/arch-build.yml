@@ -18,6 +18,9 @@ jobs:
           pacman -Syu --noconfirm
           pacman -S --noconfirm base-devel cmake git glfw-x11 mesa yaml-cpp vcpkg ninja
 
+      - name: Verify Ninja
+        run: ninja --version
+
       - name: Checkout Code
         uses: actions/checkout@v3
         with:
@@ -35,9 +38,11 @@ jobs:
       - name: Configure CMake
         run: |
           cmake -S . -B build \
-            -G Ninja \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_TOOLCHAIN_FILE=/usr/share/vcpkg/scripts/buildsystems/vcpkg.cmake
+          -G Ninja \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DCMAKE_TOOLCHAIN_FILE=/opt/vcpkg/scripts/buildsystems/vcpkg.cmake \
+          -DCMAKE_C_COMPILER=/usr/bin/gcc \
+          -DCMAKE_CXX_COMPILER=/usr/bin/g++
 
       - name: Build GUI Editor
         run: cmake --build build --target breadbin-gui --config Release
