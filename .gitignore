@@ -30,7 +30,7 @@ out/
 
 # IDE - Visual Studio (in case you open it there)
 .vs/
-vcpkg_installed/
+vcpkg/installed/
 *.sln
 *.vcxproj
 *.user
