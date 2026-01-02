@@ -8,7 +8,7 @@ namespace breadbin::core {
         YAML::Emitter out;
 
         out << YAML::BeginMap;
-        out << YAML::Key << "app_name" << YAML::Value << app_name;
+        out << YAML::Key << "name" << YAML::Value << name;
 
         out << YAML::Key << "actions" << YAML::Value << YAML::BeginSeq;
         for (const auto& action : actions) {

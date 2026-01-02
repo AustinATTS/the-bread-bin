@@ -17,7 +17,7 @@ namespace breadbin::core {
     };
 
     struct LoafFile {
-        std::string app_name;
+        std::string name;
         std::vector <Action> actions;
 
         // Generic function to simulate use
