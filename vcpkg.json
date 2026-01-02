@@ -2,8 +2,16 @@
   "name" : "the-bread-bin",
   "version-string" : "0.1.0",
   "builtin-baseline" : "af752f21c9d79ba3df9cb0250ce2233933f58486",
-  "dependencies" : [ "yaml-cpp", "glfw3", "opengl", {
-    "name" : "imgui",
-    "version>=" : "1.91.9"
-  } ]
+  "dependencies" : [
+    "glad",
+    "glfw3",
+    {
+      "name": "imgui",
+      "features": [
+        "glfw-binding",
+        "opengl3-binding"
+      ]
+    },
+    "yaml-cpp"
+  ]
 }
