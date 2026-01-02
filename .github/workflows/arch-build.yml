@@ -28,7 +28,8 @@ jobs:
 
       - name: Set up vcpkg
         run: |
-          export VCPKG_FORCE_SYSTEM_BINARIES=1
+          git clone https://github.com/microsoft/vcpkg.git /opt/vcpkg
+          /opt/vcpkg/bootstrap-vcpkg.sh
 
       - name: Install CMake
         uses: jwlawson/actions-setup-cmake@v1
