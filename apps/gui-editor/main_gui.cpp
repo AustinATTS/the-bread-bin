@@ -5,6 +5,8 @@
 #include <GLFW/glfw3.h>
 #include <breadbin/LoafFile.hpp>
 #include <cstdio>
+#include <iostream>
+#include <stdio.h>
 
 int main ( ) {
     if (! glfwInit()) {
@@ -62,6 +64,11 @@ int main ( ) {
         }
 
         if (ImGui::Button("Save Loaf File")) {
+            if (current_loaf.save_to_file("config.loaf")) {
+                std::cout << "Successfully saved config.loaf" << std::endl;
+            } else {
+                std::cout << "Failed to save config.loaf" << std::endl;
+            }
         }
 
         ImGui::End();
