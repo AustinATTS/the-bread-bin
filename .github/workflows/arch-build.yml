@@ -28,9 +28,14 @@ jobs:
           # Ensure vcpkg knows it's on Linux
           export VCPKG_FORCE_SYSTEM_BINARIES=1
 
+      - name: Install CMake
+        uses: jwlawson/actions-setup-cmake@v1
+        with:
+          cmake-version: "3.20"
+
       - name: Configure CMake
         run: |
-          cmake -B build \
+          cmake -S . -B build \
             -G Ninja \
             -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_TOOLCHAIN_FILE=/usr/share/vcpkg/scripts/buildsystems/vcpkg.cmake
