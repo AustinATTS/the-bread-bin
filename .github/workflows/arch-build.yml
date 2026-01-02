@@ -2,9 +2,9 @@ name: Arch Linux Build
 
 on:
   push:
-    branches: [ "main" ]
+    branches: '*'
   pull_request:
-    branches: [ "main" ]
+    branches: '*'
 
 jobs:
   build-apps:
@@ -19,13 +19,12 @@ jobs:
           pacman -S --noconfirm base-devel cmake git glfw-x11 mesa yaml-cpp vcpkg ninja
 
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           submodules: recursive
 
       - name: Set up vcpkg
         run: |
-          # Ensure vcpkg knows it's on Linux
           export VCPKG_FORCE_SYSTEM_BINARIES=1
 
       - name: Install CMake
@@ -41,10 +40,10 @@ jobs:
             -DCMAKE_TOOLCHAIN_FILE=/usr/share/vcpkg/scripts/buildsystems/vcpkg.cmake
 
       - name: Build GUI Editor
-        run: cmake --build build --target breadbin-gui
+        run: cmake --build build --target breadbin-gui --config Release
 
       - name: Build TUI Editor
-        run: cmake --build build --target breadbin-tui
+        run: cmake --build build --target breadbin-tui --config Release
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
