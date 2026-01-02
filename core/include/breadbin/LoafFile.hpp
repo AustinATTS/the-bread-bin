@@ -4,9 +4,21 @@
 #include <vector>
 
 namespace breadbin::core {
+    enum class ActionType {
+        App,
+        File,
+        Link
+    };
+
+    struct Action {
+        ActionType type;
+        std::string target;
+        std::vector<std::string> args;
+    };
+
     struct LoafFile {
         std::string app_name;
-        std::vector<std::string> args;
+        std::vector <Action> actions;
 
         // Generic function to simulate use
         std::string get_summary() const;
