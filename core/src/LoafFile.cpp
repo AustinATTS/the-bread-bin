@@ -15,11 +15,30 @@ namespace breadbin::core {
 
         out << YAML::BeginMap;
         out << YAML::Key << "app_name" << YAML::Value << app_name;
-        out << YAML::Key << "args" << YAML::Value << YAML::BeginSeq;
-        for (const auto& arg : args) {
-            out << arg;
+
+        out << YAML::Key << "actions" << YAML::Value << YAML::BeginSeq;
+        for (const auto& action : actions) {
+            out << YAML::BeginMap;
+
+            out << YAML::Key << "type";
+            switch (action.type) {
+                case ActionType::App: out << "app"; break;
+                case ActionType::File: out << "file"; break;
+                case ActionType::Link: out << "link"; break;
+            }
+
+            out << YAML::Key << "target" << YAML::Value << action.target;
+
+            out << YAML::Key << "args" << YAML::Value << action.BeginSeq;
+            for (const auto& arg : action.args) {
+                out << arg;
+            }
+            out << YAML::EndSeq;
+
+            out << YAML::EndMap;
         }
         out << YAML::EndSeq;
+
         out << YAML::EndMap;
 
         std::ofstream fout(path);
