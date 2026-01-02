@@ -39,7 +39,7 @@ int main ( ) {
     ImGui_ImplOpenGL3_Init("#version 330");
 
     breadbin::core::LoafFile current_loaf;
-    current_loaf.app_name = "The Bread Bin - Editor";
+    current_loaf.name = "Untitled Loaf";
 
     static char name_buf[128] = {0};
     static bool initialized = false;
@@ -52,11 +52,15 @@ int main ( ) {
         ImGui::NewFrame();
 
         if (! initialized) {
-            std::snprintf(name_buf, sizeof(name_buf), "%s", current_loaf.app_name.c_str());
+            std::snprintf(name_buf, sizeof(name_buf), "%s", current_loaf.name.c_str());
             initialized = true;
         }
 
         ImGui::Begin("Bread Bin Editor");
+
+        ImGui::InputText("Loaf Name", name_buf, sizeof(name_buf));
+        current_loaf.name = name_buf;
+
 
         if (ImGui::Button("+ Add Action")) {
             current_loaf.actions.push_back({
