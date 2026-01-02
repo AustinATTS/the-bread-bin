@@ -1,9 +1,11 @@
 add_library(breadbin_core STATIC
-    src/LoafFile.cpp
+        src/LoafFile.cpp
 )
 
 target_include_directories(breadbin_core PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 )
 
-target_link_libraries(breadbin_core PUBLIC yaml-cpp)
+target_link_libraries(breadbin_core PUBLIC
+        yaml-cpp
+)
