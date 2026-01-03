@@ -20,7 +20,10 @@
 #include <LoafBrowser.hpp>
 
 std::optional<std::filesystem::path> current_loaf_path;
+bool show_browser = false;
 bool loaf_dirty = false;
+breadbin::core::LoafFile my_loaf;
+breadbin::gui::LoafBrowser browser(loaf_dirty, my_loaf);
 
 static std::map<std::string, std::string> installed_apps;
 static std::vector<std::string> installed_app_names;
@@ -144,9 +147,6 @@ int main() {
 
     breadbin::core::LoafFile current_loaf;
     current_loaf.name = "Untitled Loaf";
-
-    breadbin::gui::LoafBrowser browser;
-
     static char name_buf[128];
     std::snprintf(name_buf, sizeof(name_buf), "%s", current_loaf.name.c_str());
 
@@ -157,15 +157,28 @@ int main() {
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        ImGui::SetNextWindowPos(ImVec2(0, 0));
-        ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
+        if (ImGui::BeginMainMenuBar()) {
+            if (ImGui::BeginMenu("View")) {
+                if (ImGui::MenuItem("Open Loaf Browser", "Ctrl + B")) {
+                    show_browser = true;
+                }
+                ImGui::EndMenu();
+            }
+            ImGui::EndMainMenuBar();
+        }
+
+        float menu_height = ImGui::GetFrameHeight();
+        ImGui::SetNextWindowPos(ImVec2(0, menu_height));
+        ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x, ImGui::GetIO().DisplaySize.y - menu_height));
 
         ImGui::Begin("Bread Bin Editor", nullptr,
                      ImGuiWindowFlags_NoDecoration |
                      ImGuiWindowFlags_NoMove |
-                     ImGuiWindowFlags_NoResize);
+                     ImGuiWindowFlags_NoResize |
+                     ImGuiWindowFlags_NoSavedSettings);
 
-        browser.render();
+
+        browser.render(&show_browser);
 
         if (ImGui::InputText("Loaf Name", name_buf, sizeof(name_buf))) {
             current_loaf.name = name_buf;
@@ -297,6 +310,8 @@ int main() {
         }
 
         ImGui::End();
+
+        browser.render(&show_browser);
 
         ImGui::Render();
         int w,h;
