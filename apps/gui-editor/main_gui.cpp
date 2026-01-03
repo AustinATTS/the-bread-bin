@@ -8,6 +8,7 @@
 #include <iostream>
 #include <optional>
 #include <nfd.hpp>
+#include "include/CatppuccinLatteStyle.hpp"
 
 std::optional<std::filesystem::path> current_loaf_path;
 bool loaf_dirty = false;
@@ -83,8 +84,7 @@ int main ( ) {
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGui::StyleColorsDark();
-
+    ApplyCatppuccinLatteTheme();
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 330");
 
