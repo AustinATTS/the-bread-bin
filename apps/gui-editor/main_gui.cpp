@@ -17,6 +17,8 @@
 #include <fstream>
 #include <map>
 
+#include <LoafBrowser.hpp>
+
 std::optional<std::filesystem::path> current_loaf_path;
 bool loaf_dirty = false;
 
@@ -143,6 +145,8 @@ int main() {
     breadbin::core::LoafFile current_loaf;
     current_loaf.name = "Untitled Loaf";
 
+    breadbin::gui::LoafBrowser browser;
+
     static char name_buf[128];
     std::snprintf(name_buf, sizeof(name_buf), "%s", current_loaf.name.c_str());
 
@@ -160,6 +164,8 @@ int main() {
                      ImGuiWindowFlags_NoDecoration |
                      ImGuiWindowFlags_NoMove |
                      ImGuiWindowFlags_NoResize);
+
+        browser.render();
 
         if (ImGui::InputText("Loaf Name", name_buf, sizeof(name_buf))) {
             current_loaf.name = name_buf;
