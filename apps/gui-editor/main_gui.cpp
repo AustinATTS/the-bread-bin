@@ -25,13 +25,21 @@ bool save_loaf_to_path(breadbin::core::LoafFile& loaf, const std::filesystem::pa
 
 
 void save_loaf_as(breadbin::core::LoafFile& loaf, std::optional<std::filesystem::path>& path) {
+    std::filesystem::path config_dir = std::filesystem::path(getenv("HOME")) / ".config" / "the-bread-bin" / "loafs";
+    std::filesystem::create_directories(config_dir);
+
     NFD::UniquePath outPath;
     nfdfilteritem_t filter[] = {{"Loaf files", "loaf"}};
 
-    nfdresult_t result = NFD::SaveDialog(outPath, filter, 1);
+    nfdresult_t result = NFD::SaveDialog(outPath, filter, 1, config_dir.string().c_str());
     if (result == NFD_OKAY) {
-        std::filesystem::path save_path = outPath.get();  // convert to proper path
-        path = save_path;  // store in session
+        std::filesystem::path save_path = outPath.get();
+
+        if (save_path.extension() != ".loaf") {
+            save_path += ".loaf";
+        }
+
+        path = save_path;
         std::cout << "Saving loaf to: " << save_path << std::endl;
         if (!save_loaf_to_path(loaf, save_path)) {
             std::cerr << "Failed to save loaf!" << std::endl;
