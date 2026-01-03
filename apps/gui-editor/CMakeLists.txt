@@ -1,6 +1,7 @@
 add_executable(breadbin-gui
         main_gui.cpp
         src/ThemeLoader.cpp
+        src/LoafBrowser.cpp
 )
 
 target_link_libraries(breadbin-gui PRIVATE ${DBUS_LIBRARIES})
