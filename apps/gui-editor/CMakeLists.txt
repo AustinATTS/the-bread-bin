@@ -5,6 +5,7 @@ add_executable(breadbin-gui
 target_link_libraries(breadbin-gui PRIVATE ${DBUS_LIBRARIES})
 target_include_directories(breadbin-gui PRIVATE ${DBUS_INCLUDE_DIRS})
 
+target_include_directories(breadbin-gui PRIVATE include)
 
 target_link_libraries(breadbin-gui PRIVATE
         breadbin_core
