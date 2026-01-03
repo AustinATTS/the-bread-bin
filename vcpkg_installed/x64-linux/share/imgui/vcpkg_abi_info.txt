@@ -1,6 +1,6 @@
 CMakeLists.txt 257e81df093db871165b6ad2f072a613fb84de69e3e45d21d09036a9c840624b
 cmake 4.2.1
-features core;glfw-binding;opengl3-binding
+features core;docking-experimental;glfw-binding;opengl3-binding
 glfw3 fa14cc449b3fd150eef1b9d0d2df8f7c41f6a7c25abf99c234e2ce5e30c9f508
 imgui-config.cmake.in 5da843cca9f52801645959f6318ebcb867837b1523924dc535d9f418abb19ae8
 portfile.cmake f3e5124cfb4118494e494e400980cbf73603b79d14d4a88937caa46f41bbc415

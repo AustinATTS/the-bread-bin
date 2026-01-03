@@ -61,7 +61,7 @@ Version: 1.91.9
 Depends: vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-linux
 Multi-Arch: same
-Abi: 57db75de48669f61627a3fa179b5136205b74bc480f9f67c0fc6978640f93a80
+Abi: 584b3834184785314ae21fda541fcd7edd8127c3f528e83a5a691c5160b6e4db
 Description: Bloat-free Immediate Mode Graphical User interface for C++ with minimal dependencies.
 Status: install ok installed
 
@@ -231,5 +231,12 @@ Architecture: x64-linux
 Multi-Arch: same
 Abi: 6e6b3540173bb443e8e9afe00b2036cc07a011d8c593a72259b431655496c122
 Description: yaml-cpp is a YAML parser and emitter in C++ matching the YAML 1.2 spec.
+Status: install ok installed
+
+Package: imgui
+Feature: docking-experimental
+Architecture: x64-linux
+Multi-Arch: same
+Description: Build with docking support
 Status: install ok installed
 

@@ -3,13 +3,13 @@
   "spdxVersion": "SPDX-2.2",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "documentNamespace": "https://spdx.org/spdxdocs/imgui-x64-linux-1.91.9-82767701-aa1f-4694-9d7a-a1311e86dee4",
-  "name": "imgui:x64-linux@1.91.9 57db75de48669f61627a3fa179b5136205b74bc480f9f67c0fc6978640f93a80",
+  "documentNamespace": "https://spdx.org/spdxdocs/imgui-x64-linux-1.91.9-c0eca7d6-aea6-4f55-b9d0-adcd1801d403",
+  "name": "imgui:x64-linux@1.91.9 584b3834184785314ae21fda541fcd7edd8127c3f528e83a5a691c5160b6e4db",
   "creationInfo": {
     "creators": [
       "Tool: vcpkg-2025-12-16-44bb3ce006467fc13ba37ca099f64077b8bbf84d"
     ],
-    "created": "2026-01-02T09:51:10Z"
+    "created": "2026-01-03T09:55:00Z"
   },
   "relationships": [
     {
@@ -149,7 +149,7 @@
     {
       "name": "imgui:x64-linux",
       "SPDXID": "SPDXRef-binary",
-      "versionInfo": "57db75de48669f61627a3fa179b5136205b74bc480f9f67c0fc6978640f93a80",
+      "versionInfo": "584b3834184785314ae21fda541fcd7edd8127c3f528e83a5a691c5160b6e4db",
       "downloadLocation": "NONE",
       "licenseConcluded": "MIT",
       "licenseDeclared": "NOASSERTION",
@@ -264,36 +264,36 @@
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./debug/lib/libimguid.a",
+      "fileName": "./include/imgui_impl_opengl3.h",
       "SPDXID": "SPDXRef-binary-file-0",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "5f021f7d0ac31264bca7501800295036e7813845d731e90474ee25fe111c28bc"
+          "checksumValue": "8b41f2d0d8d388ef9aee9c7cb73171ecae202118be3217b80cc1d6743012daca"
         }
       ],
       "licenseConcluded": "NOASSERTION",
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./lib/libimgui.a",
+      "fileName": "./include/imgui_impl_glfw.h",
       "SPDXID": "SPDXRef-binary-file-1",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "adf0695828c3e793ba39424ce5ef7647cdcc4a36e03ca9c47452781149ce1906"
+          "checksumValue": "c9c66d372a7e2a211071e95c28e75e7d18e35c861affbd0c2b052411069ce040"
         }
       ],
       "licenseConcluded": "NOASSERTION",
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./include/imgui.h",
+      "fileName": "./include/imstb_truetype.h",
       "SPDXID": "SPDXRef-binary-file-2",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "d9d28b1dfbd23841d99bb0a3f2474a28a2cae4e706919f74ef803ab9d9a67c9d"
+          "checksumValue": "87f08919ae8e7223451d0e9d06b62829075d3e920c9e6ad436db9d7e7427ffce"
         }
       ],
       "licenseConcluded": "NOASSERTION",
@@ -312,24 +312,24 @@
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./include/imgui_internal.h",
+      "fileName": "./include/imgui_impl_opengl3_loader.h",
       "SPDXID": "SPDXRef-binary-file-4",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "da27f62ccb1d9ece6a4c14b63cca4cf6cfd713f5f18bdb8868e0d199ead6d333"
+          "checksumValue": "9d17b1679dc876e0ca693631030e70656c372c808c6767644c3b545834483e24"
         }
       ],
       "licenseConcluded": "NOASSERTION",
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./include/imstb_textedit.h",
+      "fileName": "./include/imgui_internal.h",
       "SPDXID": "SPDXRef-binary-file-5",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "77010e494caf72c178b573569612aec409d24380409676325a31d02de0ec64b7"
+          "checksumValue": "a18df97203a9ba6a812f35eadd9f5861a0c8d558a59b96c14b68898272fe9e83"
         }
       ],
       "licenseConcluded": "NOASSERTION",
@@ -348,20 +348,8 @@
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./include/imstb_truetype.h",
-      "SPDXID": "SPDXRef-binary-file-7",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "87f08919ae8e7223451d0e9d06b62829075d3e920c9e6ad436db9d7e7427ffce"
-        }
-      ],
-      "licenseConcluded": "NOASSERTION",
-      "copyrightText": "NOASSERTION"
-    },
-    {
       "fileName": "./include/imgui_stdlib.h",
-      "SPDXID": "SPDXRef-binary-file-8",
+      "SPDXID": "SPDXRef-binary-file-7",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -372,48 +360,48 @@
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./include/imgui_impl_glfw.h",
+      "fileName": "./include/imstb_textedit.h",
+      "SPDXID": "SPDXRef-binary-file-8",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "77010e494caf72c178b573569612aec409d24380409676325a31d02de0ec64b7"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "fileName": "./include/imgui.h",
       "SPDXID": "SPDXRef-binary-file-9",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "bf83666dc070981c9c656c904cb3eac8dd4fb4fa826d34945620301563319cf6"
+          "checksumValue": "2840241b6101d629b5804dedff698a25414ee102959120314c6a0299ca25ef9a"
         }
       ],
       "licenseConcluded": "NOASSERTION",
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./include/imgui_impl_opengl3.h",
+      "fileName": "./debug/lib/libimguid.a",
       "SPDXID": "SPDXRef-binary-file-10",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "8239b72a4325f370c275d34b655b3fcaf2660ce9d7acfdea494a303dd51f9e5c"
+          "checksumValue": "800ad7a40073b88a04b1f634f31e62cfed9cd6e85ea2c68cfe018b9ec75bc420"
         }
       ],
       "licenseConcluded": "NOASSERTION",
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./include/imgui_impl_opengl3_loader.h",
+      "fileName": "./share/imgui/copyright",
       "SPDXID": "SPDXRef-binary-file-11",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "9d17b1679dc876e0ca693631030e70656c372c808c6767644c3b545834483e24"
-        }
-      ],
-      "licenseConcluded": "NOASSERTION",
-      "copyrightText": "NOASSERTION"
-    },
-    {
-      "fileName": "./share/imgui/imgui-config.cmake",
-      "SPDXID": "SPDXRef-binary-file-12",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "ab9944b44bb132cf7e5b3032700d08e4e64bbd77dc099282d239675f2fb9754a"
+          "checksumValue": "c80c5789748d955c4a650562baa0d750494e2c7128c2ca66aaebe2e3c4e198bf"
         }
       ],
       "licenseConcluded": "NOASSERTION",
@@ -421,11 +409,23 @@
     },
     {
       "fileName": "./share/imgui/imgui-targets.cmake",
-      "SPDXID": "SPDXRef-binary-file-13",
+      "SPDXID": "SPDXRef-binary-file-12",
       "checksums": [
         {
           "algorithm": "SHA256",
           "checksumValue": "24cacab49a6231ab2cb459da1451b026ecc621c1e0ac3a75a12b811ad6d3c40d"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "fileName": "./share/imgui/imgui-config.cmake",
+      "SPDXID": "SPDXRef-binary-file-13",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "ab9944b44bb132cf7e5b3032700d08e4e64bbd77dc099282d239675f2fb9754a"
         }
       ],
       "licenseConcluded": "NOASSERTION",
@@ -456,12 +456,12 @@
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./share/imgui/copyright",
+      "fileName": "./lib/libimgui.a",
       "SPDXID": "SPDXRef-binary-file-16",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "c80c5789748d955c4a650562baa0d750494e2c7128c2ca66aaebe2e3c4e198bf"
+          "checksumValue": "de08f998fabbd12f89c6eb382afdfa63b318fab54ed19dedfee71b3b034559f1"
         }
       ],
       "licenseConcluded": "NOASSERTION",
