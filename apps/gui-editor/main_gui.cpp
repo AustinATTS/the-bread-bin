@@ -6,6 +6,43 @@
 #include <breadbin/LoafFile.hpp>
 #include <cstdio>
 #include <iostream>
+#include <optional>
+#include <nfd.hpp>
+
+std::optional<std::filesystem::path> current_loaf_path;
+bool loaf_dirty = false;
+
+bool save_loaf_to_path(breadbin::core::LoafFile& loaf, const std::filesystem::path& path) {
+    std::cout << "Attempting to save loaf to: " << path << std::endl;
+    if (loaf.save_to_file(path)) {
+        loaf_dirty = false;
+        std::cout << "Save successful!" << std::endl;
+        return true;
+    }
+    std::cerr << "Save failed! Cannot open file: " << path << std::endl;
+    return false;
+}
+
+
+void save_loaf_as(breadbin::core::LoafFile& loaf, std::optional<std::filesystem::path>& path) {
+    NFD::UniquePath outPath;
+    nfdfilteritem_t filter[] = {{"Loaf files", "loaf"}};
+
+    nfdresult_t result = NFD::SaveDialog(outPath, filter, 1);
+    if (result == NFD_OKAY) {
+        std::filesystem::path save_path = outPath.get();  // convert to proper path
+        path = save_path;  // store in session
+        std::cout << "Saving loaf to: " << save_path << std::endl;
+        if (!save_loaf_to_path(loaf, save_path)) {
+            std::cerr << "Failed to save loaf!" << std::endl;
+        }
+    } else if (result == NFD_CANCEL) {
+        std::cout << "Save As cancelled by user." << std::endl;
+    } else {
+        std::cerr << "NFD error: " << NFD::GetError() << std::endl;
+    }
+}
+
 
 int main ( ) {
     if (! glfwInit()) {
@@ -31,6 +68,11 @@ int main ( ) {
         return -1;
     }
 
+    if (NFD::Init() != NFD_OKAY) {
+        std::cerr << "Failed to initialize NFD." << std::endl;
+        return -1;
+    }
+
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGui::StyleColorsDark();
@@ -51,6 +93,10 @@ int main ( ) {
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
+        std::string title = current_loaf.name.empty() ? "Untitled Loaf" : current_loaf.name;
+        if (loaf_dirty) title += " *";
+        glfwSetWindowTitle(window, title.c_str());
+
         if (! initialized) {
             std::snprintf(name_buf, sizeof(name_buf), "%s", current_loaf.name.c_str());
             initialized = true;
@@ -58,9 +104,12 @@ int main ( ) {
 
         ImGui::Begin("Bread Bin Editor");
 
-        ImGui::InputText("Loaf Name", name_buf, sizeof(name_buf));
-        current_loaf.name = name_buf;
-
+        if (ImGui::InputText("Loaf Name", name_buf, sizeof(name_buf))) {
+            current_loaf.name = name_buf;
+            if (!loaf_dirty) {
+                loaf_dirty = true;
+            }
+        }
 
         if (ImGui::Button("+ Add Action")) {
             current_loaf.actions.push_back({
@@ -91,6 +140,7 @@ int main ( ) {
 
                 if (ImGui::InputText("Target", target_buf, sizeof(target_buf))) {
                     action.target = target_buf;
+                    loaf_dirty = true;
                 }
 
                 ImGui::Separator();
@@ -108,6 +158,7 @@ int main ( ) {
 
                     if (ImGui::InputText("##arg", arg_buf, sizeof(arg_buf))) {
                         action.args[a] = arg_buf;
+                        loaf_dirty = true;
                     }
 
                     ImGui::SameLine();
@@ -131,13 +182,22 @@ int main ( ) {
             ImGui::PopID();
         }
 
-        if (ImGui::Button("Save Loaf File")) {
-            std::filesystem::path save_path = "settings.loaf";
-            if (current_loaf.save_to_file(save_path)) {
-                std::cout << "Successfully saved config.loaf" << std::endl;
+        ImGui::BeginDisabled(!loaf_dirty);
+        if (ImGui::Button("Save")) {
+            std::cout << "[DEBUG] Save button pressed" << std::endl;
+            if (current_loaf_path.has_value()) {
+                save_loaf_to_path(current_loaf, *current_loaf_path);
             } else {
-                std::cout << "Failed to save config.loaf" << std::endl;
+                save_loaf_as(current_loaf, current_loaf_path);
             }
+         }
+        ImGui::EndDisabled();
+
+        ImGui::SameLine();
+
+        if (ImGui::Button("Save As")) {
+            std::cout << "[DEBUG] Save As button pressed" << std::endl;
+            save_loaf_as(current_loaf, current_loaf_path);
         }
 
         ImGui::End();
@@ -157,6 +217,8 @@ int main ( ) {
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
+
+    NFD::Quit();
 
     glfwDestroyWindow(window);
     glfwTerminate();
