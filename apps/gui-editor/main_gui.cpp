@@ -9,6 +9,13 @@
 #include <optional>
 #include <nfd.hpp>
 #include "include/CatppuccinLatteStyle.hpp"
+#include <filesystem>
+#include <vector>
+#include <string>
+#include <fstream>
+#include <sstream>
+#include <map>
+#include <optional>
 
 std::optional<std::filesystem::path> current_loaf_path;
 bool loaf_dirty = false;
@@ -50,6 +57,47 @@ void save_loaf_as(breadbin::core::LoafFile& loaf, std::optional<std::filesystem:
     } else {
         std::cerr << "NFD error: " << NFD::GetError() << std::endl;
     }
+}
+
+std::map<std::string, std::string> get_installed_apps() {
+    std::map<std::string, std::string> apps;
+
+    std::vector<std::filesystem::path> paths = {
+        "/usr/share/applications",
+        std::filesystem::path(getenv("HOME")) / ".local/share/applications"
+    };
+
+    for (auto& dir : paths) {
+        if (!std::filesystem::exists(dir)) continue;
+
+        for (auto& entry : std::filesystem::directory_iterator(dir)) {
+            if (entry.path().extension() != ".desktop") continue;
+
+            std::ifstream file(entry.path());
+            std::string line, name, exec;
+
+            while (std::getline(file, line)) {
+                if (line.find("Name=",0) == 0) {
+                    name = line.substr(5);
+                } else if (line.find("Exec=",0) == 0) {
+                    exec = line.substr(5);
+
+                    auto pos = exec.find(' ');
+                    if (pos != std::string::npos) {
+                        exec = exec.substr(0, pos);
+                    }
+                }
+
+                if (!name.empty() && !exec.empty()) break;
+            }
+
+            if (!name.empty() && !exec.empty()) {
+                apps[name] = exec;
+            }
+        }
+    }
+
+    return apps;
 }
 
 
@@ -143,12 +191,30 @@ int main ( ) {
                     action.type = static_cast<breadbin::core::ActionType>(type_index);
                 }
 
-                static char target_buf[256];
-                std::snprintf(target_buf, sizeof(target_buf), "%s", action.target.c_str());
+                auto apps = get_installed_apps();
+                static int selected_index = 0;
+                static std::vector<std::string> app_names;
 
-                if (ImGui::InputText("Target", target_buf, sizeof(target_buf))) {
-                    action.target = target_buf;
-                    loaf_dirty = true;
+                if (app_names.empty()) {
+                    for (auto& [name, exec] : apps) app_names.push_back(name);
+                }
+
+                if (ImGui::BeginCombo("Select App", current_loaf.actions[i].target.c_str())) {
+                    for (int n = 0; n < app_names.size(); n++) {
+                        bool is_selected = (current_loaf.actions[i].target == apps[app_names[n]]);
+                        if (ImGui::Selectable(app_names[n].c_str(), is_selected)) {
+                            current_loaf.actions[i].target = apps[app_names[n]];
+                            loaf_dirty = true;
+                        }
+                        if (is_selected)
+                            ImGui::SetItemDefaultFocus();
+                    }
+
+                    if (ImGui::Selectable("Other...")) {
+                        save_loaf_as(current_loaf, current_loaf_path);
+                    }
+
+                    ImGui::EndCombo();
                 }
 
                 ImGui::Separator();
