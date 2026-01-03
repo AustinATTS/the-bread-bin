@@ -133,6 +133,8 @@ int main() {
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
+
+    ImGuiIO& io = ImGui::GetIO();
     breadbin::theme::ApplyTheme();
 
     ImGui_ImplGlfw_InitForOpenGL(window, true);
@@ -167,9 +169,28 @@ int main() {
             ImGui::EndMainMenuBar();
         }
 
+        if (ImGui::IsKeyDown(ImGuiMod_Ctrl) && ImGui::IsKeyPressed(ImGuiKey_B)) {
+            show_browser = !show_browser;
+        }
+
         float menu_height = ImGui::GetFrameHeight();
-        ImGui::SetNextWindowPos(ImVec2(0, menu_height));
-        ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x, ImGui::GetIO().DisplaySize.y - menu_height));
+        float sidebar_width = 0.0f;
+
+        if (show_browser) {
+            sidebar_width = 300.0f;
+
+            ImGui::SetNextWindowPos(ImVec2(0, menu_height), ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowSize(ImVec2(sidebar_width, ImGui::GetIO().DisplaySize.y - menu_height), ImGuiCond_FirstUseEver);
+            ImVec2 pos = ImGui::GetWindowPos();
+            if (pos.x > 10.0f) {
+                sidebar_width = 0.0f;
+            }
+
+            browser.render(&show_browser);
+        }
+
+        ImGui::SetNextWindowPos(ImVec2(sidebar_width, menu_height), ImGuiCond_Always);
+        ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x - sidebar_width, ImGui::GetIO().DisplaySize.y - menu_height), ImGuiCond_Always);
 
         ImGui::Begin("Bread Bin Editor", nullptr,
                      ImGuiWindowFlags_NoDecoration |
@@ -177,8 +198,9 @@ int main() {
                      ImGuiWindowFlags_NoResize |
                      ImGuiWindowFlags_NoSavedSettings);
 
-
-        browser.render(&show_browser);
+        if (!loaf_dirty && std::string(name_buf) != current_loaf.name) {
+            std::snprintf(name_buf, sizeof(name_buf), "%s", current_loaf.name.c_str());
+        }
 
         if (ImGui::InputText("Loaf Name", name_buf, sizeof(name_buf))) {
             current_loaf.name = name_buf;
@@ -310,8 +332,6 @@ int main() {
         }
 
         ImGui::End();
-
-        browser.render(&show_browser);
 
         ImGui::Render();
         int w,h;
