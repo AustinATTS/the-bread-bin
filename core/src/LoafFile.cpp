@@ -41,6 +41,7 @@ namespace breadbin::core {
         }
 
         fout << out.c_str();
+        fout.close();
         return true;
     }
 
