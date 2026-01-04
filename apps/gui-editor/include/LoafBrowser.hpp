@@ -1,13 +1,14 @@
 #pragma once
 #include <vector>
 #include <filesystem>
+#include <optional>
 #include <breadbin/LoafFile.hpp>
 #include <TextEditor.hpp>
 
 namespace breadbin::gui {
     class LoafBrowser {
         public:
-            LoafBrowser(bool& dirty_flag, core::LoafFile& active_loaf, TextEditor& editor);
+            LoafBrowser(bool& dirty_flag, core::LoafFile& active_loaf, TextEditor& editor, std::optional<std::filesystem::path>& active_path);
             void render(bool* p_open);
 
         private:
@@ -17,6 +18,8 @@ namespace breadbin::gui {
             bool& m_dirty;
             core::LoafFile& m_active_loaf;
             TextEditor& m_editor;
+            std::optional<std::filesystem::path>& m_active_path;
+
 
             std::filesystem::path m_root_path;
             std::filesystem::path m_selected_path;

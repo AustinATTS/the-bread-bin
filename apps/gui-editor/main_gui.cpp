@@ -163,7 +163,7 @@ int main() {
     static char name_buf[128];
     std::snprintf(name_buf, sizeof(name_buf), "%s", current_loaf.name.c_str());
 
-    breadbin::gui::LoafBrowser loaf_browser(loaf_dirty, current_loaf, raw_editor);
+    breadbin::gui::LoafBrowser loaf_browser(loaf_dirty, current_loaf, raw_editor, current_loaf_path);
     breadbin::gui::LoafEditor loaf_editor(loaf_dirty, current_loaf);
     breadbin::gui::TextEditor text_editor;
 
@@ -218,7 +218,9 @@ int main() {
 
                 ImGui::Separator();
 
-                if (ImGui::MenuItem("Save", nullptr, false, loaf_dirty)) {
+                bool can_save = current_loaf_path.has_value() || loaf_dirty;
+
+                if (ImGui::MenuItem("Save", nullptr, false, can_save)) {
                     if (current_loaf_path) {
                         save_loaf_to_path(current_loaf, *current_loaf_path);
                     }

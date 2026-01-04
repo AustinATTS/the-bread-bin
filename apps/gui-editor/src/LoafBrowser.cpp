@@ -4,12 +4,13 @@
 #include <cstdlib>
 #include <filesystem>
 #include <iostream>
+#include <optional>
 
 #include <breadbin/LoafRunner.hpp>
 
 namespace breadbin::gui {
 
-    LoafBrowser::LoafBrowser(bool& dirty_flag, core::LoafFile& active_loaf, TextEditor& editor) : m_dirty(dirty_flag), m_active_loaf(active_loaf), m_editor(editor) {
+    LoafBrowser::LoafBrowser(bool& dirty_flag, core::LoafFile& active_loaf, TextEditor& editor, std::optional<std::filesystem::path>& active_path) : m_dirty(dirty_flag), m_active_loaf(active_loaf), m_editor(editor), m_active_path(active_path) {
         const char* home = std::getenv("HOME");
         if (home) {
             m_root_path = std::filesystem::path(home) / ".config" / "the-bread-bin";
@@ -96,6 +97,7 @@ namespace breadbin::gui {
             if (ImGui::Button("Save and Load")) {
                 m_active_loaf.save_to_file("previous_auto.loaf");
                 m_active_loaf.load_from_file(m_selected_path);
+                m_active_path = m_selected_path;
                 m_dirty = false;
                 m_show_unsaved_modal = false;
                 ImGui::CloseCurrentPopup();
@@ -105,6 +107,7 @@ namespace breadbin::gui {
 
             if (ImGui::Button("Just Load")) {
                 m_active_loaf.load_from_file(m_selected_path);
+                m_active_path = m_selected_path;
                 m_dirty = false;
                 m_show_unsaved_modal = false;
                 ImGui::CloseCurrentPopup();
@@ -158,7 +161,10 @@ namespace breadbin::gui {
                 m_show_unsaved_modal = true;
             }
             else {
-                m_active_loaf.load_from_file(path);
+                if (m_active_loaf.load_from_file(path)) {
+                    m_active_path = path;
+                    m_dirty = false;
+                }
             }
         }
     }
