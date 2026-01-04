@@ -1,11 +1,13 @@
+#include <breadbin/LoafFile.hpp>
+#include <ThemeLoader.hpp>
+#include <LoafEditor.hpp>
+#include <LoafBrowser.hpp>
+#include <TextEditor.hpp>
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <ThemeLoader.hpp>
-#include <LoafBrowser.hpp>
-#include <breadbin/LoafFile.hpp>
 #include <nfd.hpp>
 #include <cstdio>
 #include <cstdlib>
@@ -16,9 +18,6 @@
 #include <vector>
 #include <string>
 #include <fstream>
-#include <TextEditor.hpp>
-
-#include "LoafEditor.hpp"
 
 static bool show_editor = true;
 static bool show_browser = true;
