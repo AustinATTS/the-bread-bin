@@ -16,6 +16,7 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <TextEditor.hpp>
 
 static bool show_editor = true;
 static bool show_browser = true;
@@ -26,6 +27,7 @@ static std::optional<std::filesystem::path> current_loaf_path;
 static std::map<std::string, std::string> installed_apps;
 static std::vector<std::string> installed_app_names;
 static breadbin::core::LoafFile current_loaf;
+static breadbin::gui::TextEditor raw_editor;
 
 static std::filesystem::path loafs_dir() {
     return std::filesystem::path(std::getenv("HOME")) / ".config" / "the-bread-bin" / "loafs";
@@ -159,7 +161,7 @@ int main() {
     static char name_buf[128];
     std::snprintf(name_buf, sizeof(name_buf), "%s", current_loaf.name.c_str());
 
-    breadbin::gui::LoafBrowser loaf_browser(loaf_dirty, current_loaf);
+    breadbin::gui::LoafBrowser loaf_browser(loaf_dirty, current_loaf, raw_editor);
 
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
@@ -349,6 +351,15 @@ int main() {
         if (show_browser) {
             ImGui::SetNextWindowDockID(dockspace_id, ImGuiCond_FirstUseEver);
             loaf_browser.render(&show_browser);
+        }
+
+        if (raw_editor.is_open()) {
+            ImGui::SetNextWindowDockID(dockspace_id, ImGuiCond_FirstUseEver);
+            bool p_open = true;
+            raw_editor.render(&p_open);
+            if (!p_open) {
+                raw_editor.set_open(false);
+            }
         }
 
         ImGui::Render();
