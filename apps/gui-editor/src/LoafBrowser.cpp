@@ -8,6 +8,8 @@
 
 #include <breadbin/LoafRunner.hpp>
 
+#include "ThemeLoader.hpp"
+
 namespace breadbin::gui {
 
     LoafBrowser::LoafBrowser(bool& dirty_flag, core::LoafFile& active_loaf, TextEditor& editor, std::optional<std::filesystem::path>& active_path) : m_dirty(dirty_flag), m_active_loaf(active_loaf), m_editor(editor), m_active_path(active_path) {
@@ -70,9 +72,13 @@ namespace breadbin::gui {
                     }
                     ImGui::Separator();
                 }
-                if (ImGui::MenuItem("Edit / Load")) {
+                if (ImGui::MenuItem("Load")) {
                     m_selected_path = path;
                     handle_file_action(path);
+                }
+
+                if (ImGui::MenuItem("Text Editor")) {
+                    m_editor.open_file(path);
                 }
 
                 if (ImGui::MenuItem("Delete")) {
@@ -153,7 +159,9 @@ namespace breadbin::gui {
 
     void LoafBrowser::handle_file_action(const std::filesystem::path& path) {
         if (path.extension() == ".toml") {
-            m_editor.open_file(path);
+            if (breadbin::theme::LoadThemeFromFile(path)) {
+                breadbin::theme::SaveActiveTheme();
+            }
         }
 
         if (path.extension() == ".loaf") {
