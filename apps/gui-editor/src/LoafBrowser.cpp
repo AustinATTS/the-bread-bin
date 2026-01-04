@@ -5,6 +5,8 @@
 #include <filesystem>
 #include <iostream>
 
+#include <breadbin/LoafRunner.hpp>
+
 namespace breadbin::gui {
 
     LoafBrowser::LoafBrowser(bool& dirty_flag, core::LoafFile& active_loaf, TextEditor& editor) : m_dirty(dirty_flag), m_active_loaf(active_loaf), m_editor(editor) {
@@ -58,6 +60,15 @@ namespace breadbin::gui {
             }
 
             if (ImGui::BeginPopupContextItem()) {
+                if (path.extension() == ".loaf") {
+                    if (ImGui::MenuItem("Run Loaf")) {
+                        breadbin::core::LoafFile temploaf;
+                        if (temploaf.load_from_file(path)) {
+                            breadbin::core::LoafRunner::execute(temploaf);
+                        }
+                    }
+                    ImGui::Separator();
+                }
                 if (ImGui::MenuItem("Edit / Load")) {
                     m_selected_path = path;
                     handle_file_action(path);
