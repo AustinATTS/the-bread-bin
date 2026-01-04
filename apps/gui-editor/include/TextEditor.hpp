@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 #include <filesystem>
-#include <vector>
 
 namespace breadbin::gui {
     class TextEditor {

@@ -1,28 +1,22 @@
 cmake_minimum_required(VERSION 3.20)
-
-set(VCPKG_TARGET_TRIPLET x64-linux-static CACHE STRING "")
-set(VCPKG_BUILD_TYPE release CACHE STRING "")
-
 project(TheBreadBin VERSION 0.1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_COMPILER_LAUNCHER ccache)
+set(VCPKG_TARGET_TRIPLET x64-linux-static CACHE STRING "")
+set(VCPKG_BUILD_TYPE release CACHE STRING "")
+set(GLFW_BUILD_WAYLAND OFF CACHE BOOL "")
+set(GLFW_BUILD_X11 ON CACHE BOOL "")
 
 find_package(OpenGL REQUIRED)
 find_package(yaml-cpp CONFIG REQUIRED)
 find_package(imgui CONFIG REQUIRED)
-
-set(GLFW_BUILD_WAYLAND OFF CACHE BOOL "")
-set(GLFW_BUILD_X11 ON CACHE BOOL "")
-
-
 find_package(glfw3 CONFIG REQUIRED)
 find_package(glad CONFIG REQUIRED)
 find_package(nfd CONFIG REQUIRED)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(DBUS REQUIRED dbus-1)
-
 
 add_subdirectory(core)
 add_subdirectory(apps/gui-editor)

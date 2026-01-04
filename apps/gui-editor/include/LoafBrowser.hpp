@@ -1,10 +1,8 @@
 #pragma once
 #include <vector>
-#include <string>
 #include <filesystem>
 #include <breadbin/LoafFile.hpp>
-
-#include "TextEditor.hpp"
+#include <TextEditor.hpp>
 
 namespace breadbin::gui {
     class LoafBrowser {

@@ -1,7 +1,6 @@
 #include <fstream>
 #include <breadbin/LoafFile.hpp>
 #include <yaml-cpp/yaml.h>
-#include <sstream>
 #include <filesystem>
 #include <iostream>
 
@@ -39,7 +38,6 @@ namespace breadbin::core {
                         actions.push_back(std::move(action));
                     }
                 }
-
                 return true;
             }
         } catch (const YAML::Exception& e) {
@@ -47,7 +45,6 @@ namespace breadbin::core {
             return false;
         }
     }
-
 
     bool LoafFile::save_to_file(const std::filesystem::path& path) const {
         YAML::Emitter out;
@@ -61,9 +58,15 @@ namespace breadbin::core {
 
             out << YAML::Key << "type";
             switch (action.type) {
-                case ActionType::App: out << "app"; break;
-                case ActionType::File: out << "file"; break;
-                case ActionType::Link: out << "link"; break;
+                case ActionType::App:
+                    out << "app";
+                    break;
+                case ActionType::File:
+                    out << "file";
+                    break;
+                case ActionType::Link:
+                    out << "link";
+                    break;
             }
 
             out << YAML::Key << "target" << YAML::Value << action.target;

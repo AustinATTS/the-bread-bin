@@ -20,9 +20,6 @@ namespace breadbin::core {
         std::string name;
         std::vector <Action> actions;
 
-        // Generic function to simulate use
-        std::string get_summary() const;
-
         bool save_to_file(const std::filesystem::path& path) const;
         bool load_from_file(const std::filesystem::path& path);
     };

@@ -1,7 +1,6 @@
 #include <LoafBrowser.hpp>
 #include <TextEditor.hpp>
 #include <imgui.h>
-#include <algorithm>
 #include <cstdlib>
 #include <filesystem>
 #include <iostream>
