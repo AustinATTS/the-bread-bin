@@ -1,3 +1,5 @@
+#include <breadbin/LoafRunner.hpp>
+#include <ThemeLoader.hpp>
 #include <LoafBrowser.hpp>
 #include <TextEditor.hpp>
 #include <imgui.h>
@@ -6,12 +8,7 @@
 #include <iostream>
 #include <optional>
 
-#include <breadbin/LoafRunner.hpp>
-
-#include "ThemeLoader.hpp"
-
 namespace breadbin::gui {
-
     LoafBrowser::LoafBrowser(bool& dirty_flag, core::LoafFile& active_loaf, TextEditor& editor, std::optional<std::filesystem::path>& active_path) : m_dirty(dirty_flag), m_active_loaf(active_loaf), m_editor(editor), m_active_path(active_path) {
         const char* home = std::getenv("HOME");
         if (home) {
@@ -30,7 +27,10 @@ namespace breadbin::gui {
         try {
             for (const auto& entry : std::filesystem::recursive_directory_iterator(m_root_path)) {
                 if (entry.is_regular_file()) {
-                    m_files.push_back(entry.path());
+                    auto ext = entry.path().extension();
+                    if (ext == ".loaf" || ext == ".toml") {
+                        m_files.push_back(entry.path());
+                    }
                 }
             }
         }
@@ -49,11 +49,18 @@ namespace breadbin::gui {
             return;
         }
 
-        int index = 0;
-        for (const auto& path : m_files) {
-            ImGui::PushID(index);
+        for (size_t i = 0; i < m_files.size(); ++i) {
+            const auto& path = m_files[i];
 
-            const std::string label = path.lexically_relative(m_root_path).string();
+            ImGui::PushID(static_cast<int>(i));
+
+            std::string label = path.filename().string();
+            try {
+                label = path.lexically_relative(m_root_path).string();
+            }
+            catch (...) {
+
+            }
 
             if (ImGui::Selectable(label.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick)) {
                 if (ImGui::IsMouseDoubleClicked(0)) {
@@ -63,6 +70,7 @@ namespace breadbin::gui {
             }
 
             if (ImGui::BeginPopupContextItem()) {
+                m_selected_path = path;
                 if (path.extension() == ".loaf") {
                     if (ImGui::MenuItem("Run Loaf")) {
                         breadbin::core::LoafFile temploaf;
@@ -72,6 +80,7 @@ namespace breadbin::gui {
                     }
                     ImGui::Separator();
                 }
+
                 if (ImGui::MenuItem("Load")) {
                     m_selected_path = path;
                     handle_file_action(path);
@@ -89,39 +98,39 @@ namespace breadbin::gui {
                 ImGui::EndPopup();
             }
             ImGui::PopID();
-            ++index;
         }
 
         if (m_show_unsaved_modal) {
             ImGui::OpenPopup("Unsaved Changes?");
         }
-
         if (ImGui::BeginPopupModal("Unsaved Changes?", nullptr, ImGuiWindowFlags_AlwaysAutoResize)) {
+            ImGui::Text("You have unsaved changes in your current loaf.\nWhat would you like to do?");
+            ImGui::Separator();
 
-            ImGui::TextUnformatted("You have unsaved changes in your current loaf.\nWhat would you like to do?");
-
-            if (ImGui::Button("Save and Load")) {
+            if (ImGui::Button("Save and Load", ImVec2(120, 0))) {
                 m_active_loaf.save_to_file("previous_auto.loaf");
-                m_active_loaf.load_from_file(m_selected_path);
-                m_active_path = m_selected_path;
-                m_dirty = false;
+                if (m_active_loaf.load_from_file(m_selected_path)) {
+                    m_active_path = m_selected_path;
+                    m_dirty = false;
+                }
                 m_show_unsaved_modal = false;
                 ImGui::CloseCurrentPopup();
             }
 
             ImGui::SameLine();
 
-            if (ImGui::Button("Just Load")) {
-                m_active_loaf.load_from_file(m_selected_path);
-                m_active_path = m_selected_path;
-                m_dirty = false;
+            if (ImGui::Button("Discard & Load", ImVec2(120, 0))) {
+                if (m_active_loaf.load_from_file(m_selected_path)) {
+                    m_active_path = m_selected_path;
+                    m_dirty = false;
+                }
                 m_show_unsaved_modal = false;
                 ImGui::CloseCurrentPopup();
             }
 
             ImGui::SameLine();
 
-            if (ImGui::Button("Cancel")) {
+            if (ImGui::Button("Cancel", ImVec2(120, 0))) {
                 m_show_unsaved_modal = false;
                 ImGui::CloseCurrentPopup();
             }
@@ -135,7 +144,7 @@ namespace breadbin::gui {
 
         if (ImGui::BeginPopupModal("Confirm Delete?", nullptr, ImGuiWindowFlags_AlwaysAutoResize)) {
 
-            ImGui::Text("Are you sure you want to delete:\n%s ?", m_selected_path.filename().string().c_str());
+            ImGui::Text("Are you sure you want to delete:\n%s?", m_selected_path.filename().string().c_str());
 
             if (ImGui::Button("Yes, Delete")) {
                 std::filesystem::remove(m_selected_path);
@@ -166,6 +175,7 @@ namespace breadbin::gui {
 
         if (path.extension() == ".loaf") {
             if (m_dirty) {
+                m_selected_path = path;
                 m_show_unsaved_modal = true;
             }
             else {
@@ -177,4 +187,7 @@ namespace breadbin::gui {
         }
     }
 
+    void LoafBrowser::reload() {
+        refresh_files();
+    }
 } // namespace breadbin::gui

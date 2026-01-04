@@ -1,6 +1,5 @@
 #include <breadbin/LoafRunner.hpp>
 #include <unistd.h>
-#include <sys/wait.h>
 #include <iostream>
 #include <vector>
 

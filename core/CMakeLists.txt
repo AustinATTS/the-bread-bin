@@ -1,6 +1,7 @@
 add_library(breadbin_core STATIC
         src/LoafFile.cpp
         src/LoafRunner.cpp
+        src/ReloadManager.cpp
 )
 
 target_include_directories(breadbin_core PUBLIC

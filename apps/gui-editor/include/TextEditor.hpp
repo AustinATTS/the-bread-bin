@@ -17,6 +17,12 @@ namespace breadbin::gui {
             void set_open(bool open) {
                 m_is_open = open;
             }
+            bool is_dirty() const {
+                return m_dirty;
+            }
+            const std::filesystem::path& get_current_path() const {
+                return m_current_path;
+            }
 
         private:
             std::filesystem::path m_current_path;
@@ -24,4 +30,5 @@ namespace breadbin::gui {
             bool m_is_open = false;
             bool m_dirty = false;
     };
+
 } // namespace breadbin::gui

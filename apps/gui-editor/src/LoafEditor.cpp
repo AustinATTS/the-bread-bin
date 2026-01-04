@@ -2,7 +2,7 @@
 #include <imgui.h>
 
 namespace breadbin::gui {
-    LoafEditor::LoafEditor(bool& dirty_flag, breadbin::core::LoafFile& active_loaf) : m_dirty(dirty_flag), m_loaf(active_loaf){
+    LoafEditor::LoafEditor(bool& dirty_flag, breadbin::core::LoafFile& active_loaf) : m_dirty(dirty_flag), m_loaf(active_loaf) {
         std::snprintf(m_name_buf, sizeof(m_name_buf), "%s", m_loaf.name.c_str());
     }
 
