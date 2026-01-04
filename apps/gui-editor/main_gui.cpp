@@ -18,6 +18,8 @@
 #include <fstream>
 #include <TextEditor.hpp>
 
+#include "LoafEditor.hpp"
+
 static bool show_editor = true;
 static bool show_browser = true;
 static bool loaf_dirty = false;
@@ -163,6 +165,10 @@ int main() {
     std::snprintf(name_buf, sizeof(name_buf), "%s", current_loaf.name.c_str());
 
     breadbin::gui::LoafBrowser loaf_browser(loaf_dirty, current_loaf, raw_editor);
+    breadbin::gui::LoafEditor loaf_editor(loaf_dirty, current_loaf);
+    breadbin::gui::TextEditor text_editor;
+
+    loaf_editor.update_apps(installed_apps, installed_app_names);
 
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
@@ -246,107 +252,7 @@ int main() {
         ImGui::End();
 
         if (show_editor) {
-            ImGui::SetNextWindowDockID(dockspace_id, ImGuiCond_FirstUseEver);
-
-            ImGui::Begin("Bread Bin Editor", &show_editor);
-
-            if (!loaf_dirty && std::string(name_buf) != current_loaf.name) {
-                std::snprintf(name_buf, sizeof(name_buf), "%s", current_loaf.name.c_str());
-            }
-
-            if (ImGui::InputText("Loaf Name", name_buf, sizeof(name_buf))) {
-                current_loaf.name = name_buf;
-                loaf_dirty = true;
-            }
-
-            ImGui::Separator();
-
-            if (ImGui::Button("+ Add Action")) {
-                current_loaf.actions.push_back({breadbin::core::ActionType::App, "", {}});
-                loaf_dirty = true;
-            }
-
-            for (size_t i = 0; i < current_loaf.actions.size(); ++i) {
-                auto& action = current_loaf.actions[i];
-                ImGui::PushID(static_cast<int>(i));
-
-                const char* type_labels[] = {"App","File","Link"};
-                int type_index = static_cast<int>(action.type);
-
-                std::string header = type_labels[type_index] + std::string(": ") + (action.target.empty() ? "<unset>" : action.target);
-
-                if (ImGui::CollapsingHeader(header.c_str(), ImGuiTreeNodeFlags_DefaultOpen)) {
-                    if (ImGui::Combo("Type", &type_index, type_labels, IM_ARRAYSIZE(type_labels))) {
-                        action.type = static_cast<breadbin::core::ActionType>(type_index);
-                        loaf_dirty = true;
-                    }
-
-                    std::string current_label = "<unset>";
-                    for (auto& [name, exec] : installed_apps) {
-                        if (exec == action.target) {
-                            current_label = name;
-                            break;
-                        }
-                    }
-
-                    if (ImGui::BeginCombo("Select App", current_label.c_str())) {
-                        for (auto& name : installed_app_names) {
-                            bool selected = installed_apps[name] == action.target;
-
-                            if (ImGui::Selectable(name.c_str(), selected)) {
-                                action.target = installed_apps[name];
-                                loaf_dirty = true;
-                            }
-                            if (selected) {
-                                ImGui::SetItemDefaultFocus();
-                            }
-                        }
-                        ImGui::EndCombo();
-                    }
-
-                    ImGui::Separator();
-                    ImGui::Text("Arguments");
-
-                    if (ImGui::Button("+ Add Argument")) {
-                        action.args.emplace_back();
-                        loaf_dirty = true;
-                    }
-
-                    for (size_t a = 0; a < action.args.size(); ++a) {
-                        ImGui::PushID(static_cast<int>(a));
-
-                        char arg_buf[128];
-                        std::snprintf(arg_buf, sizeof(arg_buf), "%s", action.args[a].c_str());
-
-                        if (ImGui::InputText("##arg", arg_buf, sizeof(arg_buf))) {
-                            action.args[a] = arg_buf;
-                            loaf_dirty = true;
-                        }
-
-                        ImGui::SameLine();
-                        if (ImGui::Button("Remove")) {
-                            action.args.erase(action.args.begin() + a);
-                            loaf_dirty = true;
-                            ImGui::PopID();
-                            break;
-                        }
-
-                        ImGui::PopID();
-                    }
-
-                    ImGui::Separator();
-                    if (ImGui::Button("Remove Action")) {
-                        current_loaf.actions.erase(current_loaf.actions.begin() + i);
-                        loaf_dirty = true;
-                        ImGui::PopID();
-                        break;
-                    }
-                }
-
-                ImGui::PopID();
-            }
-
-            ImGui::End();
+            loaf_editor.render(&show_editor, dockspace_id);
         }
 
         if (show_browser) {
