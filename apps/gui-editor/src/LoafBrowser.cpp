@@ -65,7 +65,7 @@ namespace breadbin::gui {
             if (ImGui::Selectable(label.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick)) {
                 if (ImGui::IsMouseDoubleClicked(0)) {
                     m_selected_path = path;
-                    handle_file_action(path);
+                    handle_file_action(path, OpenMode::Normal);
                 }
             }
 
@@ -83,11 +83,12 @@ namespace breadbin::gui {
 
                 if (ImGui::MenuItem("Load")) {
                     m_selected_path = path;
-                    handle_file_action(path);
+                    handle_file_action(path, OpenMode::Normal);
                 }
 
                 if (ImGui::MenuItem("Text Editor")) {
-                    m_editor.open_file(path);
+                    m_selected_path = path;
+                    handle_file_action(path, OpenMode::TextEditor);
                 }
 
                 if (ImGui::MenuItem("Delete")) {
@@ -166,14 +167,19 @@ namespace breadbin::gui {
         ImGui::End();
     }
 
-    void LoafBrowser::handle_file_action(const std::filesystem::path& path) {
-        if (path.extension() == ".toml") {
+    void LoafBrowser::handle_file_action(const std::filesystem::path& path, OpenMode mode) {
+        const auto ext = path.extension();
+        if (mode == OpenMode::TextEditor) {
+            m_editor.open_file(path);
+            return;
+        }
+        if (ext == ".toml") {
             if (breadbin::theme::LoadThemeFromFile(path)) {
                 breadbin::theme::SaveActiveTheme();
             }
         }
 
-        if (path.extension() == ".loaf") {
+        if (ext == ".loaf") {
             if (m_dirty) {
                 m_selected_path = path;
                 m_show_unsaved_modal = true;

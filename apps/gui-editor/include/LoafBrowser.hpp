@@ -6,6 +6,12 @@
 #include <optional>
 
 namespace breadbin::gui {
+
+    enum class OpenMode {
+        Normal,
+        TextEditor
+    };
+
     class LoafBrowser {
         public:
             LoafBrowser(bool& dirty_flag, core::LoafFile& active_loaf, TextEditor& editor, std::optional<std::filesystem::path>& active_path);
@@ -14,7 +20,7 @@ namespace breadbin::gui {
 
         private:
             void refresh_files();
-            void handle_file_action(const std::filesystem::path& path);
+            void handle_file_action(const std::filesystem::path& path, OpenMode mode);
 
             bool& m_dirty;
             core::LoafFile& m_active_loaf;
