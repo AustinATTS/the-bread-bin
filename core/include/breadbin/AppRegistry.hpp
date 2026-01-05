@@ -1,8 +1,0 @@
-//
-// Created by austin on 02/01/2026.
-//
-
-#ifndef THE_BREAD_BIN_APPREGISTRY_HPP
-#define THE_BREAD_BIN_APPREGISTRY_HPP
-
-#endif //THE_BREAD_BIN_APPREGISTRY_HPP
