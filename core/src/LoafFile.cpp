@@ -40,7 +40,8 @@ namespace breadbin::core {
                 }
                 return true;
             }
-        } catch (const YAML::Exception& e) {
+        }
+        catch (const YAML::Exception& e) {
             std::cerr << "Failed to load loaf file: " << e.what() << std::endl;
             return false;
         }
