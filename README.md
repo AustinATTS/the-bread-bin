@@ -1,1 +1,3 @@
-# the-bread-bin
+# The Bread Bin
+
+By me, Austin Welsh-Graham
