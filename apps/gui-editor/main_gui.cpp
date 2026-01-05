@@ -35,6 +35,10 @@ static std::filesystem::path loafs_dir() {
     return std::filesystem::path(std::getenv("HOME")) / ".config" / "the-bread-bin" / "loafs";
 }
 
+static std::filesystem::path theme_dir() {
+    return std::filesystem::path(std::getenv("HOME")) / ".config" / "the-bread-bin" / "themes";
+}
+
 static std::map<std::string, std::string> get_installed_apps() {
     std::map<std::string, std::string> apps;
     std::vector<std::filesystem::path> paths = {
@@ -162,6 +166,10 @@ int main() {
     loaf_editor.update_apps(installed_apps, installed_app_names);
 
     reload_mgr.watch_directory(loafs_dir(), [&]() {
+        loaf_browser.reload();
+    });
+
+    reload_mgr.watch_directory(theme_dir(), [&]() {
         loaf_browser.reload();
     });
 
