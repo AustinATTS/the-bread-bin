@@ -16,6 +16,9 @@ namespace breadbin::gui {
             bool is_active() const;
             bool is_dirty() const;
 
+            void set_on_saved(std::function<void(const std::filesystem::path&)> cb);
+
+
             bool save();
             bool save_as();
 
@@ -28,6 +31,8 @@ namespace breadbin::gui {
             void render_actions();
 
             bool& m_dirty;
+            std::function<void(const std::filesystem::path&)> m_on_saved;
+
             breadbin::core::LoafFile& m_loaf;
             std::optional<std::filesystem::path>& m_path;
             breadbin::core::ReloadManager& m_reload_mgr;

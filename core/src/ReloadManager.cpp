@@ -40,13 +40,19 @@ namespace breadbin::core {
 
     void ReloadManager::notify_internal_change(const std::filesystem::path& path) {
         auto it = m_watches.find(path);
-        if (it != m_watches.end()) {
-            std::error_code ec;
-            if (std::filesystem::exists(path, ec)) {
-                it->second.last_modified = std::filesystem::last_write_time(path, ec);
-            }
+        if (it == m_watches.end()) {
+            return;
+        }
+
+        if (!it->second.is_directory && std::filesystem::exists(path)) {
+            it->second.last_modified = std::filesystem::last_write_time(path);
+        }
+
+        if (it->second.callback) {
+            it->second.callback();
         }
     }
+
 
     void ReloadManager::update() {
         std::error_code ec;

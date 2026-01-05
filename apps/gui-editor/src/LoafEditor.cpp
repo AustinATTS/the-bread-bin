@@ -126,6 +126,14 @@ namespace breadbin::gui {
 
         ImGui::Begin("The Bread Bin - Loaf Editor", p_open, flags);
 
+        bool save_requested = ImGui::MenuItem("Save", "Ctrl+S") || (ImGui::IsKeyDown(ImGuiKey_ModCtrl) && ImGui::IsKeyPressed(ImGuiKey_S));
+
+        if (save_requested) {
+            if (save() && m_on_saved && m_path) {
+                m_on_saved(*m_path);
+            }
+        }
+
         if (!m_dirty && std::string(m_name_buf) != m_loaf.name) {
             std::snprintf(m_name_buf, sizeof(m_name_buf), "%s", m_loaf.name.c_str());
         }

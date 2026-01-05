@@ -48,6 +48,7 @@ static void glfw_error_callback(int error, const char* description) {
     std::fprintf(stderr, "GLFW Error %d: %s\n", error, description);
 }
 
+
 int main() {
     glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit()) {
@@ -95,7 +96,6 @@ int main() {
     breadbin::gui::LoafEditor loaf_editor(loaf_dirty, current_loaf, current_loaf_path, reload_mgr);
     breadbin::gui::LoafBrowser loaf_browser(loaf_dirty, current_loaf, text_editor, current_loaf_path);
 
-
     loaf_editor.refresh_installed_apps();
 
     reload_mgr.watch_directory(loafs_dir(), [&]() {
@@ -106,30 +106,18 @@ int main() {
         loaf_browser.reload();
     });
 
+    static std::optional<std::filesystem::path> last_loaf_watch;
+    static std::optional<std::filesystem::path> last_file_watch;
+
+
     auto on_file_changed = [&](const std::filesystem::path& path) {
-        if (!std::filesystem::exists(path)) {
-            if (current_loaf_path && *current_loaf_path == path) {
-                current_loaf = breadbin::core::LoafFile();
-                current_loaf_path = std::nullopt;
-                loaf_dirty = false;
-            }
 
-            if (current_file_path && *current_file_path == path) {
-                show_text_editor = false;
-            }
+        if (current_loaf_path && *current_loaf_path == path && !loaf_dirty) {
+            current_loaf.load_from_file(path);
         }
-        else {
-            if (current_loaf_path && *current_loaf_path == path && !loaf_dirty) {
-                current_loaf.load_from_file(path);
-            }
 
-            if (current_file_path && *current_file_path == path && !file_dirty) {
-                text_editor.save();
-            }
-
-            if (path.filename() == "theme.toml") {
-                breadbin::theme::LoadPersistedTheme();
-            }
+        if (current_file_path && *current_file_path == path && !file_dirty) {
+            text_editor.reload_from_disk();
         }
     };
 
@@ -137,17 +125,23 @@ int main() {
         glfwPollEvents();
         reload_mgr.update();
 
-        static std::optional<std::filesystem::path> last_watched_path;
-        if (current_loaf_path != last_watched_path) {
-            if (last_watched_path) {
-                reload_mgr.unwatch_file(*last_watched_path);
-            }
-            if (current_loaf_path) {
+        if (current_loaf_path != last_loaf_watch) {
+            if (last_loaf_watch) reload_mgr.unwatch_file(*last_loaf_watch);
+            if (current_loaf_path)
                 reload_mgr.watch_file(*current_loaf_path, [&]() {
                     on_file_changed(*current_loaf_path);
                 });
-            }
-            last_watched_path = current_loaf_path;
+            last_loaf_watch = current_loaf_path;
+        }
+
+        // Watch text file
+        if (current_file_path != last_file_watch) {
+            if (last_file_watch) reload_mgr.unwatch_file(*last_file_watch);
+            if (current_file_path)
+                reload_mgr.watch_file(*current_file_path, [&]() {
+                    on_file_changed(*current_file_path);
+                });
+            last_file_watch = current_file_path;
         }
 
         ImGui_ImplOpenGL3_NewFrame();
@@ -242,9 +236,11 @@ int main() {
             loaf_browser.reload();
             loaf_editor.refresh_installed_apps();
 
-            if (current_loaf_path && !loaf_dirty) {
+            if (current_loaf_path && !loaf_dirty)
                 current_loaf.load_from_file(*current_loaf_path);
-            }
+
+            if (current_file_path && !file_dirty)
+                current_file.load_from_file(*current_file_path);
         }
 
         if (show_loaf_editor) {
