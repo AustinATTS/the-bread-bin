@@ -20,11 +20,17 @@ static bool show_loaf_editor  = true;
 static bool show_browser = true;
 static bool show_text_editor = false;
 static bool show_theme_editor = false;
+
 static bool loaf_dirty   = false;
+static bool file_dirty = false;
+static bool theme_dirty = false;
 
 static std::optional<std::filesystem::path> current_loaf_path;
+static std::optional<std::filesystem::path> current_file_path;
+
 static breadbin::core::LoafFile current_loaf;
-static breadbin::gui::TextEditor raw_editor;
+static breadbin::core::TextFile current_file;
+
 
 static std::filesystem::path loafs_dir() {
     return std::filesystem::path(std::getenv("HOME")) / ".config" / "the-bread-bin" / "loafs";
@@ -32,6 +38,10 @@ static std::filesystem::path loafs_dir() {
 
 static std::filesystem::path theme_dir() {
     return std::filesystem::path(std::getenv("HOME")) / ".config" / "the-bread-bin" / "themes";
+}
+
+static std::filesystem::path main_dir() {
+    return std::filesystem::path(std::getenv("HOME")) / ".config" / "the-bread-bin";
 }
 
 static void glfw_error_callback(int error, const char* description) {
@@ -81,8 +91,10 @@ int main() {
 
     breadbin::core::ReloadManager reload_mgr;
 
-    breadbin::gui::LoafBrowser loaf_browser(loaf_dirty, current_loaf, raw_editor, current_loaf_path);
+    breadbin::gui::TextEditor text_editor(file_dirty, current_file, current_file_path, reload_mgr);
     breadbin::gui::LoafEditor loaf_editor(loaf_dirty, current_loaf, current_loaf_path, reload_mgr);
+    breadbin::gui::LoafBrowser loaf_browser(loaf_dirty, current_loaf, text_editor, current_loaf_path);
+
 
     loaf_editor.refresh_installed_apps();
 
@@ -102,8 +114,8 @@ int main() {
                 loaf_dirty = false;
             }
 
-            if (raw_editor.is_open() && raw_editor.get_current_path() == path) {
-                raw_editor.set_open(false);
+            if (current_file_path && *current_file_path == path) {
+                show_text_editor = false;
             }
         }
         else {
@@ -111,10 +123,8 @@ int main() {
                 current_loaf.load_from_file(path);
             }
 
-            if (raw_editor.is_open()
-                && raw_editor.get_current_path() == path
-                && !raw_editor.is_dirty()) {
-                raw_editor.open_file(path);
+            if (current_file_path && *current_file_path == path && !file_dirty) {
+                text_editor.save();
             }
 
             if (path.filename() == "theme.toml") {
@@ -143,15 +153,6 @@ int main() {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
-
-        static bool last_raw_dirty = false;
-        if (last_raw_dirty && !raw_editor.is_dirty()) {
-            reload_mgr.notify_internal_change(raw_editor.get_current_path());
-            if (current_loaf_path && *current_loaf_path == raw_editor.get_current_path()) {
-                current_loaf.load_from_file(*current_loaf_path);
-            }
-        }
-        last_raw_dirty = raw_editor.is_dirty();
 
         bool reload_requested = ImGui::Shortcut(ImGuiMod_Ctrl | ImGuiKey_R);
 
@@ -184,6 +185,19 @@ int main() {
                     }
                 }
 
+                if (ImGui::MenuItem("Load Text File")) {
+                    NFD::UniquePath inPath;
+                    nfdfilteritem_t filter[] = {
+                        {"Loaf files", "loaf"},
+                        {"Toml files", "toml"}
+                    };
+                    if (NFD::OpenDialog(inPath, filter, 2, loafs_dir().string().c_str()) == NFD_OKAY) {
+                        current_file_path = inPath.get();
+                        text_editor.save();
+                        show_text_editor = true;
+                    }
+                }
+
                 ImGui::Separator();
 
                 if (ImGui::MenuItem("Reload", "Ctrl+R")) {
@@ -194,10 +208,12 @@ int main() {
 
                 if (ImGui::MenuItem("Save", "Ctrl+S")) {
                     loaf_editor.save();
+                    text_editor.save();
                 }
 
                 if (ImGui::MenuItem("Save As")) {
                     loaf_editor.save_as();
+                    text_editor.save_as();
                 }
 
                 ImGui::Separator();
@@ -211,8 +227,8 @@ int main() {
 
             if (ImGui::BeginMenu("View")) {
                 ImGui::MenuItem("Loaf Editor", "Ctrl+L", &show_loaf_editor);
-                ImGui::MenuItem("Text Editor", "Ctrl+O", &show_loaf_editor);
-                ImGui::MenuItem("Theme Editor", "Ctrl+A", &show_loaf_editor);
+                ImGui::MenuItem("Text Editor", "Ctrl+O", &show_text_editor);
+                ImGui::MenuItem("Theme Editor", "Ctrl+A", &show_theme_editor);
                 ImGui::MenuItem("Loaf Browser", "Ctrl+F", &show_browser);
                 ImGui::EndMenu();
             }
@@ -240,13 +256,9 @@ int main() {
             loaf_browser.render(&show_browser);
         }
 
-        if (raw_editor.is_open()) {
+        if (show_text_editor) {
             ImGui::SetNextWindowDockID(dockspace_id, ImGuiCond_FirstUseEver);
-            bool p_open = true;
-            raw_editor.render(&p_open);
-            if (!p_open) {
-                raw_editor.set_open(false);
-            }
+            text_editor.render(&show_text_editor, dockspace_id);
         }
 
         ImGui::Render();
