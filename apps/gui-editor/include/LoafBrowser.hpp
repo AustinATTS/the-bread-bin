@@ -1,5 +1,6 @@
 #pragma once
 #include <breadbin/LoafFile.hpp>
+#include <breadbin/ThemeFile.hpp>
 #include <TextEditor.hpp>
 #include <vector>
 #include <filesystem>
@@ -14,7 +15,7 @@ namespace breadbin::gui {
 
     class LoafBrowser {
         public:
-            LoafBrowser(bool& dirty_flag, core::LoafFile& active_loaf, TextEditor& editor, std::optional<std::filesystem::path>& active_path);
+            LoafBrowser(bool& dirty_loaf_flag, bool& dirty_theme_flag, core::LoafFile& active_loaf, core::ThemeFile& active_theme, TextEditor& editor, std::optional<std::filesystem::path>& active_loaf_path, std::optional<std::filesystem::path>& active_theme_path);
             void render(bool* p_open);
             void reload();
 
@@ -22,10 +23,15 @@ namespace breadbin::gui {
             void refresh_files();
             void handle_file_action(const std::filesystem::path& path, OpenMode mode);
 
-            bool& m_dirty;
+            bool& m_loaf_dirty;
             core::LoafFile& m_active_loaf;
+            std::optional<std::filesystem::path>& m_active_loaf_path;
+
+            bool& m_theme_dirty;
+            core::ThemeFile& m_active_theme;
+            std::optional<std::filesystem::path>& m_active_theme_path;
+
             TextEditor& m_editor;
-            std::optional<std::filesystem::path>& m_active_path;
 
             std::filesystem::path m_root_path;
             std::filesystem::path m_selected_path;

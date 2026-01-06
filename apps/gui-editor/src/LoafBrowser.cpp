@@ -9,7 +9,7 @@
 #include <optional>
 
 namespace breadbin::gui {
-    LoafBrowser::LoafBrowser(bool& dirty_flag, core::LoafFile& active_loaf, TextEditor& editor, std::optional<std::filesystem::path>& active_path) : m_dirty(dirty_flag), m_active_loaf(active_loaf), m_editor(editor), m_active_path(active_path) {
+    LoafBrowser::LoafBrowser(bool& dirty_loaf_flag, bool& dirty_theme_flag, core::LoafFile& active_loaf, core::ThemeFile& active_theme, TextEditor& editor, std::optional<std::filesystem::path>& active_loaf_path, std::optional<std::filesystem::path>& active_theme_path) : m_loaf_dirty(dirty_loaf_flag), m_theme_dirty(dirty_theme_flag), m_active_loaf(active_loaf), m_active_theme(active_theme), m_editor(editor), m_active_loaf_path(active_loaf_path), m_active_theme_path(active_theme_path) {
         const char* home = std::getenv("HOME");
         if (home) {
             m_root_path = std::filesystem::path(home) / ".config" / "the-bread-bin";
@@ -111,8 +111,8 @@ namespace breadbin::gui {
             if (ImGui::Button("Save and Load", ImVec2(120, 0))) {
                 m_active_loaf.save_to_file("previous_auto.loaf");
                 if (m_active_loaf.load_from_file(m_selected_path)) {
-                    m_active_path = m_selected_path;
-                    m_dirty = false;
+                    m_active_loaf_path = m_selected_path;
+                    m_loaf_dirty = false;
                 }
                 m_show_unsaved_modal = false;
                 ImGui::CloseCurrentPopup();
@@ -122,8 +122,8 @@ namespace breadbin::gui {
 
             if (ImGui::Button("Discard & Load", ImVec2(120, 0))) {
                 if (m_active_loaf.load_from_file(m_selected_path)) {
-                    m_active_path = m_selected_path;
-                    m_dirty = false;
+                    m_active_loaf_path = m_selected_path;
+                    m_loaf_dirty = false;
                 }
                 m_show_unsaved_modal = false;
                 ImGui::CloseCurrentPopup();
@@ -173,21 +173,30 @@ namespace breadbin::gui {
             m_editor.open_file(path);
             return;
         }
-        if (ext == ".toml") {
-            if (breadbin::theme::LoadThemeFromFile(path)) {
-                breadbin::theme::SaveActiveTheme();
+        else {
+            if (ext == ".toml") {
+                if (m_theme_dirty) {
+                    m_selected_path = path;
+                    m_show_unsaved_modal = true;
+                }
+                else {
+                    if (m_active_theme.load_from_file(path)) {
+                        m_active_theme_path = path;
+                        m_theme_dirty = false;
+                    }
+                }
             }
-        }
 
-        if (ext == ".loaf") {
-            if (m_dirty) {
-                m_selected_path = path;
-                m_show_unsaved_modal = true;
-            }
-            else {
-                if (m_active_loaf.load_from_file(path)) {
-                    m_active_path = path;
-                    m_dirty = false;
+            if (ext == ".loaf") {
+                if (m_loaf_dirty) {
+                    m_selected_path = path;
+                    m_show_unsaved_modal = true;
+                }
+                else {
+                    if (m_active_loaf.load_from_file(path)) {
+                        m_active_loaf_path = path;
+                        m_loaf_dirty = false;
+                    }
                 }
             }
         }
