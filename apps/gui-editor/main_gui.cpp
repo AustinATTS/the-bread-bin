@@ -1,5 +1,6 @@
 #include <breadbin/LoafFile.hpp>
 #include <breadbin/ReloadManager.hpp>
+#include <ThemeEditor.hpp>
 #include <ThemeLoader.hpp>
 #include <LoafEditor.hpp>
 #include <LoafBrowser.hpp>
@@ -27,9 +28,11 @@ static bool theme_dirty = false;
 
 static std::optional<std::filesystem::path> current_loaf_path;
 static std::optional<std::filesystem::path> current_file_path;
+static std::optional<std::filesystem::path> current_theme_path;
 
 static breadbin::core::LoafFile current_loaf;
 static breadbin::core::TextFile current_file;
+static breadbin::core::ThemeFile current_theme;
 
 
 static std::filesystem::path loafs_dir() {
@@ -92,6 +95,7 @@ int main() {
 
     breadbin::core::ReloadManager reload_mgr;
 
+    breadbin::gui::ThemeEditor theme_editor(theme_dirty, current_theme, current_theme_path, reload_mgr);
     breadbin::gui::TextEditor text_editor(file_dirty, current_file, current_file_path, reload_mgr);
     breadbin::gui::LoafEditor loaf_editor(loaf_dirty, current_loaf, current_loaf_path, reload_mgr);
     breadbin::gui::LoafBrowser loaf_browser(loaf_dirty, current_loaf, text_editor, current_loaf_path);
@@ -255,6 +259,11 @@ int main() {
         if (show_text_editor) {
             ImGui::SetNextWindowDockID(dockspace_id, ImGuiCond_FirstUseEver);
             text_editor.render(&show_text_editor, dockspace_id);
+        }
+
+        if (show_theme_editor) {
+            ImGui::SetNextWindowDockID(dockspace_id, ImGuiCond_FirstUseEver);
+            theme_editor.render(&show_theme_editor, dockspace_id);
         }
 
         ImGui::Render();
