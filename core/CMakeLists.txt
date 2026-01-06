@@ -3,6 +3,7 @@ add_library(breadbin_core STATIC
         src/LoafRunner.cpp
         src/ReloadManager.cpp
         src/TextFile.cpp
+        src/ThemeFile.cpp
 )
 
 target_include_directories(breadbin_core PUBLIC
