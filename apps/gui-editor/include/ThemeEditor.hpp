@@ -28,7 +28,7 @@ namespace breadbin::gui {
             std::function<void(const std::filesystem::path&)> m_on_saved;
 
             breadbin::core::ThemeFile& m_theme;
-            std::optional<std::filesystem::path> m_path;
+            std::optional<std::filesystem::path>& m_path;
             breadbin::core::ReloadManager& m_reload_mgr;
 
             char m_name_buf[128] {};

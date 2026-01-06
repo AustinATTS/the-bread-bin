@@ -135,8 +135,14 @@ namespace breadbin::gui {
         ImGui::Separator();
 
         auto& theme_tbl = m_theme.theme;
-        theme_tbl.insert_or_assign("style", toml::table{});
-        theme_tbl.insert_or_assign("colors", toml::table{});
+
+        if (!theme_tbl.contains("style")) {
+            theme_tbl.insert("style", toml::table{});
+        }
+
+        if (!theme_tbl.contains("colors")) {
+            theme_tbl.insert("colors", toml::table{});
+        }
 
         auto* style_tbl  = theme_tbl["style"].as_table();
         auto* colors_tbl = theme_tbl["colors"].as_table();

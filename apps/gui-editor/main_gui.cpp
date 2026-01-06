@@ -98,7 +98,7 @@ int main() {
     breadbin::gui::ThemeEditor theme_editor(theme_dirty, current_theme, current_theme_path, reload_mgr);
     breadbin::gui::TextEditor text_editor(file_dirty, current_file, current_file_path, reload_mgr);
     breadbin::gui::LoafEditor loaf_editor(loaf_dirty, current_loaf, current_loaf_path, reload_mgr);
-    breadbin::gui::LoafBrowser loaf_browser(loaf_dirty, current_loaf, text_editor, current_loaf_path);
+    breadbin::gui::LoafBrowser loaf_browser(loaf_dirty, theme_dirty, current_loaf, current_theme, text_editor, current_loaf_path, current_theme_path);
 
     loaf_editor.refresh_installed_apps();
 
@@ -112,6 +112,7 @@ int main() {
 
     static std::optional<std::filesystem::path> last_loaf_watch;
     static std::optional<std::filesystem::path> last_file_watch;
+    static std::optional<std::filesystem::path> last_theme_watch;
 
 
     auto on_file_changed = [&](const std::filesystem::path& path) {
@@ -122,6 +123,10 @@ int main() {
 
         if (current_file_path && *current_file_path == path && !file_dirty) {
             text_editor.reload_from_disk();
+        }
+
+        if (current_theme_path && *current_theme_path == path && !theme_dirty) {
+            current_theme.load_from_file(path);
         }
     };
 
@@ -138,7 +143,6 @@ int main() {
             last_loaf_watch = current_loaf_path;
         }
 
-        // Watch text file
         if (current_file_path != last_file_watch) {
             if (last_file_watch) reload_mgr.unwatch_file(*last_file_watch);
             if (current_file_path)
@@ -207,11 +211,13 @@ int main() {
                 if (ImGui::MenuItem("Save", "Ctrl+S")) {
                     loaf_editor.save();
                     text_editor.save();
+                    theme_editor.save();
                 }
 
                 if (ImGui::MenuItem("Save As")) {
                     loaf_editor.save_as();
                     text_editor.save_as();
+                    loaf_editor.save_as();
                 }
 
                 ImGui::Separator();
