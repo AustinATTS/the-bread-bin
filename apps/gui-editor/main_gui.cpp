@@ -85,7 +85,10 @@ int main() {
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 330");
 
-    breadbin::theme::LoadPersistedTheme();
+    //breadbin::theme::LoadPersistedTheme();
+
+    ImGui::StyleColorsLight();
+
 
     if (NFD::Init() != NFD_OKAY) {
         return 1;
