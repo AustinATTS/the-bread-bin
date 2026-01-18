@@ -3,13 +3,13 @@
   "spdxVersion": "SPDX-2.2",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "documentNamespace": "https://spdx.org/spdxdocs/nativefiledialog-extended-x64-linux-1.2.1-df4277cd-1785-4889-93a1-4d9b3041fd4b",
-  "name": "nativefiledialog-extended:x64-linux@1.2.1 a332d59769d2eafe8f38e3bb7926f56cc76d57eef4ba7653372bc2259d8dbc14",
+  "documentNamespace": "https://spdx.org/spdxdocs/nativefiledialog-extended-x64-linux-1.2.1-b35e7dc7-b670-4e43-9c37-3c1cd65ecca5",
+  "name": "nativefiledialog-extended:x64-linux@1.2.1 e5801eb35af74667919c9b07db6dc0c37947bf1678c4d7429d316222bd482a40",
   "creationInfo": {
     "creators": [
       "Tool: vcpkg-2025-12-16-44bb3ce006467fc13ba37ca099f64077b8bbf84d"
     ],
-    "created": "2026-01-02T23:42:34Z"
+    "created": "2026-01-18T20:16:28Z"
   },
   "relationships": [
     {
@@ -104,7 +104,7 @@
     {
       "name": "nativefiledialog-extended:x64-linux",
       "SPDXID": "SPDXRef-binary",
-      "versionInfo": "a332d59769d2eafe8f38e3bb7926f56cc76d57eef4ba7653372bc2259d8dbc14",
+      "versionInfo": "e5801eb35af74667919c9b07db6dc0c37947bf1678c4d7429d316222bd482a40",
       "downloadLocation": "NONE",
       "licenseConcluded": "Zlib",
       "licenseDeclared": "NOASSERTION",
@@ -205,7 +205,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "9718a33b887bbb10c961603968367636a7efd2c466e0b68d7169c1c8fabf4634"
+          "checksumValue": "cefed086f7edc58d1959b0d788fa83ebb99305ad77a2578f501f2982e28161f9"
         }
       ],
       "licenseConcluded": "NOASSERTION",
@@ -265,7 +265,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "5a473d29dc7359a2e44b95aa710fce74f223473a75095870dc803a8e01bd820c"
+          "checksumValue": "f9b0003d4a682b9de27d6597ffb2b600a21938e72effada9c17126e80b40f08a"
         }
       ],
       "licenseConcluded": "NOASSERTION",

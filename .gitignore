@@ -13,7 +13,6 @@
 *.lib
 *.a
 *.la
-*.lo
 *.dll
 *.so
 *.so.*
@@ -24,13 +23,13 @@
 
 # IDE - CLion / JetBrains
 .idea/
-cmake-build-*/
+cmake-build-debug/
 *.iws
 out/
 
 # IDE - Visual Studio (in case you open it there)
 .vs/
-vcpkg/installed/
+vcpkg_installed/
 *.sln
 *.vcxproj
 *.user

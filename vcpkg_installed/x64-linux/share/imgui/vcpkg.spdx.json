@@ -3,13 +3,13 @@
   "spdxVersion": "SPDX-2.2",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "documentNamespace": "https://spdx.org/spdxdocs/imgui-x64-linux-1.91.9-c0eca7d6-aea6-4f55-b9d0-adcd1801d403",
-  "name": "imgui:x64-linux@1.91.9 584b3834184785314ae21fda541fcd7edd8127c3f528e83a5a691c5160b6e4db",
+  "documentNamespace": "https://spdx.org/spdxdocs/imgui-x64-linux-1.91.9-2abd712d-b17b-4fec-befd-896b2e3c15d7",
+  "name": "imgui:x64-linux@1.91.9 d11ba2c87e208790a82038daf0e6d7815498756920e1b8b3a8407bd507796aae",
   "creationInfo": {
     "creators": [
       "Tool: vcpkg-2025-12-16-44bb3ce006467fc13ba37ca099f64077b8bbf84d"
     ],
-    "created": "2026-01-03T09:55:00Z"
+    "created": "2026-01-18T20:14:21Z"
   },
   "relationships": [
     {
@@ -149,7 +149,7 @@
     {
       "name": "imgui:x64-linux",
       "SPDXID": "SPDXRef-binary",
-      "versionInfo": "584b3834184785314ae21fda541fcd7edd8127c3f528e83a5a691c5160b6e4db",
+      "versionInfo": "d11ba2c87e208790a82038daf0e6d7815498756920e1b8b3a8407bd507796aae",
       "downloadLocation": "NONE",
       "licenseConcluded": "MIT",
       "licenseDeclared": "NOASSERTION",
@@ -389,7 +389,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "800ad7a40073b88a04b1f634f31e62cfed9cd6e85ea2c68cfe018b9ec75bc420"
+          "checksumValue": "444d07ad2988ffefcc7a89957340ac49b33b05aeca07b91bf78055dea7c44ae5"
         }
       ],
       "licenseConcluded": "NOASSERTION",
@@ -461,7 +461,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "de08f998fabbd12f89c6eb382afdfa63b318fab54ed19dedfee71b3b034559f1"
+          "checksumValue": "9b176ccbe472bdaf6ac7c1d80acf19d896e26775fc33061b5aeff27e80e98583"
         }
       ],
       "licenseConcluded": "NOASSERTION",

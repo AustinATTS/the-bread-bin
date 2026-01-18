@@ -3,13 +3,13 @@
   "spdxVersion": "SPDX-2.2",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "documentNamespace": "https://spdx.org/spdxdocs/yaml-cpp-x64-linux-0.8.0#3-668daf04-dffd-4a1d-9fca-6a72a18d69f6",
-  "name": "yaml-cpp:x64-linux@0.8.0#3 6e6b3540173bb443e8e9afe00b2036cc07a011d8c593a72259b431655496c122",
+  "documentNamespace": "https://spdx.org/spdxdocs/yaml-cpp-x64-linux-0.8.0#3-7b24e9cb-0ca4-4a0d-a39c-c50ec4e0ae42",
+  "name": "yaml-cpp:x64-linux@0.8.0#3 fd695979eaeffc86d018e4fa5058b6737a4197cced9f7b3cebbc007aa9991bc0",
   "creationInfo": {
     "creators": [
       "Tool: vcpkg-2025-12-16-44bb3ce006467fc13ba37ca099f64077b8bbf84d"
     ],
-    "created": "2026-01-02T09:10:50Z"
+    "created": "2026-01-18T20:16:35Z"
   },
   "relationships": [
     {
@@ -299,7 +299,7 @@
     {
       "name": "yaml-cpp:x64-linux",
       "SPDXID": "SPDXRef-binary",
-      "versionInfo": "6e6b3540173bb443e8e9afe00b2036cc07a011d8c593a72259b431655496c122",
+      "versionInfo": "fd695979eaeffc86d018e4fa5058b6737a4197cced9f7b3cebbc007aa9991bc0",
       "downloadLocation": "NONE",
       "licenseConcluded": "MIT",
       "licenseDeclared": "NOASSERTION",
@@ -832,7 +832,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "3ee9c323f25bc5309c1109a8e4256fe841a6d1c2f5228714d150fa171cdd145a"
+          "checksumValue": "67c4571849ceaefa2b58b19a99b6f3d50c8ac32f02114bcca25c29910d7f846d"
         }
       ],
       "licenseConcluded": "NOASSERTION",
@@ -916,7 +916,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "71982b5a1ef068d287ec5ec2b01c56b6f3ad892f67c96ab49592f407d0a82335"
+          "checksumValue": "798c95e3124eda9ee1bba783579256dae62eb075c661a00ff01127d1f533efc8"
         }
       ],
       "licenseConcluded": "NOASSERTION",

@@ -2,21 +2,21 @@ Package: vcpkg-cmake-config
 Version: 2024-05-23
 Architecture: x64-linux
 Multi-Arch: same
-Abi: a74a68f637443a4c9114e8241c1188c97e5bff62ced9f1e6ad75174ce99d5c01
+Abi: 0a99cf2f6397ebd30688fbdbd69604efe6292ee83c54d414b6a760e94431cc7c
 Status: install ok installed
 
 Package: vcpkg-cmake
 Version: 2024-04-23
 Architecture: x64-linux
 Multi-Arch: same
-Abi: f7a89341b52c5705605f21355579f9ef25827840d871d58a144647d76a906f45
+Abi: f76a62ef54129dcf7d3588ff1ade027c7ab438d978061e243de3a0984c15584b
 Status: install ok installed
 
 Package: egl-registry
 Version: 2025-05-27
 Architecture: x64-linux
 Multi-Arch: same
-Abi: 08c8d3d7033d4022d8a366ff5c49da284fed1593fccf0bbbca74c343905a94cf
+Abi: cf807b9de474d213a8ca59463e9e62e7bb9c3e0a0178de232d06f42d35aba566
 Description: EGL API and Extension Registry
 Status: install ok installed
 
@@ -25,7 +25,7 @@ Version: 2025-10-23
 Depends: egl-registry
 Architecture: x64-linux
 Multi-Arch: same
-Abi: 74058ab63f9403b2a5757f3951d12e9f771eeac4841b5ceeee49b0e5160e537e
+Abi: d851ed4dd9bf701d2e463728c3dce1744b0fcb8e6721c9bf419adb61f68d4a7d
 Description: OpenGL, OpenGL ES, and OpenGL ES-SC API and Extension Registry
 Status: install ok installed
 
@@ -34,7 +34,7 @@ Version: 0.1.36
 Depends: egl-registry, opengl-registry, vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-linux
 Multi-Arch: same
-Abi: a4d12404986382644d2e651913fc0702c08e4854d3207d71df002e7195101218
+Abi: 55a7768b3a07afc40c1846cb859ae3b7be01f8178bfbfd22bf8c118ad5a88d7e
 Description: Multi-Language Vulkan/GL/GLES/EGL/GLX/WGL Loader-Generator based on the official specs.
 Default-Features: loader
 Status: install ok installed
@@ -52,7 +52,7 @@ Port-Version: 1
 Depends: vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-linux
 Multi-Arch: same
-Abi: fa14cc449b3fd150eef1b9d0d2df8f7c41f6a7c25abf99c234e2ce5e30c9f508
+Abi: 3850e9c37ca05ea4d8ccd584e9166a55f839dc5dcfcdb67f9979b8a17e9bf09c
 Description: GLFW is a free, Open Source, multi-platform library for OpenGL, OpenGL ES and Vulkan application development. It provides a simple, platform-independent API for creating windows, contexts and surfaces, reading input, handling events, etc.
 Status: install ok installed
 
@@ -61,7 +61,7 @@ Version: 1.91.9
 Depends: vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-linux
 Multi-Arch: same
-Abi: 584b3834184785314ae21fda541fcd7edd8127c3f528e83a5a691c5160b6e4db
+Abi: d11ba2c87e208790a82038daf0e6d7815498756920e1b8b3a8407bd507796aae
 Description: Bloat-free Immediate Mode Graphical User interface for C++ with minimal dependencies.
 Status: install ok installed
 
@@ -85,7 +85,7 @@ Version: 1.5.7
 Depends: vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-linux
 Multi-Arch: same
-Abi: a9605d59e326620fc1fa3ddbcb45bfad7f1ddb72ddae73ee8036905aca05dd1e
+Abi: dd47a423ada5f92b80afd914663fef1f5570a8aee01a0a14d1c2e049d429be7f
 Description: Zstandard - Fast real-time compression algorithm
 Status: install ok installed
 
@@ -94,7 +94,7 @@ Version: 2025-05-29
 Depends: vcpkg-cmake
 Architecture: x64-linux
 Multi-Arch: same
-Abi: 0e827a672c30a42d052cb2befd2ab2355ca44d701cd959852e4a49864cff3433
+Abi: 000eaca15a8fa3aee8ab3ff112a215742e8ae9d587e0886268fff85fb9b4e5d0
 Status: install ok installed
 
 Package: vcpkg-tool-meson
@@ -103,7 +103,7 @@ Port-Version: 3
 Depends: vcpkg-cmake-get-vars
 Architecture: x64-linux
 Multi-Arch: same
-Abi: 1ce29d73c86b597ed771cd90a116039d8af5396c1b85320062a6269d1201b1a5
+Abi: 746e34bc6f8f54bb9d68b95f1e92d2ca80993eadcb914ebec62316fe28072b5a
 Description: Meson build system
 Status: install ok installed
 
@@ -111,7 +111,7 @@ Package: vcpkg-get-python-packages
 Version: 2025-04-05
 Architecture: x64-linux
 Multi-Arch: same
-Abi: 7f64a7ebcd1d4f545da5b7210192022045ac57b5521750a61c9559c2c4f3daaa
+Abi: 52446c40a69f5d5671fbc515b47a7fd6495ed45d5f1e719474b85b5e472ec0ac
 Status: install ok installed
 
 Package: lz4
@@ -119,7 +119,7 @@ Version: 1.10.0
 Depends: vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-linux
 Multi-Arch: same
-Abi: 79c239d4baa9799119b705f76e235d21c3b6bff64ad1af8b32232ad1371b2fb4
+Abi: 4f7e16ab7af2fb5a7168be3d8125393fa7f08167746ca7436b7869cfe4e41d21
 Description: Lossless compression algorithm, providing compression speed at 400 MB/s per core.
 Status: install ok installed
 
@@ -128,7 +128,7 @@ Version: 2025-10-26
 Depends: vcpkg-cmake-get-vars
 Architecture: x64-linux
 Multi-Arch: same
-Abi: 9268918a6590c97fd28a98af825cf4cf1c4cf93dbff0d6092540ac2e03d24493
+Abi: 4b821fd756da97d4eb8f0b2e91d109d3bc9f63af19c1d092033ac7bc9078de18
 Status: install ok installed
 
 Package: libxcrypt
@@ -136,7 +136,7 @@ Version: 4.5.2
 Depends: vcpkg-make
 Architecture: x64-linux
 Multi-Arch: same
-Abi: d631acf415a73254e8efd307000ed375813c994feaee2c40b1795d4ab8b77b96
+Abi: 6d8ce228d33b8e831af767d88ea94e5f2960bf79950a7d9f37638a9c43e9d5b7
 Description: libxcrypt is a modern library for one-way hashing of passwords. On Linux-based systems, by default libxcrypt will be binary backward compatible with the libcrypt.so.1 shipped as part of the GNU C Library.
 Status: install ok installed
 
@@ -144,7 +144,7 @@ Package: libmount
 Version: 2.40
 Architecture: x64-linux
 Multi-Arch: same
-Abi: 5688c07b854d20ef1b727b098cc32c81e4d827c9b8137fc19617d0f6c3669fef
+Abi: 3bad1af273af3786052f7c639701e7bb91b874cd5cddc010a44fc18ec1bcdbb3
 Description: Block device identification library from util-linux
 Status: install ok installed
 
@@ -153,7 +153,7 @@ Version: 5.8.2
 Depends: vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-linux
 Multi-Arch: same
-Abi: 8782b9ff0fdebb48380f0485f6320b23252708e5cf653b21eb6e84bac63d88ba
+Abi: 49d3bc14343058262ca25a0d5079ddf8e068c1323162a3dbdafeee576af2fae1
 Description: Compression library with an API similar to that of zlib.
 Status: install ok installed
 
@@ -163,7 +163,7 @@ Port-Version: 1
 Depends: vcpkg-cmake-get-vars, vcpkg-make
 Architecture: x64-linux
 Multi-Arch: same
-Abi: 93ff07704ae4268359c0880f87f4d781c99d5b96998b301b3155b519b32c1a0a
+Abi: 6e214bc4a8caefe168135ef0aab822afa354b8522bb2a8d9ad2ad9299f852002
 Description: A library for getting and setting POSIX.1e (formerly POSIX 6) draft 15 capabilities.
 Status: install ok installed
 
@@ -172,7 +172,7 @@ Version: 3.3
 Depends: vcpkg-make
 Architecture: x64-linux
 Multi-Arch: same
-Abi: d9e87802de1547f6f2239fc28104f28592b1abdc09156c7bc93ca42701e75798
+Abi: 394d9db01ae6128a9939d07439c15f883a1b6a6c97a1736a0d18a6923a6f4cc2
 Description: GNU perfect hash function generator
 Status: install ok installed
 
@@ -182,7 +182,7 @@ Port-Version: 1
 Depends: gperf, libcap, liblzma, libmount, libxcrypt, lz4, vcpkg-get-python-packages, vcpkg-tool-meson, zstd
 Architecture: x64-linux
 Multi-Arch: same
-Abi: 365bcf4dfe34cdcae35f172c96ecee2524083aa47e3434ef69c5211c1423e873
+Abi: 96e132036bf4bd07dcb4e4c2143b0c8948edf0258e07a8dc0f3023226818a1a9
 Description: Libsystemd
 Status: install ok installed
 
@@ -191,7 +191,7 @@ Version: 2.7.3
 Depends: vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-linux
 Multi-Arch: same
-Abi: facf2e1e80b308d8656a1a1f7e180e0da35661a95237cf42d3e46a26bd279c5f
+Abi: ba7474e6dc998faab3a6b7edb8c9ae2dc8f907dd77ed24bf1d909d7b32be91e7
 Description: XML parser library written in C
 Status: install ok installed
 
@@ -201,7 +201,7 @@ Port-Version: 2
 Depends: expat, vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-linux
 Multi-Arch: same
-Abi: 17b4b1406c9df43234036d3ca41b6cf99ffb3f0065425e344a119de66607d45e
+Abi: f1d069dddd52d768e6a2b41efa48a19ff41c75145286672012604cecafecfe44
 Description: D-Bus specification and reference implementation, including libdbus and dbus-daemon
 Default-Features: systemd
 Status: install ok installed
@@ -219,7 +219,7 @@ Version: 1.2.1
 Depends: dbus, vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-linux
 Multi-Arch: same
-Abi: a332d59769d2eafe8f38e3bb7926f56cc76d57eef4ba7653372bc2259d8dbc14
+Abi: e5801eb35af74667919c9b07db6dc0c37947bf1678c4d7429d316222bd482a40
 Description: Native File Dialog Extended
 Status: install ok installed
 
@@ -229,7 +229,7 @@ Port-Version: 3
 Depends: vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-linux
 Multi-Arch: same
-Abi: 6e6b3540173bb443e8e9afe00b2036cc07a011d8c593a72259b431655496c122
+Abi: fd695979eaeffc86d018e4fa5058b6737a4197cced9f7b3cebbc007aa9991bc0
 Description: yaml-cpp is a YAML parser and emitter in C++ matching the YAML 1.2 spec.
 Status: install ok installed
 

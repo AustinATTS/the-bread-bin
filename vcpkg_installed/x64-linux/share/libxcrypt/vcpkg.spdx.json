@@ -3,13 +3,13 @@
   "spdxVersion": "SPDX-2.2",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "documentNamespace": "https://spdx.org/spdxdocs/libxcrypt-x64-linux-4.5.2-5cc7ab41-085f-4923-ac29-7bfa8f19aa96",
-  "name": "libxcrypt:x64-linux@4.5.2 d631acf415a73254e8efd307000ed375813c994feaee2c40b1795d4ab8b77b96",
+  "documentNamespace": "https://spdx.org/spdxdocs/libxcrypt-x64-linux-4.5.2-9426ac00-68d8-4389-a833-009f860088aa",
+  "name": "libxcrypt:x64-linux@4.5.2 6d8ce228d33b8e831af767d88ea94e5f2960bf79950a7d9f37638a9c43e9d5b7",
   "creationInfo": {
     "creators": [
       "Tool: vcpkg-2025-12-16-44bb3ce006467fc13ba37ca099f64077b8bbf84d"
     ],
-    "created": "2026-01-02T23:40:55Z"
+    "created": "2026-01-18T20:14:53Z"
   },
   "relationships": [
     {
@@ -144,7 +144,7 @@
     {
       "name": "libxcrypt:x64-linux",
       "SPDXID": "SPDXRef-binary",
-      "versionInfo": "d631acf415a73254e8efd307000ed375813c994feaee2c40b1795d4ab8b77b96",
+      "versionInfo": "6d8ce228d33b8e831af767d88ea94e5f2960bf79950a7d9f37638a9c43e9d5b7",
       "downloadLocation": "NONE",
       "licenseConcluded": "LicenseRef-vcpkg-null",
       "licenseDeclared": "NOASSERTION",
@@ -209,7 +209,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "ab8ef6a91968159f8165faff54f4108b465bb85c3dde76e5a9aa31e97a7d69c9"
+          "checksumValue": "7cf093a8add2d5038aafda430384ede1a47c2f24cb993dea9c756551bee6432d"
         }
       ],
       "licenseConcluded": "NOASSERTION",
@@ -377,7 +377,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "5c97e3113611958f7b172f7d07afbd7ff1203a05ee3f581641a7b6be6e0049a6"
+          "checksumValue": "f2685762e751e556ad73f383d7cad0db984d4114059f97b282f1de8e296c375b"
         }
       ],
       "licenseConcluded": "NOASSERTION",

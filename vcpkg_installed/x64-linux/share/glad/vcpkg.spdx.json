@@ -3,13 +3,13 @@
   "spdxVersion": "SPDX-2.2",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "documentNamespace": "https://spdx.org/spdxdocs/glad-x64-linux-0.1.36-ba508557-46c2-45aa-bf97-517c3e8d540b",
-  "name": "glad:x64-linux@0.1.36 a4d12404986382644d2e651913fc0702c08e4854d3207d71df002e7195101218",
+  "documentNamespace": "https://spdx.org/spdxdocs/glad-x64-linux-0.1.36-7d4f0636-367e-4ea7-a7b2-a2df2aa97da4",
+  "name": "glad:x64-linux@0.1.36 55a7768b3a07afc40c1846cb859ae3b7be01f8178bfbfd22bf8c118ad5a88d7e",
   "creationInfo": {
     "creators": [
       "Tool: vcpkg-2025-12-16-44bb3ce006467fc13ba37ca099f64077b8bbf84d"
     ],
-    "created": "2026-01-02T09:38:00Z"
+    "created": "2026-01-18T20:14:10Z"
   },
   "relationships": [
     {
@@ -109,7 +109,7 @@
     {
       "name": "glad:x64-linux",
       "SPDXID": "SPDXRef-binary",
-      "versionInfo": "a4d12404986382644d2e651913fc0702c08e4854d3207d71df002e7195101218",
+      "versionInfo": "55a7768b3a07afc40c1846cb859ae3b7be01f8178bfbfd22bf8c118ad5a88d7e",
       "downloadLocation": "NONE",
       "licenseConcluded": "MIT",
       "licenseDeclared": "NOASSERTION",
@@ -181,36 +181,36 @@
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./debug/lib/libglad.a",
+      "fileName": "./include/glad/glad.h",
       "SPDXID": "SPDXRef-binary-file-0",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "ac4fb0b26a3fb863708150407ad8ea7689d65c7a8aa5eb1a179bd5402367c832"
+          "checksumValue": "8d320a45a0214296c75124fc5c4776ff853714d188093acd0308f3af53669945"
         }
       ],
       "licenseConcluded": "NOASSERTION",
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./lib/libglad.a",
+      "fileName": "./debug/lib/libglad.a",
       "SPDXID": "SPDXRef-binary-file-1",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "7ff554b7bd1c2e9807b6f760695d7f423978168196c183874a111890903a044c"
+          "checksumValue": "39cc560d689d68128235856d8bad055a6b960e558cb935a09027b0115464ba7c"
         }
       ],
       "licenseConcluded": "NOASSERTION",
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./include/glad/glad.h",
+      "fileName": "./share/glad/gladTargets-release.cmake",
       "SPDXID": "SPDXRef-binary-file-2",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "8d320a45a0214296c75124fc5c4776ff853714d188093acd0308f3af53669945"
+          "checksumValue": "8338597e283f58809d7fc8926e47b118fcad95051f8e45c03bb004e20688b57f"
         }
       ],
       "licenseConcluded": "NOASSERTION",
@@ -229,24 +229,24 @@
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./share/glad/gladConfigVersion.cmake",
+      "fileName": "./share/glad/copyright",
       "SPDXID": "SPDXRef-binary-file-4",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "b8328f024ff61efa6353c4da7534c2fca04225e44b56846e7eee2e730731d410"
+          "checksumValue": "3d6e8bb9a06887b182a1da966937678b69fb8faeacf05dbf058cec8d0e4dc872"
         }
       ],
       "licenseConcluded": "NOASSERTION",
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./share/glad/gladTargets-release.cmake",
+      "fileName": "./share/glad/gladTargets-debug.cmake",
       "SPDXID": "SPDXRef-binary-file-5",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "8338597e283f58809d7fc8926e47b118fcad95051f8e45c03bb004e20688b57f"
+          "checksumValue": "d0122dd22e32ad8ba3790bbebd0e5de9af9a9347b5acc845376ec8a8ce3493b4"
         }
       ],
       "licenseConcluded": "NOASSERTION",
@@ -265,24 +265,24 @@
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./share/glad/gladTargets-debug.cmake",
+      "fileName": "./share/glad/gladConfigVersion.cmake",
       "SPDXID": "SPDXRef-binary-file-7",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "d0122dd22e32ad8ba3790bbebd0e5de9af9a9347b5acc845376ec8a8ce3493b4"
+          "checksumValue": "b8328f024ff61efa6353c4da7534c2fca04225e44b56846e7eee2e730731d410"
         }
       ],
       "licenseConcluded": "NOASSERTION",
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./share/glad/copyright",
+      "fileName": "./lib/libglad.a",
       "SPDXID": "SPDXRef-binary-file-8",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "3d6e8bb9a06887b182a1da966937678b69fb8faeacf05dbf058cec8d0e4dc872"
+          "checksumValue": "878cadcf88d994f14ba1996e4ef91937f3db00ab4689c6ff2961e74a6db6fd12"
         }
       ],
       "licenseConcluded": "NOASSERTION",
