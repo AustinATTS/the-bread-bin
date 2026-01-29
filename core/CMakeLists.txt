@@ -4,6 +4,7 @@ add_library(breadbin_core STATIC
         src/ReloadManager.cpp
         src/TextFile.cpp
         src/ThemeFile.cpp
+        src/ScriptFile.cpp
 )
 
 target_include_directories(breadbin_core PUBLIC

@@ -5,6 +5,7 @@ add_executable(breadbin-gui
         src/TextEditor.cpp
         src/LoafEditor.cpp
         src/ThemeEditor.cpp
+        src/LoafScripter.cpp
 )
 
 target_include_directories(breadbin-gui PRIVATE ${DBUS_INCLUDE_DIRS})
