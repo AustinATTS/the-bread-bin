@@ -17,52 +17,52 @@ namespace BreadBin {
             Q_OBJECT
 
             public:
-                explicit ThemeEditorWidget(QWidget *parent = nullptr);
-                ~ThemeEditorWidget();
+                explicit ThemeEditorWidget (QWidget *parent = nullptr);
+                ~ThemeEditorWidget ( );
 
-                void newTheme(const QString &name);
-                bool loadTheme(const QString &filepath);
-                bool saveTheme(const QString &filepath);
+                void NewTheme (const QString &name);
+                bool LoadTheme (const QString &filepath);
+                bool SaveTheme (const QString &filepath);
 
             signals:
-                void themeChanged();
-                void themeApplied(const QString& filepath);
+                void ThemeChanged ( );
+                void ThemeApplied (const QString& filepath);
 
             private slots:
-                void onNewTheme();
-                void onLoadTheme();
-                void onSaveTheme();
-                void onElementSelected();
-                void onColourChanged();
-                void onFontChanged();
-                void onApplyTheme();
+                void OnNewTheme ( );
+                void OnLoadTheme ( );
+                void OnSaveTheme ( );
+                void OnElementSelected ( );
+                void OnColourChanged ( );
+                void OnFontChanged ( );
+                void OnApplyTheme ( );
 
             private:
-                void setupUI();
-                void updateElementList();
-                void updateColourPicker();
-                void updateFontPicker();
-                void connectSignals();
+                void SetupUI ( );
+                void UpdateElementList ( );
+                void UpdateColourPicker ( );
+                void UpdateFontPicker ( );
+                void ConnectSignals ( );
 
                 std::shared_ptr<ThemeEditor> editor_;
 
-                QLineEdit *themeNameEdit_;
-                QListWidget *elementList_;
+                QLineEdit *theme_name_edit_;
+                QListWidget *element_list_;
 
-                QPushButton *newThemeButton_;
-                QPushButton *loadThemeButton_;
-                QPushButton *saveThemeButton_;
-                QPushButton *applyThemeButton_;
+                QPushButton *new_theme_button_;
+                QPushButton *load_theme_button_;
+                QPushButton *save_theme_button_;
+                QPushButton *apply_theme_button_;
 
-                QPushButton *colourButton_;
-                QLabel *colourPreview_;
+                QPushButton *colour_button_;
+                QLabel *colour_preview_;
 
-                QComboBox *fontCombo_;
-                QComboBox *fontSizeCombo_;
+                QComboBox *font_combo_;
+                QComboBox *font_size_combo_;
 
-                QLabel *statusLabel_;
+                QLabel *status_label_;
 
-                QString currentThemePath_;
+                QString current_theme_path_;
         };
 
     } // namespace GUI

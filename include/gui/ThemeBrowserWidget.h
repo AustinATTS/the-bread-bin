@@ -18,56 +18,56 @@ namespace BreadBin {
             QString filepath;
             QString name;
             QString description;
-            QString lastModified;
-            QColor primaryColour;
-            QColor secondaryColour;
+            QString last_modified;
+            QColor primary_colour;
+            QColor secondary_colour;
         };
 
         class ThemeBrowserWidget : public QWidget {
             Q_OBJECT
 
             public:
-                explicit ThemeBrowserWidget(QWidget *parent = nullptr);
-                ~ThemeBrowserWidget();
+                explicit ThemeBrowserWidget (QWidget *parent = nullptr);
+                ~ThemeBrowserWidget ( );
 
-                void refreshThemeFiles();
+                void RefreshThemeFiles ( );
 
-                void setSearchPaths(const QStringList& paths);
+                void SetSearchPaths (const QStringList& paths);
 
-                QString getSelectedTheme() const;
+                QString GetSelectedTheme ( ) const;
 
             signals:
-                void themeSelected(const QString& filepath);
-                void themeApplied(const QString& filepath);
+                void ThemeSelected (const QString& filepath);
+                void ThemeApplied (const QString& filepath);
 
             private slots:
-                void onRefreshClicked();
-                void onSearchChanged(const QString& text);
-                void onThemeSelected();
-                void onApplyClicked();
-                void onDeleteClicked();
+                void OnRefreshClicked ( );
+                void OnSearchChanged (const QString& text);
+                void OnThemeSelected ( );
+                void OnApplyClicked ( );
+                void OnDeleteClicked ( );
 
             private:
-                void setupUI();
-                void connectSignals();
-                void updateThemeList();
-                void updateThemePreview(const ThemeFileInfo& info);
-                void scanForThemeFiles();
-                ThemeFileInfo loadThemeInfo(const QString& filepath);
+                void SetupUI ( );
+                void ConnectSignals ( );
+                void UpdateThemeList ( );
+                void UpdateThemePreview (const ThemeFileInfo& info);
+                void ScanForThemeFiles ( );
+                ThemeFileInfo LoadThemeInfo (const QString& filepath);
 
-                std::vector<ThemeFileInfo> themeFiles_;
-                std::vector<ThemeFileInfo> filteredFiles_;
-                QStringList searchPaths_;
-                QString currentTheme_;
+                std::vector<ThemeFileInfo> theme_files_;
+                std::vector<ThemeFileInfo> filtered_files_;
+                QStringList search_paths_;
+                QString current_theme_;
 
-                QLineEdit *searchEdit_;
-                QListWidget *fileList_;
-                QTextEdit *previewText_;
-                QPushButton *refreshButton_;
-                QPushButton *applyButton_;
-                QPushButton *deleteButton_;
-                QLabel *statusLabel_;
-                QWidget *colourPreview_;
+                QLineEdit *search_edit_;
+                QListWidget *file_list_;
+                QTextEdit *preview_text_;
+                QPushButton *refresh_button_;
+                QPushButton *apply_button_;
+                QPushButton *delete_button_;
+                QLabel *status_label_;
+                QWidget *colour_preview_;
         };
 
     } // namespace GUI

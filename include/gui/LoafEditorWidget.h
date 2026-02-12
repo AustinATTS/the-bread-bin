@@ -17,57 +17,57 @@ namespace BreadBin {
             Q_OBJECT
 
             public:
-                explicit LoafEditorWidget(QWidget *parent = nullptr);
-                ~LoafEditorWidget();
+                explicit LoafEditorWidget (QWidget *parent = nullptr);
+                ~LoafEditorWidget ( );
 
-                void newLoaf();
-                bool openLoaf(const QString &filepath);
-                bool saveLoaf(const QString &filepath);
-                bool saveLoaf(); // Save to current path
-                bool hasUnsavedChanges() const;
-                std::shared_ptr<Loaf> getCurrentLoaf() const;
-                QString getCurrentFilePath() const;
+                void NewLoaf ( );
+                bool OpenLoaf (const QString &filepath);
+                bool SaveLoaf (const QString &filepath);
+                bool SaveLoaf ( );
+                bool HasUnsavedChanges ( ) const;
+                std::shared_ptr<Loaf> GetCurrentLoaf ( ) const;
+                QString GetCurrentFilePath ( ) const;
 
             signals:
-                void loafModified();
-                void createNewScriptRequested();
+                void LoafModified ( );
+                void CreateNewScriptRequested ( );
 
             private slots:
-                void onAddApplication();
-                void onAddFile();
-                void onAddScript();
-                void onAddConfig();
-                void onAddWebPage();
-                void onRemoveItem();
-                void onItemSelected();
-                void onConfigureItem();
-                void onNameChanged();
-                void onDescriptionChanged();
+                void OnAddApplication ( );
+                void OnAddFile ( );
+                void OnAddScript ( );
+                void OnAddConfig ( );
+                void OnAddWebPage ( );
+                void OnRemoveItem ( );
+                void OnItemSelected ( );
+                void OnConfigureItem ( );
+                void OnNameChanged ( );
+                void OnDescriptionChanged ( );
 
             private:
-                void setupUI();
-                void updateLoafInfo();
-                void refreshItemList();
-                void connectSignals();
-                QString generateItemId(const QString& name) const;
+                void SetupUI ( );
+                void UpdateLoafInfo ( );
+                void RefreshItemList ( );
+                void ConnectSignals ( );
+                QString GenerateItemId (const QString& name) const;
 
                 std::shared_ptr<LoafEditor> editor_;
 
-                QString currentFilePath_;
+                QString current_file_path_;
 
-                QLineEdit *nameEdit_;
-                QTextEdit *descriptionEdit_;
-                QListWidget *itemList_;
+                QLineEdit *name_edit_;
+                QTextEdit *description_edit_;
+                QListWidget *item_list_;
 
-                QPushButton *addAppButton_;
-                QPushButton *addFileButton_;
-                QPushButton *addScriptButton_;
-                QPushButton *addConfigButton_;
-                QPushButton *addWebPageButton_;
-                QPushButton *removeButton_;
-                QPushButton *configureButton_;
+                QPushButton *add_app_button_;
+                QPushButton *add_file_button_;
+                QPushButton *add_script_button_;
+                QPushButton *add_config_button_;
+                QPushButton *add_web_page_button_;
+                QPushButton *remove_button_;
+                QPushButton *configure_button_;
 
-                QLabel *statusLabel_;
+                QLabel *status_label_;
         };
 
     } // namespace GUI

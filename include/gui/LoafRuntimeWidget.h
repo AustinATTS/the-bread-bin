@@ -16,37 +16,37 @@ namespace BreadBin {
             Q_OBJECT
 
             public:
-                explicit LoafRuntimeWidget(QWidget *parent = nullptr);
-                ~LoafRuntimeWidget();
+                explicit LoafRuntimeWidget (QWidget *parent = nullptr);
+                ~LoafRuntimeWidget ( );
 
-                void setLoaf(std::shared_ptr<Loaf> loaf);
+                void SetLoaf (std::shared_ptr<Loaf> loaf);
 
             signals:
                 void loafStarted();
                 void loafStopped();
 
             private slots:
-                void onRunLoaf();
-                void onStopLoaf();
-                void onRefreshStatus();
-                void updateStatus();
+                void OnRunLoaf ( );
+                void OnStopLoaf ( );
+                void OnRefreshStatus ( );
+                void UpdateStatus ( );
 
             private:
-                void setupUI();
-                void connectSignals();
-                void refreshLoafStatus();
+                void SetupUI ( );
+                void ConnectSignals ( );
+                void RefreshLoafStatus ( );
 
-                std::shared_ptr<Loaf> currentLoaf_;
+                std::shared_ptr<Loaf> current_loaf_;
 
-                QLabel *loafNameLabel_;
-                QLabel *statusLabel_;
-                QListWidget *itemStatusList_;
+                QLabel *loaf_name_label_;
+                QLabel *status_label_;
+                QListWidget *item_status_list_;
 
-                QPushButton *runButton_;
-                QPushButton *stopButton_;
-                QPushButton *refreshButton_;
+                QPushButton *run_button_;
+                QPushButton *stop_button_;
+                QPushButton *refresh_button_;
 
-                QTimer *statusTimer_;
+                QTimer *status_timer_;
         };
 
     } // namespace GUI

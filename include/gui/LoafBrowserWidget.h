@@ -25,44 +25,44 @@ namespace BreadBin {
             Q_OBJECT
 
             public:
-                explicit LoafBrowserWidget(QWidget *parent = nullptr);
-                ~LoafBrowserWidget();
+                explicit LoafBrowserWidget (QWidget *parent = nullptr);
+                ~LoafBrowserWidget ( );
 
-                void refreshLoafFiles();
+                void RefreshLoafFiles ( );
 
-                void setSearchPaths(const QStringList& paths);
+                void SetSearchPaths (const QStringList& paths);
 
             signals:
-                void loafSelected(const QString& filepath);
-                void loafOpened(const QString& filepath);
+                void LoafSelected (const QString& filepath);
+                void LoafOpened (const QString& filepath);
 
             private slots:
-                void onRefreshClicked();
-                void onSearchChanged(const QString& text);
-                void onLoafSelected();
-                void onOpenClicked();
-                void onDeleteClicked();
+                void OnRefreshClicked ( );
+                void OnSearchChanged (const QString& text);
+                void OnLoafSelected ( );
+                void OnOpenClicked ( );
+                void OnDeleteClicked ( );
 
             private:
-                void setupUI();
-                void connectSignals();
-                void updateLoafList();
-                void updateLoafPreview(const LoafFileInfo& info);
-                void scanForLoafFiles();
-                LoafFileInfo loadLoafInfo(const QString& filepath);
+                void SetupUI ( );
+                void ConnectSignals ( );
+                void UpdateLoafList ( );
+                void UpdateLoafPreview (const LoafFileInfo& info);
+                void ScanForLoafFiles ( );
+                LoafFileInfo LoadLoafInfo (const QString& filepath);
 
-                std::vector<LoafFileInfo> loafFiles_;
-                std::vector<LoafFileInfo> filteredFiles_;
-                QStringList searchPaths_;
+                std::vector<LoafFileInfo> loaf_files_;
+                std::vector<LoafFileInfo> filtered_files_;
+                QStringList search_paths_;
 
-                QLineEdit *searchEdit_;
-                QListWidget *fileList_;
-                QTextEdit *previewText_;
-                QPushButton *refreshButton_;
-                QPushButton *openButton_;
-                QPushButton *deleteButton_;
-                QLabel *statusLabel_;
-                QLabel *pathsLabel_;
+                QLineEdit *search_edit_;
+                QListWidget *file_list_;
+                QTextEdit *preview_text_;
+                QPushButton *refresh_button_;
+                QPushButton *open_button_;
+                QPushButton *delete_button_;
+                QLabel *status_label_;
+                QLabel *paths_label_;
         };
 
     } // namespace GUI

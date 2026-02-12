@@ -15,8 +15,8 @@ namespace BreadBin {
         struct LoafInfo {
             QString filepath;
             QString name;
-            QDateTime lastOpened;
-            bool isFavorite;
+            QDateTime last_opened;
+            bool is_favorite;
             QString category;
         };
 
@@ -24,43 +24,43 @@ namespace BreadBin {
             Q_OBJECT
 
             public:
-                explicit HomeWidget(QWidget *parent = nullptr);
-                ~HomeWidget();
+                explicit HomeWidget (QWidget *parent = nullptr);
+                ~HomeWidget ( );
 
-                void refresh();
+                void Refresh ( );
 
-                void addRecentLoaf(const QString& filepath, const QString& name);
+                void AddRecentLoaf (const QString& filepath, const QString& name);
 
             signals:
-                void openLoafRequested(const QString& filepath);
-                void openLoafInTextEditorRequested(const QString& filepath);
-                void newLoafRequested();
+                void OpenLoafRequested (const QString& filepath);
+                void OpenLoafInTextEditorRequested (const QString& filepath);
+                void NewLoafRequested ( );
 
             private slots:
-                void onRecentLoafDoubleClicked(QListWidgetItem* item);
-                void onFavoriteLoafDoubleClicked(QListWidgetItem* item);
-                void onCategoryLoafDoubleClicked(QListWidgetItem* item);
-                void showContextMenu(const QPoint& pos);
+                void OnRecentLoafDoubleClicked (QListWidgetItem* item);
+                void OnFavoriteLoafDoubleClicked (QListWidgetItem* item);
+                void OnCategoryLoafDoubleClicked (QListWidgetItem* item);
+                void ShowContextMenu (const QPoint& pos);
 
             private:
-                void setupUI();
-                void connectSignals();
-                void loadSettings();
-                void saveSettings();
-                void updateRecentList();
-                void updateFavoritesList();
-                void updateCategoriesList();
-                void toggleFavorite(const QString& filepath);
-                void setCategory(const QString& filepath, const QString& category);
-                QString getSettingsFile() const;
+                void SetupUI ( );
+                void ConnectSignals ( );
+                void LoadSettings ( );
+                void SaveSettings ( );
+                void UpdateRecentList ( );
+                void UpdateFavoritesList ( );
+                void UpdateCategoriesList ( );
+                void ToggleFavorite (const QString& filepath);
+                void SetCategory (const QString& filepath, const QString& category);
+                QString GetSettingsFile (  ) const;
 
-                QListWidget *recentList_;
-                QListWidget *favoritesList_;
-                QListWidget *categoriesList_;
-                QLabel *statusLabel_;
+                QListWidget *recent_list_;
+                QListWidget *favorites_list_;
+                QListWidget *categories_list_;
+                QLabel *status_label_;
 
-                QList<LoafInfo> recentLoafs_;
-                QMap<QString, LoafInfo> allLoafs_;
+                QList<LoafInfo> recent_loafs_;
+                QMap<QString, LoafInfo> all_loafs_;
         };
 
     } // namespace GUI

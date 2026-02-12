@@ -17,47 +17,47 @@ namespace BreadBin {
             Q_OBJECT
 
             public:
-                explicit TextEditorWidget(QWidget *parent = nullptr);
-                ~TextEditorWidget();
+                explicit TextEditorWidget (QWidget *parent = nullptr);
+                ~TextEditorWidget ( );
 
-                bool openFile(const QString &filepath);
-                bool saveFile(const QString &filepath);
-                bool saveCurrentFile();
-                bool hasUnsavedChanges() const;
-                void newFile();
+                bool OpenFile (const QString &filepath);
+                bool SaveFile (const QString &filepath);
+                bool SaveCurrentFile ( );
+                bool HasUnsavedChanges ( ) const;
+                void NewFile ( );
 
             signals:
-                void fileModified();
+                void FileModified ( );
 
             private slots:
-                void onNewFile();
-                void onOpenFile();
-                void onSaveFile();
-                void onFind();
-                void onReplace();
-                void onTextChanged();
-                void onTabChanged(int index);
-                void onCloseTab(int index);
+                void OnNewFile ( );
+                void OnOpenFile ( );
+                void OnSaveFile ( );
+                void OnFind ( );
+                void OnReplace ( );
+                void OnTextChanged ( );
+                void OnTabChanged (int index);
+                void OnCloseTab (int index);
 
             private:
-                void setupUI();
-                void createNewTab(const QString &title = "Untitled");
-                void connectSignals();
-                int getCurrentTabIndex() const;
-                QPlainTextEdit* getCurrentEditor() const;
+                void SetupUI ( );
+                void CreateNewTab (const QString &title = "Untitled");
+                void ConnectSignals ( );
+                int GetCurrentTabIndex ( ) const;
+                QPlainTextEdit* GetCurrentEditor ( ) const;
 
                 std::vector<std::shared_ptr<TextEditor>> editors_;
 
-                QTabWidget *tabWidget_;
-                QPushButton *newFileButton_;
-                QPushButton *openFileButton_;
-                QPushButton *saveFileButton_;
-                QPushButton *findButton_;
-                QPushButton *replaceButton_;
+                QTabWidget *tab_widget_;
+                QPushButton *new_file_button_;
+                QPushButton *open_file_button_;
+                QPushButton *save_file_button_;
+                QPushButton *find_button_;
+                QPushButton *replace_button_;
 
-                QLabel *statusLabel_;
+                QLabel *status_label_;
 
-                QStringList filePaths_;
+                QStringList file_paths_;
         };
 
     } // namespace GUI

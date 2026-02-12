@@ -25,53 +25,53 @@ namespace BreadBin {
             Q_OBJECT
 
             public:
-                explicit MainWindow(QWidget *parent = nullptr);
-                ~MainWindow();
+                explicit MainWindow (QWidget *parent = nullptr);
+                ~MainWindow ( );
 
             protected:
-                void closeEvent(QCloseEvent *event) override;
+                void closeEvent (QCloseEvent *event) override;
 
             private slots:
-                void newLoaf();
-                void openLoaf();
-                bool openLoafFile(const QString& filepath);
-                void saveLoaf();
-                void saveLoafAs();
-                void showAbout();
-                void applyTheme();
-                void onAddApplicationFromBrowser(const AppInfo& appInfo);
-                void onOpenLoafFromBrowser(const QString& filepath);
-                void onApplyThemeFromBrowser(const QString& filepath);
-                void onOpenLoafInTextEditor(const QString& filepath);
+                void NewLoaf ( );
+                void OpenLoaf ( );
+                bool OpenLoafFile (const QString& filepath);
+                void SaveLoaf ( );
+                void SaveLoafAs ( );
+                void ShowAbout ( );
+                void ApplyTheme ( );
+                void OnAddApplicationFromBrowser (const AppInfo& app_info);
+                void OnOpenLoafFromBrowser (const QString& filepath);
+                void OnApplyThemeFromBrowser (const QString& filepath);
+                void OnOpenLoafInTextEditor (const QString& filepath);
 
             private:
-                void createMenus();
-                void createToolBar();
-                void createCentralWidget();
-                void applyWarmTheme();
-                void applyThemeFromFile(const QString& filepath, bool persistSelection = true);
-                QString getThemeSettingsFile() const;
-                QString getDefaultLoafDirectory() const;
-                bool checkUnsavedChanges();
+                void CreateMenus ( );
+                void CreateToolBar ( );
+                void CreateCentralWidget ( );
+                void ApplyWarmTheme ( );
+                void ApplyThemeFromFile (const QString& filepath, bool persist_selection = true);
+                QString GetThemeSettingsFile ( ) const;
+                QString GetDefaultLoafDirectory ( ) const;
+                bool CheckUnsavedChanges ( );
 
-                QTabWidget *tabWidget_;
+                QTabWidget *tab_widget_;
 
-                HomeWidget *homeWidget_;
-                LoafEditorWidget *loafEditor_;
-                TextEditorWidget *textEditor_;
-                ThemeEditorWidget *themeEditor_;
-                LoafRuntimeWidget *runtimeWidget_;
-                AppBrowserWidget *appBrowser_;
-                LoafBrowserWidget *loafBrowser_;
-                ThemeBrowserWidget *themeBrowser_;
+                HomeWidget *home_widget_;
+                LoafEditorWidget *loaf_editor_;
+                TextEditorWidget *text_editor_;
+                ThemeEditorWidget *theme_editor_;
+                LoafRuntimeWidget *runtime_widget_;
+                AppBrowserWidget *app_browser_;
+                LoafBrowserWidget *loaf_browser_;
+                ThemeBrowserWidget *theme_browser_;
 
-                QMenu *fileMenu_;
-                QMenu *editMenu_;
-                QMenu *viewMenu_;
-                QMenu *helpMenu_;
+                QMenu *file_menu_;
+                QMenu *edit_menu_;
+                QMenu *view_menu_;
+                QMenu *help_menu_;
 
-                QToolBar *mainToolBar_;
-                QString currentThemePath_;
+                QToolBar *main_tool_bar_;
+                QString current_theme_path_;
         };
 
     } // namespace GUI

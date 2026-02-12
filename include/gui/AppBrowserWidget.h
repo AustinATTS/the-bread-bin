@@ -18,41 +18,41 @@ namespace BreadBin {
             Q_OBJECT
 
             public:
-                explicit AppBrowserWidget(QWidget *parent = nullptr);
-                ~AppBrowserWidget();
+                explicit AppBrowserWidget (QWidget *parent = nullptr);
+                ~AppBrowserWidget ( );
 
-                void refreshApplications();
+                void RefreshApplications ( );
 
-                const AppInfo* getSelectedApplication() const;
+                const AppInfo* GetSelectedApplication ( ) const;
 
             signals:
-                void applicationSelected(const AppInfo& appInfo);
-                void addApplicationRequested(const AppInfo& appInfo);
+                void ApplicationSelected (const AppInfo& app_info);
+                void AddApplicationRequested (const AppInfo& app_info);
 
             private slots:
-                void onScanClicked();
-                void onSearchChanged(const QString& text);
-                void onCategoryChanged(const QString& category);
-                void onApplicationSelected();
-                void onAddToLoafClicked();
+                void OnScanClicked ( );
+                void OnSearchChanged (const QString& text);
+                void OnCategoryChanged (const QString& category);
+                void OnApplicationSelected ( );
+                void OnAddToLoafClicked ( );
 
             private:
-                void setupUI();
-                void connectSignals();
-                void updateApplicationList();
-                void updateApplicationDetails(const AppInfo& appInfo);
-                void populateCategories();
+                void SetupUI ( );
+                void ConnectSignals ( );
+                void UpdateApplicationList ( );
+                void UpdateApplicationDetails (const AppInfo& app_info);
+                void PopulateCategories ( );
 
                 std::shared_ptr<AppDiscovery> discovery_;
-                std::vector<AppInfo> filteredApps_;
+                std::vector<AppInfo> filtered_apps_;
 
-                QLineEdit *searchEdit_;
-                QComboBox *categoryCombo_;
-                QListWidget *appList_;
-                QTextEdit *detailsText_;
-                QPushButton *scanButton_;
-                QPushButton *addButton_;
-                QLabel *statusLabel_;
+                QLineEdit *search_edit_;
+                QComboBox *category_combo_;
+                QListWidget *app_list_;
+                QTextEdit *details_text_;
+                QPushButton *scan_button_;
+                QPushButton *add_button_;
+                QLabel *status_label_;
         };
 
     } // namespace GUI
