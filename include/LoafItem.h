@@ -16,22 +16,22 @@ namespace BreadBin {
                 WEBPAGE
             };
 
-            LoafItem(const std::string& id, Type type);
-            virtual ~LoafItem();
+            LoafItem (const std::string& id, Type type);
+            virtual ~LoafItem ( );
 
-            std::string getId() const;
-            Type getType() const;
-            void setName(const std::string& name);
-            std::string getName() const;
-            void setPath(const std::string& path);
-            std::string getPath() const;
+            std::string GetId ( ) const;
+            Type GetType ( ) const;
+            void SetName (const std::string& name);
+            std::string GetName ( ) const;
+            void SetPath (const std::string& path);
+            std::string GetPath ( ) const;
 
-            void setMetadata(const std::string& key, const std::string& value);
-            std::string getMetadata(const std::string& key) const;
+            void SetMetadata (const std::string& key, const std::string& value);
+            std::string GetMetadata (const std::string& key) const;
 
-            virtual bool execute() = 0;
-            virtual bool validate() const = 0;
-            virtual std::string toString() const;
+            virtual bool Execute ( ) = 0;
+            virtual bool Validate ( ) const = 0;
+            virtual std::string ToString ( ) const;
 
         protected:
             std::string id_;
@@ -43,37 +43,37 @@ namespace BreadBin {
 
     class ApplicationItem : public LoafItem {
         public:
-            explicit ApplicationItem(const std::string& id);
-            bool execute() override;
-            bool validate() const override;
+            explicit ApplicationItem (const std::string& id);
+            bool Execute ( ) override;
+            bool Validate ( ) const override;
     };
 
     class FileItem : public LoafItem {
         public:
-            explicit FileItem(const std::string& id);
-            bool execute() override;
-            bool validate() const override;
+            explicit FileItem (const std::string& id);
+            bool Execute ( ) override;
+            bool Validate ( ) const override;
     };
 
     class ConfigItem : public LoafItem {
         public:
-            explicit ConfigItem(const std::string& id);
-            bool execute() override;
-            bool validate() const override;
+            explicit ConfigItem (const std::string& id);
+            bool Execute ( ) override;
+            bool Validate ( ) const override;
     };
 
     class ScriptItem : public LoafItem {
         public:
-            explicit ScriptItem(const std::string& id);
-            bool execute() override;
-            bool validate() const override;
+            explicit ScriptItem (const std::string& id);
+            bool Execute ( ) override;
+            bool Validate ( ) const override;
     };
 
     class WebPageItem : public LoafItem {
         public:
-            explicit WebPageItem(const std::string& id);
-            bool execute() override;
-            bool validate() const override;
+            explicit WebPageItem (const std::string& id);
+            bool Execute  ( ) override;
+            bool Validate ( ) const override;
     };
 
 } // namespace BreadBin

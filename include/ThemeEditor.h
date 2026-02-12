@@ -9,38 +9,38 @@ namespace BreadBin {
     class ThemeEditor {
         public:
             struct Colour {
-                int r, g, b, a;
-                Colour(int red = 0, int green = 0, int blue = 0, int alpha = 255)
-                    : r(red), g(green), b(blue), a(alpha) {}
+                int red, green, blue, alpha;
+                Colour (int red = 0, int green = 0, int blue = 0, int alpha = 255)
+                    : red(red), green(green), blue(blue), alpha(alpha) {}
             };
 
-            ThemeEditor();
-            ~ThemeEditor();
+            ThemeEditor ( );
+            ~ThemeEditor ( );
 
-            void newTheme(const std::string& name);
-            bool loadTheme(const std::string& filepath);
-            bool saveTheme(const std::string& filepath);
+            void NewTheme (const std::string& name);
+            bool LoadTheme (const std::string& filepath);
+            bool SaveTheme (const std::string& filepath);
 
-            void setColour(const std::string& element, const Colour& colour);
-            Colour getColour(const std::string& element) const;
+            void SetColor (const std::string& element, const Colour& color);
+            Colour GetColor (const std::string& element) const;
 
-            void setFont(const std::string& element, const std::string& fontName, int fontSize);
-            std::string getFont(const std::string& element) const;
-            int getFontSize(const std::string& element) const;
+            void SetFont (const std::string& element, const std::string& font_name, int font_size);
+            std::string GetFont (const std::string& element) const;
+            int GetFontSize (const std::string& element) const;
 
-            void setStyle(const std::string& property, const std::string& value);
-            std::string getStyle(const std::string& property) const;
+            void SetStyle (const std::string& property, const std::string& value);
+            std::string GetStyle (const std::string& property) const;
 
-            void setThemeName(const std::string& name);
-            std::string getThemeName() const;
-            bool hasUnsavedChanges() const;
+            void SetThemeName (const std::string& name);
+            std::string GetThemeName ( ) const;
+            bool HasUnsavedChanges ( ) const;
 
         private:
-            std::string themeName_;
-            std::map<std::string, Colour> colours_;
+            std::string theme_name_;
+            std::map<std::string, Colour> colors_;
             std::map<std::string, std::pair<std::string, int>> fonts_;
             std::map<std::string, std::string> styles_;
-            bool unsavedChanges_;
+            bool unsaved_changes_;
     };
 
 } // namespace BreadBin

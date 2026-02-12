@@ -11,39 +11,39 @@ namespace BreadBin {
 
     class Loaf {
         public:
-            Loaf();
-            explicit Loaf(const std::string& name);
-            ~Loaf();
+            Loaf ( );
+            explicit Loaf (const std::string& name);
+            ~Loaf ( );
 
-            bool load(const std::string& filepath);
-            bool save(const std::string& filepath) const;
-            void clear();
+            bool Load (const std::string& filepath);
+            bool Save (const std::string& filepath) const;
+            void Clear ( );
 
-            void addItem(std::shared_ptr<LoafItem> item);
-            void removeItem(const std::string& itemId);
-            std::shared_ptr<LoafItem> getItem(const std::string& itemId) const;
-            const std::vector<std::shared_ptr<LoafItem>>& getItems() const;
+            void AddItem (std::shared_ptr<LoafItem> item);
+            void RemoveItem (const std::string& itemId);
+            std::shared_ptr<LoafItem> GetItem (const std::string& itemId) const;
+            const std::vector<std::shared_ptr<LoafItem>>& GetItems ( ) const;
 
-            void setName(const std::string& name);
-            std::string getName() const;
-            void setDescription(const std::string& description);
-            std::string getDescription() const;
+            void SetName (const std::string& name);
+            std::string GetName ( ) const;
+            void SetDescription (const std::string& description);
+            std::string GetDescription ( ) const;
 
-            void setLayout(const std::string& layout);
-            std::string getLayout() const;
-            void setRuntimeRule(const std::string& key, const std::string& value);
-            std::string getRuntimeRule(const std::string& key) const;
+            void SetLayout (const std::string& layout);
+            std::string GetLayout ( ) const;
+            void SetRuntimeRule (const std::string& key, const std::string& value);
+            std::string GetRuntimeRule (const std::string& key) const;
 
-            bool run();
-            bool stop();
-            bool isRunning() const;
+            bool Run ( );
+            bool Stop ( );
+            bool IsRunning ( ) const;
 
         private:
             std::string name_;
             std::string description_;
             std::string layout_;
             std::vector<std::shared_ptr<LoafItem>> items_;
-            std::map<std::string, std::string> runtimeRules_;
+            std::map<std::string, std::string> runtime_rules_;
             bool running_;
     };
 

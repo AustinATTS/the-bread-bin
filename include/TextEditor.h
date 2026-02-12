@@ -8,32 +8,32 @@ namespace BreadBin {
 
     class TextEditor {
         public:
-            TextEditor();
-            ~TextEditor();
+            TextEditor ( );
+            ~TextEditor ( );
 
-            bool openFile(const std::string& filepath);
-            bool saveFile(const std::string& filepath);
-            bool closeFile();
+            bool OpenFile (const std::string& filepath);
+            bool SaveFile (const std::string& filepath);
+            bool CloseFile ( );
 
-            void setContent(const std::string& content);
-            std::string getContent() const;
-            void insertText(int line, int column, const std::string& text);
-            void deleteText(int startLine, int startColumn, int endLine, int endColumn);
-            void replaceText(int startLine, int startColumn, int endLine, int endColumn, const std::string& text);
+            void SetContent (const std::string& content);
+            std::string GetContent ( ) const;
+            void InsertText (int line, int column, const std::string& text);
+            void DeleteText (int start_line, int start_column, int end_line, int end_column);
+            void ReplaceText (int start_line, int start_column, int end_line, int end_column, const std::string& text);
 
-            int getLineCount() const;
-            std::string getLine(int lineNumber) const;
+            int GetLineCount ( ) const;
+            std::string GetLine (int line_number) const;
 
-            bool find(const std::string& searchText, int& line, int& column);
-            int replaceAll(const std::string& searchText, const std::string& replaceText);
+            bool Find (const std::string& search_text, int& line, int& column);
+            int ReplaceAll (const std::string& search_text, const std::string& replace_text);
 
-            bool hasUnsavedChanges() const;
-            std::string getCurrentFilePath() const;
+            bool HasUnsavedChanges ( ) const;
+            std::string GetCurrentFilePath ( ) const;
 
         private:
             std::vector<std::string> lines_;
-            std::string currentFilePath_;
-            bool unsavedChanges_;
+            std::string current_file_path_;
+            bool unsaved_changes_;
     };
 
 } // namespace BreadBin

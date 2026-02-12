@@ -9,33 +9,33 @@ namespace BreadBin {
 
     class LoafEditor {
         public:
-            LoafEditor();
-            ~LoafEditor();
+            LoafEditor ( );
+            ~LoafEditor ( );
 
-            void newLoaf(const std::string& name);
-            bool openLoaf(const std::string& filepath);
-            bool saveLoaf(const std::string& filepath);
-            bool closeLoaf();
+            void NewLoaf (const std::string& name);
+            bool OpenLoaf (const std::string& filepath);
+            bool SaveLoaf (const std::string& filepath);
+            bool CloseLoaf ( );
 
-            bool addApplication(const std::string& id, const std::string& name, const std::string& path);
-            bool addFile(const std::string& id, const std::string& name, const std::string& path);
-            bool addConfig(const std::string& id, const std::string& name, const std::string& path);
-            bool addScript(const std::string& id, const std::string& name, const std::string& path);
-            bool addWebPage(const std::string& id, const std::string& name, const std::string& url);
-            bool removeItem(const std::string& itemId);
+            bool AddApplication (const std::string& id, const std::string& name, const std::string& path);
+            bool AddFile (const std::string& id, const std::string& name, const std::string& path);
+            bool AddConfig (const std::string& id, const std::string& name, const std::string& path);
+            bool AddScript (const std::string& id, const std::string& name, const std::string& path);
+            bool AddWebPage (const std::string& id, const std::string& name, const std::string& url);
+            bool RemoveItem (const std::string& itemId);
 
-            bool setLoafName(const std::string& name);
-            bool setLoafDescription(const std::string& description);
-            bool setLoafLayout(const std::string& layout);
-            bool setRuntimeRule(const std::string& key, const std::string& value);
+            bool SetLoafName (const std::string& name);
+            bool SetLoafDescription (const std::string& description);
+            bool SetLoafLayout (const std::string& layout);
+            bool SetRuntimeRule (const std::string& key, const std::string& value);
 
-            std::shared_ptr<Loaf> getCurrentLoaf() const;
-            bool hasUnsavedChanges() const;
+            std::shared_ptr<Loaf> GetCurrentLoaf ( ) const;
+            bool HasUnsavedChanges ( ) const;
 
         private:
-            std::shared_ptr<Loaf> currentLoaf_;
-            bool unsavedChanges_;
-    };
+            std::shared_ptr<Loaf> current_loaf_;
+            bool unsaved_changes_;
+        };
 
 } // namespace BreadBin
 

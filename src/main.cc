@@ -37,7 +37,7 @@ void LoafEditorMenu ( ) {
             std::cout << "Enter Loaf name: ";
             std::string name;
             std::getline(std::cin, name);
-            editor.newLoaf(name);
+            editor.NewLoaf(name);
             std::cout << "Created new Loaf: " << name << "\n";
         }
         else {
@@ -45,7 +45,7 @@ void LoafEditorMenu ( ) {
                 std::cout << "Enter Loaf filepath: ";
                 std::string filepath;
                 std::getline(std::cin, filepath);
-                if (editor.openLoaf(filepath)) {
+                if (editor.OpenLoaf(filepath)) {
                     std::cout << "Opened Loaf successfully\n";
                 }
                 else {
@@ -64,7 +64,7 @@ void LoafEditorMenu ( ) {
                     std::string path;
                     std::getline(std::cin, path);
 
-                    if (editor.addApplication(id, name, path)) {
+                    if (editor.AddApplication(id, name, path)) {
                         std::cout << "Added application successfully\n";
                     }
                     else {
@@ -83,7 +83,7 @@ void LoafEditorMenu ( ) {
                         std::string path;
                         std::getline(std::cin, path);
 
-                        if (editor.addFile(id, name, path)) {
+                        if (editor.AddFile(id, name, path)) {
                             std::cout << "Added file successfully\n";
                         }
                         else {
@@ -102,7 +102,7 @@ void LoafEditorMenu ( ) {
                             std::string path;
                             std::getline(std::cin, path);
 
-                            if (editor.addScript(id, name, path)) {
+                            if (editor.AddScript(id, name, path)) {
                                 std::cout << "Added script successfully\n";
                             }
                             else {
@@ -114,7 +114,7 @@ void LoafEditorMenu ( ) {
                                 std::cout << "Enter save filepath: ";
                                 std::string filepath;
                                 std::getline(std::cin, filepath);
-                                if (editor.saveLoaf(filepath)) {
+                                if (editor.SaveLoaf(filepath)) {
                                     std::cout << "Saved Loaf successfully\n";
                                 }
                                 else {
@@ -154,7 +154,7 @@ void TextEditorMenu() {
             std::cout << "Enter file path: ";
             std::string filepath;
             std::getline(std::cin, filepath);
-            if (editor.openFile(filepath)) {
+            if (editor.OpenFile(filepath)) {
                 std::cout << "Opened file successfully\n";
             }
             else {
@@ -163,15 +163,15 @@ void TextEditorMenu() {
         }
         else {
             if (input == "2") {
-                std::cout << "Content:\n" << editor.getContent() << "\n";
+                std::cout << "Content:\n" << editor.GetContent() << "\n";
             }
             else {
                 if (input == "3") {
                     std::cout << "Enter search text: ";
-                    std::string searchText;
-                    std::getline(std::cin, searchText);
+                    std::string search_text;
+                    std::getline(std::cin, search_text);
                     int line, column;
-                    if (editor.find(searchText, line, column)) {
+                    if (editor.Find(search_text, line, column)) {
                         std::cout << "Found at line " << line << ", column " << column << "\n";
                     }
                     else {
@@ -181,12 +181,12 @@ void TextEditorMenu() {
                 else {
                     if (input == "4") {
                         std::cout << "Enter search text: ";
-                        std::string searchText;
-                        std::getline(std::cin, searchText);
+                        std::string search_text;
+                        std::getline(std::cin, search_text);
                         std::cout << "Enter replace text: ";
-                        std::string replaceText;
-                        std::getline(std::cin, replaceText);
-                        int count = editor.replaceAll(searchText, replaceText);
+                        std::string replace_text;
+                        std::getline(std::cin, replace_text);
+                        int count = editor.ReplaceAll(search_text, replace_text);
                         std::cout << "Replaced " << count << " occurrences\n";
                     }
                     else {
@@ -194,7 +194,7 @@ void TextEditorMenu() {
                             std::cout << "Enter save filepath: ";
                             std::string filepath;
                             std::getline(std::cin, filepath);
-                            if (editor.saveFile(filepath)) {
+                            if (editor.SaveFile(filepath)) {
                                 std::cout << "Saved file successfully\n";
                             }
                             else {
@@ -233,7 +233,7 @@ void ThemeEditorMenu() {
             std::cout << "Enter theme name: ";
             std::string name;
             std::getline(std::cin, name);
-            editor.newTheme(name);
+            editor.NewTheme(name);
             std::cout << "Created new theme: " << name << "\n";
         }
         else {
@@ -241,7 +241,7 @@ void ThemeEditorMenu() {
                 std::cout << "Enter theme filepath: ";
                 std::string filepath;
                 std::getline(std::cin, filepath);
-                if (editor.loadTheme(filepath)) {
+                if (editor.LoadTheme(filepath)) {
                     std::cout << "Loaded theme successfully\n";
                 }
                 else {
@@ -253,11 +253,11 @@ void ThemeEditorMenu() {
                     std::cout << "Enter element name: ";
                     std::string element;
                     std::getline(std::cin, element);
-                    std::cout << "Enter R G B A values (0-255): ";
-                    int r, g, b, a;
-                    std::cin >> r >> g >> b >> a;
+                    std::cout << "Enter RED GREEN BLUE ALPHA values (0-255): ";
+                    int red, green, blue, alpha;
+                    std::cin >> red >> green >> blue >> alpha;
                     std::cin.ignore();
-                    editor.setColor(element, ThemeEditor::Color(r, g, b, a));
+                    editor.SetColor(element, ThemeEditor::Colour(red, green, blue, alpha));
                     std::cout << "Set colour successfully\n";
                 }
                 else {
@@ -266,13 +266,13 @@ void ThemeEditorMenu() {
                         std::string element;
                         std::getline(std::cin, element);
                         std::cout << "Enter font name: ";
-                        std::string fontName;
-                        std::getline(std::cin, fontName);
+                        std::string font_name;
+                        std::getline(std::cin, font_name);
                         std::cout << "Enter font size: ";
-                        int fontSize;
-                        std::cin >> fontSize;
+                        int font_size;
+                        std::cin >> font_size;
                         std::cin.ignore();
-                        editor.setFont(element, fontName, fontSize);
+                        editor.SetFont(element, font_name, font_size);
                         std::cout << "Set font successfully\n";
                     }
                     else {
@@ -280,7 +280,7 @@ void ThemeEditorMenu() {
                             std::cout << "Enter save filepath: ";
                             std::string filepath;
                             std::getline(std::cin, filepath);
-                            if (editor.saveTheme(filepath)) {
+                            if (editor.SaveTheme(filepath)) {
                                 std::cout << "Saved theme successfully\n";
                             }
                             else {
