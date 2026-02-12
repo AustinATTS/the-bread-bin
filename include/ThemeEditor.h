@@ -21,8 +21,8 @@ namespace BreadBin {
             bool LoadTheme (const std::string& filepath);
             bool SaveTheme (const std::string& filepath);
 
-            void SetColor (const std::string& element, const Colour& color);
-            Colour GetColor (const std::string& element) const;
+            void SetColour (const std::string& element, const Colour& colour);
+            Colour GetColour (const std::string& element) const;
 
             void SetFont (const std::string& element, const std::string& font_name, int font_size);
             std::string GetFont (const std::string& element) const;
@@ -37,7 +37,7 @@ namespace BreadBin {
 
         private:
             std::string theme_name_;
-            std::map<std::string, Colour> colors_;
+            std::map<std::string, Colour> colours_;
             std::map<std::string, std::pair<std::string, int>> fonts_;
             std::map<std::string, std::string> styles_;
             bool unsaved_changes_;

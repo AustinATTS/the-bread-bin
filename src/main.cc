@@ -257,7 +257,7 @@ void ThemeEditorMenu() {
                     int red, green, blue, alpha;
                     std::cin >> red >> green >> blue >> alpha;
                     std::cin.ignore();
-                    editor.SetColor(element, ThemeEditor::Colour(red, green, blue, alpha));
+                    editor.SetColour(element, ThemeEditor::Colour(red, green, blue, alpha));
                     std::cout << "Set colour successfully\n";
                 }
                 else {
