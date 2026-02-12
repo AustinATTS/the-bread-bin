@@ -78,7 +78,7 @@ install(TARGETS breadbin DESTINATION bin)
 # Enable testing.
 enable_testing()
 
-# Add tests subdirectory if it exists and contains CMakeLists.txt
+# Add tests subdirectory if it exists and contains CMakeLists.txt.
 if(EXISTS ${PROJECT_SOURCE_DIR}/tests/CMakeLists.txt)
     add_subdirectory(tests)
 endif()
