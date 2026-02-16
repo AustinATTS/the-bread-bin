@@ -16,6 +16,7 @@
 #include <QFile>
 #include <QColor>
 #include <QRegularExpression>
+#include <QFont>
 #include <QCloseEvent>
 #include <fstream>
 #include <sstream>
@@ -24,6 +25,31 @@ namespace BreadBin {
     namespace GUI {
 
         namespace {
+            std::string TrimThemeValue (const std::string& value) {
+                const auto first = value.find_first_not_of(" \t\r\n");
+                if (first == std::string::npos) {
+                    return "";
+                }
+
+                const auto last = value.find_last_not_of(" \t\r\n");
+                return value.substr(first, (last - first + 1));
+            }
+
+            bool ParseThemeEntry (const std::string& line, std::string* key, std::string* value) {
+                if (line.empty() || line[0] == '#') {
+                    return false;
+                }
+
+                const std::size_t separator_index = line.find_first_of(":=");
+                if (separator_index == std::string::npos) {
+                    return false;
+                }
+
+                *key = TrimThemeValue(line.substr(0, separator_index));
+                *value = TrimThemeValue(line.substr(separator_index + 1));
+                return !key->empty();
+            }
+
             QString ParseThemeColourString(const std::string& raw_value, const QString& fallback) {
                 const QString trimmed = QString::fromStdString(raw_value).trimmed();
                 QColor direct(trimmed);
@@ -131,9 +157,9 @@ namespace BreadBin {
             connect(loaf_editor_, &LoafEditorWidget::LoafModified, this, [this]() {
                 runtime_widget_->SetLoaf(loaf_editor_->GetCurrentLoaf());
             });
-            connect(loaf_editor_, &LoafEditorWidget::CreateNewScriptRequested, this, [this]() {
+            connect(loaf_editor_, &LoafEditorWidget::CreateNewScriptRequested, this, [this](const QString& loaf_name) {
                 tab_widget_->setCurrentWidget(text_editor_);
-                text_editor_->NewFile();
+                text_editor_->NewScriptFile(loaf_name);
                 statusBar()->showMessage("Create your script in the text editor, then save it", 5000);
             });
 
@@ -157,7 +183,7 @@ namespace BreadBin {
 
             QAction *save_action = new QAction("&Save", this);
             save_action->setShortcut(QKeySequence::Save);
-            connect(save_action, &QAction::triggered, this, &MainWindow::SaveLoaf);
+            connect(save_action, &QAction::triggered, this, &MainWindow::SaveCurrentContext);
             file_menu_->addAction(save_action);
 
             QAction *save_as_action = new QAction("Save &As...", this);
@@ -198,7 +224,7 @@ namespace BreadBin {
             main_tool_bar_->addAction(open_tool_action);
 
             QAction *save_tool_action = new QAction("Save", this);
-            connect(save_tool_action, &QAction::triggered, this, &MainWindow::SaveLoaf);
+            connect(save_tool_action, &QAction::triggered, this, &MainWindow::SaveCurrentContext);
             main_tool_bar_->addAction(save_tool_action);
         }
 
@@ -317,25 +343,65 @@ namespace BreadBin {
                     background-color: #f5ede0;
                 }
 
-                /* Combo Box - Modern dropdown */
+                /* Combo Box - Styled to match warm BreadBin theme */
                 QComboBox {
                     background-color: #ffffff;
                     border: 2px solid #e8dcc8;
-                    border-radius: 6px;
-                    padding: 6px 12px;
+                    border-radius: 8px;
+                    padding: 6px 34px 6px 12px;
                     color: #2d1f0f;
                     font-size: 13px;
-                    min-height: 28px;
+                    min-height: 30px;
+                    selection-background-color: #d4a574;
+                    combobox-popup: 0;
                 }
                 QComboBox:hover {
                     border: 2px solid #ddc9a3;
+                    background-color: #fffefb;
                 }
                 QComboBox:focus {
                     border: 2px solid #d4a574;
+                    background-color: #fffaf3;
                 }
                 QComboBox::drop-down {
-                    border: none;
-                    padding-right: 8px;
+                    subcontrol-origin: padding;
+                    subcontrol-position: top right;
+                    width: 26px;
+                    border-left: 1px solid #eadbc3;
+                    border-top-right-radius: 7px;
+                    border-bottom-right-radius: 7px;
+                    background-color: #f7efe2;
+                }
+                QComboBox::down-arrow {
+                    image: none;
+                    width: 0;
+                    height: 0;
+                    border-left: 5px solid transparent;
+                    border-right: 5px solid transparent;
+                    border-top: 7px solid #8b6a45;
+                    margin-right: 8px;
+                }
+                QComboBox QAbstractItemView {
+                    border: 1px solid #d4a574;
+                    border-radius: 6px;
+                    padding: 4px;
+                    background-color: #ffffff;
+                    color: #2d1f0f;
+                    selection-background-color: #f1ddc0;
+                    selection-color: #2d1f0f;
+                    outline: none;
+                }
+                QComboBox QAbstractItemView::item {
+                    min-height: 26px;
+                    padding: 4px 8px;
+                    background-color: #ffffff;
+                }
+                QComboBox QAbstractItemView::item:selected {
+                    background-color: #f1ddc0;
+                    color: #2d1f0f;
+                }
+                QComboBox QAbstractItemView::viewport {
+                    background-color: #ffffff;
                 }
 
                 /* Group Boxes - Modern card style */
@@ -589,6 +655,21 @@ namespace BreadBin {
             }
         }
 
+        void MainWindow::SaveCurrentContext ( ) {
+            QWidget* current = tab_widget_->currentWidget();
+            if (current == text_editor_) {
+                text_editor_->SaveCurrentFile();
+                return;
+            }
+
+            if (current == theme_editor_) {
+                theme_editor_->SaveCurrentTheme();
+                return;
+            }
+
+            SaveLoaf();
+        }
+
         void MainWindow::SaveLoaf ( ) {
             QString current_path = loaf_editor_->GetCurrentFilePath();
 
@@ -704,28 +785,81 @@ namespace BreadBin {
             QString secondary_colour = "#f5f0e8";
             QString background_colour = "#faf7f2";
             QString text_colour = "#2d1f0f";
+            QString accent_colour = "#c29860";
+            QString editor_background_colour = "#ffffff";
+            QString default_font_family = "Sans Serif";
+            int default_font_size = 13;
 
             std::string line;
+            std::string key;
+            std::string value;
             while (std::getline(file, line)) {
-                if (line.find("PRIMARY_COLOUR:") == 0) {
-                    primary_colour = ParseThemeColourString(line.substr(14), primary_colour);
+                if (!ParseThemeEntry(line, &key, &value)) {
+                    continue;
                 }
-                else {
-                    if (line.find("SECONDARY_COLOUR:") == 0) {
-                        secondary_colour = ParseThemeColourString(line.substr(16), secondary_colour);
-                    }
-                    else {
-                        if (line.find("BACKGROUND_COLOUR:") == 0) {
-                            background_colour = ParseThemeColourString(line.substr(17), background_colour);
+
+                if (key == "PRIMARY_COLOUR" || key == "COLOUR_primary") {
+                    primary_colour = ParseThemeColourString(value, primary_colour);
+                    continue;
+                }
+
+                if (key == "SECONDARY_COLOUR" || key == "COLOUR_secondary") {
+                    secondary_colour = ParseThemeColourString(value, secondary_colour);
+                    continue;
+                }
+
+                if (key == "BACKGROUND_COLOUR" || key == "COLOUR_background") {
+                    background_colour = ParseThemeColourString(value, background_colour);
+                    continue;
+                }
+
+                if (key == "TEXT_COLOUR" || key == "TEXT_COLOR" || key == "COLOUR_foreground" || key == "COLOUR_default") {
+                    text_colour = ParseThemeColourString(value, text_colour);
+                    continue;
+                }
+
+                if (key == "ACCENT_COLOUR" || key == "COLOUR_accent") {
+                    accent_colour = ParseThemeColourString(value, accent_colour);
+                    continue;
+                }
+
+                if (key == "COLOUR_code") {
+                    editor_background_colour = ParseThemeColourString(value, editor_background_colour);
+                    continue;
+                }
+
+                if (key == "FONT_global" || key == "FONT_default") {
+                    const std::size_t comma_index = value.rfind(',');
+                    if (comma_index != std::string::npos) {
+                        const QString parsed_family = QString::fromStdString(value.substr(0, comma_index)).trimmed();
+                        if (!parsed_family.isEmpty()) {
+                            default_font_family = parsed_family;
                         }
-                        else {
-                            if (line.find("TEXT_COLOUR:") == 0) {
-                                text_colour = ParseThemeColourString(line.substr(11), text_colour);
-                            }
+
+                        const QString raw_size = QString::fromStdString(value.substr(comma_index + 1)).trimmed();
+                        const int parsed_size = raw_size.toInt();
+                        if (parsed_size > 0) {
+                            default_font_size = parsed_size;
                         }
                     }
                 }
             }
+
+            QFont application_font = QApplication::font();
+            application_font.setFamily(default_font_family);
+            application_font.setPointSize(default_font_size);
+            QApplication::setFont(application_font);
+
+            QPalette app_palette = QApplication::palette();
+            app_palette.setColor(QPalette::Window, QColor(background_colour));
+            app_palette.setColor(QPalette::Base, QColor(editor_background_colour));
+            app_palette.setColor(QPalette::AlternateBase, QColor(secondary_colour));
+            app_palette.setColor(QPalette::Button, QColor(primary_colour));
+            app_palette.setColor(QPalette::ButtonText, QColor(text_colour));
+            app_palette.setColor(QPalette::WindowText, QColor(text_colour));
+            app_palette.setColor(QPalette::Text, QColor(text_colour));
+            app_palette.setColor(QPalette::Highlight, QColor(accent_colour));
+            QApplication::setPalette(app_palette);
 
             QString style_sheet = QString(R"(
                 QMainWindow {
@@ -753,7 +887,7 @@ namespace BreadBin {
                     color: %4;
                 }
                 QTabBar::tab:hover {
-                    background-color: %3;
+                    background-color: %5;
                 }
                 QPushButton {
                     background-color: %2;
@@ -764,20 +898,20 @@ namespace BreadBin {
                     font-weight: bold;
                 }
                 QPushButton:hover {
-                    background-color: %2;
+                    background-color: %5;
                 }
                 QPushButton:pressed {
-                    background-color: %2;
+                    background-color: %5;
                 }
                 QLineEdit, QTextEdit, QPlainTextEdit {
-                    background-color: #ffffff;
+                    background-color: %6;
                     border: 1px solid %2;
                     border-radius: 3px;
                     padding: 4px;
                     color: %4;
                 }
                 QListWidget {
-                    background-color: #ffffff;
+                    background-color: %6;
                     border: 1px solid %2;
                     border-radius: 3px;
                     color: %4;
@@ -797,7 +931,7 @@ namespace BreadBin {
                     border: 1px solid %2;
                 }
                 QMenu::item:selected {
-                    background-color: %2;
+                    background-color: %5;
                 }
                 QToolBar {
                     background-color: %3;
@@ -808,7 +942,7 @@ namespace BreadBin {
                     background-color: %3;
                     color: %4;
                 }
-            )").arg(background_colour, primary_colour, secondary_colour, text_colour);
+            )").arg(background_colour, primary_colour, secondary_colour, text_colour, accent_colour, editor_background_colour);
 
             setStyleSheet(style_sheet);
             current_theme_path_ = filepath;

@@ -14,19 +14,51 @@
 #include <QBrush>
 #include <fstream>
 #include <sstream>
+#include <QFontDatabase>
 
 namespace BreadBin {
     namespace GUI {
 
     namespace {
-        QColor ParseThemeColour (const std::string& rawValue) {
-            const QString value = QString::fromStdString(rawValue).trimmed();
+        QString CSSFontFamily (const QString& family) {
+            QString escaped = family;
+            escaped.replace("\\", "\\\\");
+            escaped.replace("\"", "\\\"");
+            return "\"" + escaped + "\"";
+        }
+
+        std::string trim (const std::string& value) {
+            const auto first = value.find_first_not_of(" \t\r\n");
+            if (first == std::string::npos) {
+                return "";
+            }
+            const auto last = value.find_last_not_of(" \t\r\n");
+            return value.substr(first, (last - first + 1));
+        }
+
+        bool ParseThemeEntry (const std::string& line, std::string& key, std::string& value) {
+            if (line.empty() || line[0] == '#') {
+                return false;
+            }
+
+            const auto seperator = line.find_first_of(":=");
+            if (seperator == std::string::npos) {
+                return false;
+            }
+
+            key = trim(line.substr(0, seperator));
+            value = trim(line.substr(seperator + 1));
+            return !key.empty();
+        }
+
+        QColor ParseThemeColour (const std::string& raw_value) {
+            const QString value = QString::fromStdString(raw_value).trimmed();
             QColor direct_colour(value);
             if (direct_colour.isValid()) {
                 return direct_colour;
             }
 
-            std::istringstream ss(rawValue);
+            std::istringstream ss(raw_value);
             int red, green, blue, alpha = 255;
             if (ss >> red >> green >> blue) {
                 if (!(ss >> alpha)) {
@@ -227,33 +259,72 @@ namespace BreadBin {
         ThemeFileInfo info;
         info.filepath = filepath;
 
-        QFileInfo file_info(filepath);
-        info.last_modified = file_info.lastModified().toString("yyyy-MM-dd HH:mm:ss");
+        QFileInfo fileInfo(filepath);
+        info.last_modified = fileInfo.lastModified().toString("yyyy-MM-dd HH:mm:ss");
 
         std::ifstream file(filepath.toStdString());
         if (file.is_open()) {
             std::string line;
 
+            std::string key;
+            std::string value;
             while (std::getline(file, line)) {
-                if (line.find("NAME:") == 0) {
-                    info.name = QString::fromStdString(line.substr(5)).trimmed();
+                if (!ParseThemeEntry(line, key, value)) {
+                    continue;
+                }
+
+                if (key == "NAME") {
+                    info.name = QString::fromStdString(value).trimmed();
                 }
                 else {
-                    if (line.find("DESCRIPTION:") == 0) {
-                        info.description = QString::fromStdString(line.substr(12)).trimmed();
+                    if (key == "DESCRIPTION") {
+                        info.description = QString::fromStdString(value).trimmed();
                     }
                     else {
-                        if (line.find("PRIMARY_COLOR:") == 0) {
-                            QColor colour = ParseThemeColour(line.substr(14));
+                        if (key == "PRIMARY_COLOUR") {
+                            QColor colour = ParseThemeColour(value);
                             if (colour.isValid()) {
                                 info.primary_colour = colour;
                             }
                         }
                         else {
-                            if (line.find("SECONDARY_COLOR:") == 0) {
-                                QColor colour = ParseThemeColour(line.substr(16));
+                            if (key == "SECONDARY_COLOUR") {
+                                QColor colour = ParseThemeColour(value);
                                 if (colour.isValid()) {
                                     info.secondary_colour = colour;
+                                }
+                            }
+                            else {
+                                if (key == "FONT_default" || key == "FONT_global") {
+                                    const QStringList parts = QString::fromStdString(value).trimmed().split(',');
+                                    if (!parts.isEmpty()) {
+                                        info.default_font_family = parts[0].trimmed();
+                                    }
+                                    if (parts.size() > 1) {
+                                        info.default_font_size = parts[1].trimmed().toInt();
+                                    }
+                                }
+                                else {
+                                    if (key == "FONT_heading") {
+                                        const QStringList parts = QString::fromStdString(value).trimmed().split(',');
+                                        if (!parts.isEmpty()) {
+                                            info.heading_font_family = parts[0].trimmed();
+                                        }
+                                        if (parts.size() > 1) {
+                                            info.heading_font_size = parts[1].trimmed().toInt();
+                                        }
+                                    }
+                                    else {
+                                        if (key == "FONT_code") {
+                                            const QStringList parts = QString::fromStdString(value).trimmed().split(',');
+                                            if (!parts.isEmpty()) {
+                                                info.code_font_family = parts[0].trimmed();
+                                            }
+                                            if (parts.size() > 1) {
+                                                info.code_font_size = parts[1].trimmed().toInt();
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -263,7 +334,7 @@ namespace BreadBin {
         }
 
         if (info.name.isEmpty()) {
-            info.name = file_info.baseName();
+            info.name = fileInfo.baseName();
         }
 
         if (!info.primary_colour.isValid()) {
@@ -271,6 +342,21 @@ namespace BreadBin {
         }
         if (!info.secondary_colour.isValid()) {
             info.secondary_colour = QColor("#f5f0e8");
+        }
+
+        const QFontDatabase database;
+        const QString default_ui_font = database.families().isEmpty()
+            ? QStringLiteral("Sans Serif")
+            : database.families().first();
+
+        if (info.default_font_family.isEmpty()) {
+            info.default_font_family = default_ui_font;
+        }
+        if (info.heading_font_family.isEmpty()) {
+            info.heading_font_family = info.default_font_family;
+        }
+        if (info.code_font_family.isEmpty()) {
+            info.code_font_family = QStringLiteral("Monospace");
         }
 
         return info;
@@ -403,6 +489,20 @@ namespace BreadBin {
         preview += "<p><b>Secondary Color:</b> <span style='background-color:" +
                    info.secondary_colour.name() + ";padding:2px 10px;'>" +
                    info.secondary_colour.name() + "</span></p>";
+
+        preview += "<hr><h4>Typography:</h4>";
+        preview += "<p><b>Body:</b> " + info.default_font_family + " (" + QString::number(info.default_font_size) + "pt)</p>";
+        preview += "<p><b>Heading:</b> " + info.heading_font_family + " (" + QString::number(info.heading_font_size) + "pt)</p>";
+        preview += "<p><b>Code:</b> " + info.code_font_family + " (" + QString::number(info.code_font_size) + "pt)</p>";
+
+        preview += "<div style='padding: 10px; border: 1px solid #e8dcc8; border-radius: 6px; background-color: #fff;'>";
+        preview += "<div style='font-family:" + CSSFontFamily(info.heading_font_family) + "; font-size:" + QString::number(info.heading_font_size) + "pt; font-weight:700;'>"
+            "Heading Preview: The Bread Bin</div>";
+        preview += "<div style='margin-top:8px; font-family:" + CSSFontFamily(info.default_font_family) + "; font-size:" + QString::number(info.default_font_size) + "pt;'>"
+            "Body Preview: Pack my box with five dozen liquor jugs.</div>";
+        preview += "<div style='margin-top:8px; font-family:" + CSSFontFamily(info.code_font_family) + "; font-size:" + QString::number(info.code_font_size) + "pt;'>"
+            "Code Preview: for (int i = 0; i < 5; ++i) { bake(); }</div>";
+        preview += "</div>";
 
         std::ifstream file(info.filepath.toStdString());
         if (file.is_open()) {

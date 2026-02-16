@@ -57,6 +57,7 @@ namespace BreadBin {
         category_combo_ = new QComboBox(this);
         category_combo_->addItem("All Categories");
         category_combo_->setMinimumHeight(36);
+        category_combo_->setMaxVisibleItems(12);
         category_layout->addWidget(category_label);
         category_layout->addWidget(category_combo_, 1);
         filter_layout->addLayout(category_layout);

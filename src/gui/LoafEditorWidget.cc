@@ -29,7 +29,7 @@ namespace BreadBin {
         ConnectSignals();
 
         // Initialize with a default empty loaf so users can start adding items immediately
-        editor_->NewLoaf("Untitled Loaf");
+        editor_->NewLoaf("Untitled Loaf", false);
         UpdateLoafInfo();
         status_label_->setText("Ready to add items to your loaf");
     }
@@ -273,6 +273,7 @@ namespace BreadBin {
 
         QComboBox *app_combo = new QComboBox(&dialog);
         app_combo->setMinimumContentsLength(40);
+        app_combo->setMaxVisibleItems(12);
         app_combo->addItem("-- Browse for application --", "");
 
         AppDiscovery discovery;
@@ -466,7 +467,11 @@ namespace BreadBin {
         }
 
         if (should_create) {
-            emit CreateNewScriptRequested();
+            QString loaf_name = "Untitled_Loaf";
+            if (auto loaf = editor_->GetCurrentLoaf()) {
+                loaf_name = QString::fromStdString(loaf->GetName());
+            }
+            emit CreateNewScriptRequested(loaf_name);
             return;
         }
 
