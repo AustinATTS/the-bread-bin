@@ -19,7 +19,7 @@ void PrintMenu ( ) {
 void LoafEditorMenu ( ) {
     LoafEditor editor;
     std::string input;
-    
+
     while (true) {
         std::cout << "\n--- Loaf Editor ---\n";
         std::cout << "1. Create new Loaf\n";
@@ -30,9 +30,9 @@ void LoafEditorMenu ( ) {
         std::cout << "6. Save Loaf\n";
         std::cout << "7. Back to main menu\n";
         std::cout << "Select option: ";
-        
+
         std::getline(std::cin, input);
-        
+
         if (input == "1") {
             std::cout << "Enter Loaf name: ";
             std::string name;
@@ -137,7 +137,7 @@ void LoafEditorMenu ( ) {
 void TextEditorMenu() {
     TextEditor editor;
     std::string input;
-    
+
     while (true) {
         std::cout << "\n--- Text Editor ---\n";
         std::cout << "1. Open file\n";
@@ -147,9 +147,9 @@ void TextEditorMenu() {
         std::cout << "5. Save file\n";
         std::cout << "6. Back to main menu\n";
         std::cout << "Select option: ";
-        
+
         std::getline(std::cin, input);
-        
+
         if (input == "1") {
             std::cout << "Enter file path: ";
             std::string filepath;
@@ -216,7 +216,7 @@ void TextEditorMenu() {
 void ThemeEditorMenu() {
     ThemeEditor editor;
     std::string input;
-    
+
     while (true) {
         std::cout << "\n--- Theme Editor ---\n";
         std::cout << "1. Create new theme\n";
@@ -226,9 +226,9 @@ void ThemeEditorMenu() {
         std::cout << "5. Save theme\n";
         std::cout << "6. Back to main menu\n";
         std::cout << "Select option: ";
-        
+
         std::getline(std::cin, input);
-        
+
         if (input == "1") {
             std::cout << "Enter theme name: ";
             std::string name;
@@ -302,12 +302,12 @@ void ThemeEditorMenu() {
 int main ( ) {
     std::cout << "Bread Bin - Cross-Platform Loaf Management System\n";
     std::cout << "Version 0.1\n";
-    
+
     std::string input;
     while (true) {
         PrintMenu();
         std::getline(std::cin, input);
-        
+
         if (input == "1") {
             LoafEditorMenu();
         }
@@ -328,6 +328,6 @@ int main ( ) {
             }
         }
     }
-    
+
     return 0;
 }

@@ -39,7 +39,10 @@ namespace BreadBin {
             return ThemeEditor::Colour(red, green, blue, alpha);
         }
 
-        void ResetToDefaults (std::map<std::string, ThemeEditor::Colour>* colours, std::map<std::string, std::pair<std::string, int>>* fonts, std::map<std::string, std::string>* styles) {
+        void ResetToDefaults (
+            std::map<std::string, ThemeEditor::Colour>* colours,
+            std::map<std::string, std::pair<std::string, int>>* fonts,
+            std::map<std::string, std::string>* styles) {
             colours->clear();
             (*colours)["background"] = ThemeEditor::Colour(250, 247, 242);
             (*colours)["foreground"] = ThemeEditor::Colour(45, 31, 15);
@@ -202,7 +205,7 @@ namespace BreadBin {
             return false;
         }
 
-        file << "NAME:" << theme_name_ << "\n";
+        file << "NAME=" << theme_name_ << "\n";
 
         const Colour background = GetColour("background");
         const Colour foreground = GetColour("foreground");
@@ -210,11 +213,11 @@ namespace BreadBin {
         const Colour secondary = GetColour("secondary");
         const Colour accent = GetColour("accent");
 
-        file << "PRIMARY_COLOUR:" << primary.red << " " << primary.green << " " << primary.blue << " " << primary.alpha << "\n";
-        file << "SECONDARY_COLOUR:" << secondary.red << " " << secondary.green << " " << secondary.blue << " " << secondary.alpha << "\n";
-        file << "BACKGROUND_COLOUR:" << background.red << " " << background.green << " " << background.blue << " " << background.alpha << "\n";
-        file << "TEXT_COLOUR:" << foreground.red << " " << foreground.green << " " << foreground.blue << " " << foreground.alpha << "\n";
-        file << "ACCENT_COLOUR:" << accent.red << " " << accent.green << " " << accent.blue << " " << accent.alpha << "\n";
+        file << "PRIMARY_COLOUR=" << primary.red << " " << primary.green << " " << primary.blue << " " << primary.alpha << "\n";
+        file << "SECONDARY_COLOUR=" << secondary.red << " " << secondary.green << " " << secondary.blue << " " << secondary.alpha << "\n";
+        file << "BACKGROUND_COLOUR=" << background.red << " " << background.green << " " << background.blue << " " << background.alpha << "\n";
+        file << "TEXT_COLOUR=" << foreground.red << " " << foreground.green << " " << foreground.blue << " " << foreground.alpha << "\n";
+        file << "ACCENT_COLOUR=" << accent.red << " " << accent.green << " " << accent.blue << " " << accent.alpha << "\n";
 
         for (const auto& key : ColourElementKeys()) {
             const Colour colour = GetColour(key);
@@ -259,7 +262,7 @@ namespace BreadBin {
             }
         }
 
-        return Colour(45,31,15);
+        return Colour(45, 31, 15);
     }
 
     void ThemeEditor::SetFont (const std::string& element, const std::string& font_name, int font_size) {

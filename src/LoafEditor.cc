@@ -11,9 +11,9 @@
         CloseLoaf();
     }
 
-    void LoafEditor::NewLoaf (const std::string& name) {
+    void LoafEditor::NewLoaf (const std::string& name, bool mark_unsaved) {
         current_loaf_ = std::make_shared<Loaf>(name);
-        unsaved_changes_ = true;
+        unsaved_changes_ = mark_unsaved;
     }
 
     bool LoafEditor::OpenLoaf (const std::string& filepath) {
