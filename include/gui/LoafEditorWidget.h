@@ -30,7 +30,7 @@ namespace BreadBin {
 
             signals:
                 void LoafModified ( );
-                void CreateNewScriptRequested ( );
+                void CreateNewScriptRequested (const QString& loaf_name);
 
             private slots:
                 void OnAddApplication ( );

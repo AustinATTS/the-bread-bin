@@ -19,7 +19,7 @@ namespace BreadBin {
 
             public:
                 explicit TextEditorWidget (QWidget *parent = nullptr);
-                ~TextEditorWidget ( );
+                ~TextEditorWidget ( ) override;
 
                 enum class DocumentType {
                     PlainText,
@@ -43,7 +43,7 @@ namespace BreadBin {
                 void FileModified ( );
 
             protected:
-                void ShowEvent (QShowEvent *event) override;
+                void showEvent (QShowEvent* event) override;
 
             private slots:
                 void OnNewFile ( );
@@ -92,7 +92,7 @@ namespace BreadBin {
                 QLabel *status_label_;
 
                 QStringList file_paths_;
-                QStringList preferred_extension_;
+                QStringList preferred_extensions_;
                 QStringList script_loaf_names_;
                 bool prompted_on_first_show_;
         };
