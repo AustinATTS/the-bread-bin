@@ -12,7 +12,7 @@ namespace BreadBin {
             LoafEditor ( );
             ~LoafEditor ( );
 
-            void NewLoaf (const std::string& name);
+            void NewLoaf (const std::string& name, bool mark_unsaved = true);
             bool OpenLoaf (const std::string& filepath);
             bool SaveLoaf (const std::string& filepath);
             bool CloseLoaf ( );
@@ -35,7 +35,7 @@ namespace BreadBin {
         private:
             std::shared_ptr<Loaf> current_loaf_;
             bool unsaved_changes_;
-        };
+    };
 
 } // namespace BreadBin
 
