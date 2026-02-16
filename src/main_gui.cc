@@ -8,8 +8,8 @@ int main (int argument_count, char *argument_vector[]) {
     QApplication::setApplicationVersion("0.1");
     QApplication::setOrganizationName("All Things Toasty Software Ltd");
     
-    BreadBin::GUI::MainWindow mainWindow;
-    mainWindow.show();
+    BreadBin::GUI::MainWindow main_window;
+    main_window.show();
     
     return app.exec();
 }
