@@ -21,6 +21,12 @@ namespace BreadBin {
             QString last_modified;
             QColor primary_colour;
             QColor secondary_colour;
+            QString default_font_family;
+            int default_font_size = 12;
+            QString heading_font_family;
+            int heading_font_size = 16;
+            QString code_font_family;
+            int code_font_size = 10;
         };
 
         class ThemeBrowserWidget : public QWidget {

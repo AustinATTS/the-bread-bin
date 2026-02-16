@@ -37,6 +37,7 @@ namespace BreadBin {
                 bool OpenLoafFile (const QString& filepath);
                 void SaveLoaf ( );
                 void SaveLoafAs ( );
+                void SaveCurrentContext ( );
                 void ShowAbout ( );
                 void ApplyTheme ( );
                 void OnAddApplicationFromBrowser (const AppInfo& app_info);

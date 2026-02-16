@@ -7,6 +7,7 @@
 #include <QLineEdit>
 #include <QLabel>
 #include <QListWidget>
+#include <QCheckBox>
 #include <memory>
 #include "ThemeEditor.h"
 
@@ -36,12 +37,15 @@ namespace BreadBin {
                 void OnColourChanged ( );
                 void OnFontChanged ( );
                 void OnApplyTheme ( );
+                void OnUseElementFontsToggled (bool enabled);
+                void OnGlobalFontChanged ( );
 
             private:
                 void SetupUI ( );
                 void UpdateElementList ( );
                 void UpdateColourPicker ( );
                 void UpdateFontPicker ( );
+                void ApplyGlobalFontToElements ( );
                 void ConnectSignals ( );
 
                 std::shared_ptr<ThemeEditor> editor_;
@@ -59,6 +63,8 @@ namespace BreadBin {
 
                 QComboBox *font_combo_;
                 QComboBox *font_size_combo_;
+                QComboBox *global_font_combo_;
+                QCheckBox *use_element_fonts_check_;
 
                 QLabel *status_label_;
 
