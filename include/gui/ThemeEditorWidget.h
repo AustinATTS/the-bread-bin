@@ -24,6 +24,7 @@ namespace BreadBin {
                 void NewTheme (const QString &name);
                 bool LoadTheme (const QString &filepath);
                 bool SaveTheme (const QString &filepath);
+                bool SaveCurrentTheme ( );
 
             signals:
                 void ThemeChanged ( );
@@ -47,6 +48,7 @@ namespace BreadBin {
                 void UpdateFontPicker ( );
                 void ApplyGlobalFontToElements ( );
                 void ConnectSignals ( );
+                bool PromptAndSaveTheme ( );
 
                 std::shared_ptr<ThemeEditor> editor_;
 
