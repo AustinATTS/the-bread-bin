@@ -1,0 +1,72 @@
+<h3>
+    {{NAME}}
+</h3>
+{{DESCRIPTION_SECTION}}
+<p>
+    <b>
+        File:
+    </b>
+    <code>
+        {{FILEPATH}}
+    </code>
+</p>
+<p>
+    <b>
+        Last Modified:
+    </b>
+    {{LAST_MODIFIED}}
+</p>
+<hr>
+<h4>
+    Color Scheme:
+</h4>
+<p>
+    <b>
+        Primary Color:
+    </b>
+    <span style='background-color:{{PRIMARY_COLOUR}};padding:2px 10px;'>
+        {{PRIMARY_COLOUR}}
+    </span>
+</p>
+<p>
+    <b>
+        Secondary Color:
+    </b>
+    <span style='background-color:{{SECONDARY_COLOUR}};padding:2px 10px;'>
+        {{SECONDARY_COLOUR}}
+    </span>
+</p>
+<hr>
+<h4>
+    Typography:
+</h4>
+<p>
+    <b>
+        Body:
+    </b>
+    {{BODY_FONT_FAMILY}} ({{BODY_FONT_SIZE}}pt)
+</p>
+<p>
+    <b>
+        Heading:
+    </b>
+    {{HEADING_FONT_FAMILY}} ({{HEADING_FONT_SIZE}}pt)
+</p>
+<p>
+    <b>
+        Code:
+    </b>
+    {{CODE_FONT_FAMILY}} ({{CODE_FONT_SIZE}}pt)
+</p>
+<div style='padding: 10px; border: 1px solid #e8dcc8; border-radius: 6px; background-color: #fff;'>
+    <div style='font-family:{{HEADING_FONT_CSS}}; font-size:{{HEADING_FONT_SIZE}}pt; font-weight:700;'>
+        Heading Preview: The Bread Bin
+    </div>
+    <div style='margin-top:8px; font-family:{{BODY_FONT_CSS}}; font-size:{{BODY_FONT_SIZE}}pt;'>
+        Body Preview: Pack my box with five dozen liquor jugs.
+    </div>
+    <div style='margin-top:8px; font-family:{{CODE_FONT_CSS}}; font-size:{{CODE_FONT_SIZE}}pt;'>
+        Code Preview: for (int i = 0; i < 5; ++i) { bake(); }
+    </div>
+</div>
+{{THEME_DEFINITION_SECTION}}

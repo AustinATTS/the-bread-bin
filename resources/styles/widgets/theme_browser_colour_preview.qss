@@ -1,0 +1,4 @@
+QWidget {
+    border: 2px solid #e8dcc8;
+    border-radius: 6px;
+}

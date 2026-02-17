@@ -1,0 +1,97 @@
+QMainWindow {
+    background-color: {{BACKGROUND_COLOUR}};
+}
+
+QTabWidget::pane {
+    border: 2px solid {{PRIMARY_COLOUR}};
+    background-color: {{BACKGROUND_COLOUR}};
+    border-radius: 4px;
+}
+
+QTabWidget::tab-bar {
+    left: 8px;
+}
+
+QTabBar::tab {
+    background-color: {{SECONDARY_COLOUR}};
+    color: {{TEXT_COLOUR}};
+    padding: 8px 16px;
+    margin-right: 2px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    font-weight: bold;
+}
+
+QTabBar::tab:selected {
+    background-color: {{PRIMARY_COLOUR}};
+    color: {{TEXT_COLOUR}};
+}
+
+QTabBar::tab:hover {
+    background-color: {{ACCENT_COLOUR}};
+}
+
+QPushButton {
+    background-color: {{PRIMARY_COLOUR}};
+    color: {{TEXT_COLOUR}};
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: {{ACCENT_COLOUR}};
+}
+
+QPushButton:pressed {
+    background-color: {{ACCENT_COLOUR}};
+}
+
+QLineEdit, QTextEdit, QPlainTextEdit {
+    background-color: {{EDITOR_BACKGROUND_COLOUR}};
+    border: 1px solid {{PRIMARY_COLOUR}};
+    border-radius: 3px;
+    padding: 4px;
+    color: {{TEXT_COLOUR}};
+}
+
+QListWidget {
+    background-color: {{EDITOR_BACKGROUND_COLOUR}};
+    border: 1px solid {{PRIMARY_COLOUR}};
+    border-radius: 3px;
+    color: {{TEXT_COLOUR}};
+}
+
+QLabel {
+    color: {{TEXT_COLOUR}};
+}
+
+QMenuBar {
+    background-color: {{SECONDARY_COLOUR}};
+    color: {{TEXT_COLOUR}};
+}
+
+QMenuBar::item:selected {
+    background-color: {{PRIMARY_COLOUR}};
+}
+
+QMenu {
+    background-color: {{BACKGROUND_COLOUR}};
+    border: 1px solid {{PRIMARY_COLOUR}};
+}
+
+QMenu::item:selected {
+    background-color: {{ACCENT_COLOUR}};
+}
+
+QToolBar {
+    background-color: {{SECONDARY_COLOUR}};
+    border: none;
+    spacing: 4px;
+}
+
+QStatusBar {
+    background-color: {{SECONDARY_COLOUR}};
+    color: {{TEXT_COLOUR}};
+}

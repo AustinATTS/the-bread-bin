@@ -1,0 +1,31 @@
+<RCC>
+    <qresource prefix="/styles">
+        <file>styles/common/form_label.qss</file>
+        <file>styles/common/status_label.qss</file>
+        <file>styles/common/preview_text.qss</file>
+        <file>styles/common/search_label_60.qss</file>
+        <file>styles/common/search_label_70.qss</file>
+        <file>styles/common/paths_label.qss</file>
+        <file>styles/widgets/home_welcome_label.qss</file>
+        <file>styles/widgets/home_subtitle_label.qss</file>
+        <file>styles/widgets/home_new_loaf_button.qss</file>
+        <file>styles/widgets/runtime_loaf_name_label.qss</file>
+        <file>styles/widgets/runtime_status_label.qss</file>
+        <file>styles/widgets/runtime_run_button.qss</file>
+        <file>styles/widgets/runtime_stop_button.qss</file>
+        <file>styles/widgets/text_editor_output.qss</file>
+        <file>styles/widgets/theme_browser_apply_button.qss</file>
+        <file>styles/widgets/theme_browser_colour_preview.qss</file>
+        <file>styles/widgets/theme_editor_colour_preview_template.qss</file>
+        <file>styles/widgets/theme_editor_picker_colour_template.qss</file>
+        <file>styles/main_window/warm_theme.qss</file>
+        <file>styles/main_window/custom_theme.qss</file>
+    </qresource>
+    <qresource prefix="/templates">
+        <file>templates/about_dialog.html</file>
+        <file>templates/home_welcome.html</file>
+        <file>templates/app_details.html</file>
+        <file>templates/loaf_preview.html</file>
+        <file>templates/theme_preview.html</file>
+    </qresource>
+</RCC>
