@@ -15,7 +15,7 @@ namespace BreadBin {
                 WEBPAGE
             };
 
-            LoafItem (const std::string& id, Type type);
+            LoafItem (std::string  id, Type type);
             virtual ~LoafItem ( );
 
             [[nodiscard]] std::string GetId ( ) const;
@@ -27,7 +27,7 @@ namespace BreadBin {
             void SetMetadata (const std::string& key, const std::string& value);
             [[nodiscard]] std::string GetMetadata (const std::string& key) const;
             virtual bool Execute ( ) = 0;
-            [[nodiscard]] virtual bool Validate ( ) const;
+            virtual bool Validate ( ) const = 0;
             [[nodiscard]] virtual std::string ToString ( ) const;
 
         protected:
