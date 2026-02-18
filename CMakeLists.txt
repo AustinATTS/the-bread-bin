@@ -27,7 +27,7 @@ set(CORE_SOURCES
 
 # GUI sources.
 set(GUI_SOURCES
-    #src/gui/ResourceLoader.cc
+    src/gui/ResourceLoader.cc
     src/gui/MainWindow.cc
     src/gui/HomeWidget.cc
     src/gui/LoafEditorWidget.cc
