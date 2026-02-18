@@ -27,6 +27,7 @@ set(CORE_SOURCES
 
 # GUI sources.
 set(GUI_SOURCES
+    #src/gui/ResourceLoader.cc
     src/gui/MainWindow.cc
     src/gui/HomeWidget.cc
     src/gui/LoafEditorWidget.cc
@@ -37,6 +38,10 @@ set(GUI_SOURCES
     src/gui/LoafBrowserWidget.cc
     src/gui/ThemeBrowserWidget.cc
     src/main_gui.cc
+)
+
+set(GUI_RESOURCES
+    resources/resources.qrc
 )
 
 # GUI headers (needed for MOC).
@@ -53,7 +58,7 @@ set(GUI_HEADERS
 )
 
 # Create executable.
-add_executable(breadbin ${CORE_SOURCES} ${GUI_SOURCES} ${GUI_HEADERS})
+add_executable(breadbin ${CORE_SOURCES} ${GUI_SOURCES} ${GUI_HEADERS} ${GUI_RESOURCES})
 
 # Link Qt6.
 target_link_libraries(breadbin Qt6::Core Qt6::Widgets Qt6::Gui)
