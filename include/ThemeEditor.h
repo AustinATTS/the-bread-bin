@@ -5,13 +5,11 @@
 #include <map>
 
 namespace BreadBin {
-
     class ThemeEditor {
         public:
             struct Colour {
                 int red, green, blue, alpha;
-                Colour (int red = 0, int green = 0, int blue = 0, int alpha = 255)
-                    : red(red), green(green), blue(blue), alpha(alpha) {}
+                explicit Colour (int red = 0, int green = 0, int blue = 0, int alpha = 255) : red(red), green(green), blue(blue), alpha(alpha) {}
             };
 
             ThemeEditor ( );
@@ -20,20 +18,16 @@ namespace BreadBin {
             void NewTheme (const std::string& name);
             bool LoadTheme (const std::string& filepath);
             bool SaveTheme (const std::string& filepath);
-
             void SetColour (const std::string& element, const Colour& colour);
-            Colour GetColour (const std::string& element) const;
-
+            [[nodiscard]] Colour GetColour (const std::string& element) const;
             void SetFont (const std::string& element, const std::string& font_name, int font_size);
-            std::string GetFont (const std::string& element) const;
-            int GetFontSize (const std::string& element) const;
-
+            [[nodiscard]] std::string GetFont (const std::string& element) const;
+            [[nodiscard]] int GetFontSize (const std::string& element) const;
             void SetStyle (const std::string& property, const std::string& value);
-            std::string GetStyle (const std::string& property) const;
-
+            [[nodiscard]] std::string GetStyle (const std::string& property) const;
             void SetThemeName (const std::string& name);
-            std::string GetThemeName ( ) const;
-            bool HasUnsavedChanges ( ) const;
+            [[nodiscard]] std::string GetThemeName ( ) const;
+            [[nodiscard]] bool HasUnsavedChanges ( ) const;
 
         private:
             std::string theme_name_;
@@ -42,7 +36,6 @@ namespace BreadBin {
             std::map<std::string, std::string> styles_;
             bool unsaved_changes_;
     };
-
 } // namespace BreadBin
 
 #endif // THEME_EDITOR_H

@@ -2,12 +2,12 @@
 #define APPDISCOVERY_H
 
 #include <string>
+#include <utility>
 #include <vector>
 #include <map>
 #include <memory>
 
 namespace BreadBin {
-
     struct AppInfo {
         std::string name;
         std::string executable;
@@ -18,8 +18,7 @@ namespace BreadBin {
         std::map<std::string, std::string> metadata;
 
         AppInfo() = default;
-        AppInfo(const std::string& name, const std::string& executable)
-            : name(name), executable(executable) {}
+        AppInfo(std::string  name, std::string  executable) : name(std::move(name)), executable(std::move(executable)) {}
     };
 
     class AppDiscovery {
@@ -28,19 +27,12 @@ namespace BreadBin {
             ~AppDiscovery ( );
 
             size_t ScanSystem ( );
-
-            const std::vector<AppInfo>& GetApplications ( ) const;
-
-            std::vector<AppInfo> SearchApplications (const std::string& query) const;
-
-            std::vector<AppInfo> GetApplicationsByCategory (const std::string& category) const;
-
-            std::vector<std::string> GetCategories ( ) const;
-
+            [[nodiscard]] const std::vector<AppInfo>& GetApplications ( ) const;
+            [[nodiscard]] std::vector<AppInfo> SearchApplications (const std::string& query) const;
+            [[nodiscard]] std::vector<AppInfo> GetApplicationsByCategory (const std::string& category) const;
+            [[nodiscard]] std::vector<std::string> GetCategories ( ) const;
             void clear ( );
-
-            bool SaveCache (const std::string& filepath) const;
-
+            [[nodiscard]] bool SaveCache (const std::string& filepath) const;
             bool LoadCache (const std::string& filepath);
 
         private:
@@ -48,12 +40,10 @@ namespace BreadBin {
             void ScanWindowsApplications ( );
             void ScanMacOSApplications ( );
             void ScanPathEnvironment ( );
-
             AppInfo ParseDesktopFile (const std::string& filepath);
 
             std::vector<AppInfo> applications_;
     };
-
 } // namespace BreadBin
 
 #endif // APPDISCOVERY_H
