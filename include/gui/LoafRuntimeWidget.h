@@ -9,47 +9,40 @@
 #include <memory>
 #include "Loaf.h"
 
-namespace BreadBin {
-    namespace GUI {
+namespace BreadBin::GUI {
+    class LoafRuntimeWidget : public QWidget {
+        Q_OBJECT
 
-        class LoafRuntimeWidget : public QWidget {
-            Q_OBJECT
+        public:
+            explicit LoafRuntimeWidget (QWidget *parent = nullptr);
+            ~LoafRuntimeWidget ( ) override;
 
-            public:
-                explicit LoafRuntimeWidget (QWidget *parent = nullptr);
-                ~LoafRuntimeWidget ( );
+            void SetLoaf (std::shared_ptr<Loaf> loaf);
 
-                void SetLoaf (std::shared_ptr<Loaf> loaf);
+        signals:
+            void loafStarted ( );
+            void loafStopped ( );
 
-            signals:
-                void loafStarted();
-                void loafStopped();
+        private slots:
+            void OnRunLoaf ( );
+            void OnStopLoaf ( );
+            void OnRefreshStatus ( );
+            void UpdateStatus ( );
 
-            private slots:
-                void OnRunLoaf ( );
-                void OnStopLoaf ( );
-                void OnRefreshStatus ( );
-                void UpdateStatus ( );
+        private:
+            void SetupUI ( );
+            void ConnectSignals ( );
+            void RefreshLoafStatus ( );
 
-            private:
-                void SetupUI ( );
-                void ConnectSignals ( );
-                void RefreshLoafStatus ( );
-
-                std::shared_ptr<Loaf> current_loaf_;
-
-                QLabel *loaf_name_label_;
-                QLabel *status_label_;
-                QListWidget *item_status_list_;
-
-                QPushButton *run_button_;
-                QPushButton *stop_button_;
-                QPushButton *refresh_button_;
-
-                QTimer *status_timer_;
-        };
-
-    } // namespace GUI
-} // namespace BreadBin
+            std::shared_ptr<Loaf> current_loaf_;
+            QLabel *loaf_name_label_;
+            QLabel *status_label_;
+            QListWidget *item_status_list_;
+            QPushButton *run_button_;
+            QPushButton *stop_button_;
+            QPushButton *refresh_button_;
+            QTimer *status_timer_;
+    };
+} // namespace BreadBin::GUI
 
 #endif // LOAFRUNTIMEWIDGET_H
