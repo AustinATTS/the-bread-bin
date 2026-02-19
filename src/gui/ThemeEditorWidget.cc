@@ -12,9 +12,7 @@
 #include <vector>
 #include <QFontDatabase>
 
-namespace BreadBin {
-    namespace GUI {
-
+namespace BreadBin::GUI {
         namespace {
             std::string SelectedThemeKey (const QListWidgetItem* item) {
                 if (!item) {
@@ -485,6 +483,4 @@ namespace BreadBin {
                 font_size_combo_->setCurrentText(QString::number(editor_->GetFontSize(key)));
             }
         }
-
-    } // namespace GUI
-} // namespace BreadBin
+} // namespace BreadBin::GUI

@@ -13,9 +13,7 @@
 #include <sstream>
 #include "Loaf.h"
 
-namespace BreadBin {
-    namespace GUI {
-
+namespace BreadBin::GUI {
     LoafBrowserWidget::LoafBrowserWidget (QWidget *parent)
         : QWidget(parent),
           paths_label_(nullptr)
@@ -320,12 +318,8 @@ namespace BreadBin {
             if (file.good()) {
                 preview += "...\n(file continues)";
             }
-
             preview += "</pre>";
         }
-
         preview_text_->setHtml(preview);
     }
-
-    } // namespace GUI
-} // namespace BreadBin
+} // namespace BreadBin::GUI

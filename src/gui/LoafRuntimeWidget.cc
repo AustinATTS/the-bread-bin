@@ -3,9 +3,7 @@
 #include <QHBoxLayout>
 #include <QGroupBox>
 
-namespace BreadBin {
-    namespace GUI {
-
+namespace BreadBin::GUI {
     LoafRuntimeWidget::LoafRuntimeWidget (QWidget *parent)
         : QWidget(parent),
           current_loaf_(nullptr)
@@ -18,9 +16,7 @@ namespace BreadBin {
         connect(status_timer_, &QTimer::timeout, this, &LoafRuntimeWidget::UpdateStatus);
     }
 
-    LoafRuntimeWidget::~LoafRuntimeWidget ( ) {
-
-    }
+    LoafRuntimeWidget::~LoafRuntimeWidget ( ) = default;
 
     void LoafRuntimeWidget::SetupUI ( ) {
         QVBoxLayout *main_layout = new QVBoxLayout(this);
@@ -199,6 +195,4 @@ namespace BreadBin {
             stop_button_->setEnabled(false);
         }
     }
-
-    } // namespace GUI
-} // namespace BreadBin
+} // namespace BreadBin::GUI

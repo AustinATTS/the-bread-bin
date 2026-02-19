@@ -16,9 +16,7 @@
 #include <sstream>
 #include <QFontDatabase>
 
-namespace BreadBin {
-    namespace GUI {
-
+namespace BreadBin::GUI {
     namespace {
         QString CSSFontFamily (const QString& family) {
             QString escaped = family;
@@ -525,6 +523,4 @@ namespace BreadBin {
 
         preview_text_->setHtml(preview);
     }
-
-    } // namespace GUI
-} // namespace BreadBin
+} // namespace BreadBin::GUI

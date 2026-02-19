@@ -14,9 +14,7 @@
 #include <QInputDialog>
 #include <QMessageBox>
 
-namespace BreadBin {
-    namespace GUI {
-
+namespace BreadBin::GUI {
     HomeWidget::HomeWidget (QWidget *parent)
         : QWidget(parent),
           recent_list_(nullptr),
@@ -294,7 +292,6 @@ namespace BreadBin {
                 if (info.is_favorite) {
                     display = "  ⭐ " + info.name;
                 }
-
                 QListWidgetItem *item = new QListWidgetItem(display, categories_list_);
                 item->setData(Qt::UserRole, info.filepath);
                 item->setToolTip(info.filepath);
@@ -341,7 +338,6 @@ namespace BreadBin {
                     break;
                 }
             }
-
             SaveSettings();
             Refresh();
         }
@@ -413,6 +409,4 @@ namespace BreadBin {
             }
         }
     }
-
-    } // namespace GUI
-} // namespace BreadBin
+} // namespace BreadBin::GUI

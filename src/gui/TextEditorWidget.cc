@@ -20,9 +20,7 @@
 #include <QTextEdit>
 #include <QTextCursor>
 
-namespace BreadBin {
-    namespace GUI {
-
+namespace BreadBin::GUI {
     namespace {
         class ScriptTerminalDialog final : public QDialog {
         public:
@@ -1025,6 +1023,4 @@ namespace BreadBin {
         const bool index_valid = index >= 0 && index < static_cast<int>(document_types_.size());
         run_script_button_->setEnabled(index_valid && document_types_[index] == DocumentType::Script);
     }
-
-    } // namespace GUI
-} // namespace BreadBin
+} // namespace BreadBin::GUI

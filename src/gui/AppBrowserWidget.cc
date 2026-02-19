@@ -8,13 +8,8 @@
 #include <QDir>
 #include <QLabel>
 
-namespace BreadBin {
-    namespace GUI {
-
-    AppBrowserWidget::AppBrowserWidget (QWidget *parent)
-        : QWidget(parent),
-          discovery_(std::make_shared<AppDiscovery>())
-    {
+namespace BreadBin::GUI {
+    AppBrowserWidget::AppBrowserWidget (QWidget *parent) : QWidget(parent), discovery_(std::make_shared<AppDiscovery>()) {
         SetupUI();
         ConnectSignals();
 
@@ -25,16 +20,14 @@ namespace BreadBin {
         }
     }
 
-    AppBrowserWidget::~AppBrowserWidget ( ) {
-
-    }
+    AppBrowserWidget::~AppBrowserWidget ( ) = default;
 
     void AppBrowserWidget::SetupUI ( ) {
-        QVBoxLayout *main_layout = new QVBoxLayout(this);
+        auto *main_layout = new QVBoxLayout(this);
         main_layout->setContentsMargins(16, 16, 16, 16);
         main_layout->setSpacing(16);
 
-        QGroupBox *filter_group = new QGroupBox("🔍 Search & Filter", this);
+        auto *filter_group = new QGroupBox("🔍 Search & Filter", this);
         QVBoxLayout *filter_layout = new QVBoxLayout(filter_group);
         filter_layout->setContentsMargins(12, 20, 12, 12);
         filter_layout->setSpacing(12);
@@ -274,8 +267,7 @@ namespace BreadBin {
             details += "<p><b>Additional Metadata:</b></p>";
             details += "<ul>";
             for (const auto& [key, value] : app_info.metadata) {
-                details += "<li>" + QString::fromStdString(key) + ": " +
-                          QString::fromStdString(value) + "</li>";
+                details += "<li>" + QString::fromStdString(key) + ": " + QString::fromStdString(value) + "</li>";
             }
             details += "</ul>";
         }
@@ -283,21 +275,18 @@ namespace BreadBin {
         details_text_->setHtml(details);
     }
 
-    void AppBrowserWidget::PopulateCategories ( ) {
-        QString current_category = category_combo_->currentText();
+    void AppBrowserWidget::PopulateCategories ( ) const {
+        const QString current_category = category_combo_->currentText();
         category_combo_->clear();
         category_combo_->addItem("All Categories");
 
-        auto categories = discovery_->GetCategories();
+        const auto categories = discovery_->GetCategories();
         for (const auto& category : categories) {
             category_combo_->addItem(QString::fromStdString(category));
         }
 
-        int index = category_combo_->findText(current_category);
-        if (index >= 0) {
+        if (const int index = category_combo_->findText(current_category); index >= 0) {
             category_combo_->setCurrentIndex(index);
         }
     }
-
-    } // namespace GUI
-} // namespace BreadBin
+} // namespace BreadBin::GUI

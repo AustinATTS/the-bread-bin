@@ -18,9 +18,7 @@
 #include <algorithm>
 #include "AppDiscovery.h"
 
-namespace BreadBin {
-    namespace GUI {
-
+namespace BreadBin::GUI {
     LoafEditorWidget::LoafEditorWidget (QWidget *parent)
         : QWidget(parent),
           editor_(std::make_shared<LoafEditor>())
@@ -800,6 +798,4 @@ namespace BreadBin {
             }
         }
     }
-
-    } // namespace GUI
-} // namespace BreadBin
+} // namespace BreadBin::GUI
