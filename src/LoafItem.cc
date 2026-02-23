@@ -4,17 +4,16 @@
 #include <cstdlib>
 #include <algorithm>
 #include <cctype>
+#include <utility>
 
 namespace BreadBin {
 
-    LoafItem::LoafItem (const std::string& id, Type type)
-        : id_(id), type_(type), name_(""), path_("") {
+    LoafItem::LoafItem (std::string  id, Type type)
+        : id_(std::move(id)), type_(type), name_(""), path_("") {
 
     }
 
-    LoafItem::~LoafItem ( ) {
-
-    }
+    LoafItem::~LoafItem ( ) = default;
 
     std::string LoafItem::GetId ( ) const {
         return id_;

@@ -21,9 +21,7 @@
 #include <fstream>
 #include <sstream>
 
-namespace BreadBin {
-    namespace GUI {
-
+namespace BreadBin::GUI {
         namespace {
             std::string TrimThemeValue (const std::string& value) {
                 const auto first = value.find_first_not_of(" \t\r\n");
@@ -953,9 +951,6 @@ namespace BreadBin {
                     settings << filepath.toStdString() << "\n";
                 }
             }
-
             statusBar()->showMessage("Applied theme from: " + filepath, 3000);
         }
-
-    } // namespace GUI
-} // namespace BreadBin
+} // namespace BreadBin::GUI

@@ -1,8 +1,7 @@
 #include "LoafEditor.h"
 #include "LoafItem.h"
 
-    namespace BreadBin {
-
+namespace BreadBin {
     LoafEditor::LoafEditor ( ) : current_loaf_(nullptr), unsaved_changes_(false) {
 
     }
@@ -166,5 +165,4 @@
     bool LoafEditor::HasUnsavedChanges ( ) const {
         return unsaved_changes_;
     }
-
 } // namespace BreadBin

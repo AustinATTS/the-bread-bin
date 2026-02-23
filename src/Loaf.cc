@@ -3,7 +3,6 @@
 #include <algorithm>
 
 namespace BreadBin {
-
     namespace {
         std::shared_ptr<LoafItem> CreateItemByType(const std::string& type, const std::string& id) {
             if (type == "APPLICATION") {

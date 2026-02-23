@@ -38,7 +38,7 @@ namespace BreadBin::GUI {
             void ConnectSignals ( );
             void UpdateApplicationList ( );
             void UpdateApplicationDetails (const AppInfo& app_info);
-            void PopulateCategories ( );
+            void PopulateCategories ( ) const;
 
             std::shared_ptr<AppDiscovery> discovery_;
             std::vector<AppInfo> filtered_apps_;

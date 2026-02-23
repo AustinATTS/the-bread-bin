@@ -40,7 +40,7 @@ namespace BreadBin {
             void ScanWindowsApplications ( );
             void ScanMacOSApplications ( );
             void ScanPathEnvironment ( );
-            AppInfo ParseDesktopFile (const std::string& filepath);
+            static AppInfo ParseDesktopFile (const std::string& filepath);
 
             std::vector<AppInfo> applications_;
     };

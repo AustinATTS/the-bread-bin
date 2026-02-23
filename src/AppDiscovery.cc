@@ -17,13 +17,9 @@
 
 namespace BreadBin {
 
-    AppDiscovery::AppDiscovery ( ) {
+    AppDiscovery::AppDiscovery ( ) = default;
 
-    }
-
-    AppDiscovery::~AppDiscovery ( ) {
-
-    }
+    AppDiscovery::~AppDiscovery ( ) = default;
 
     size_t AppDiscovery::ScanSystem ( ) {
         clear();

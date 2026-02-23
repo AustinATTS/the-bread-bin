@@ -3,7 +3,6 @@
 #include <sstream>
 
 namespace BreadBin {
-
     TextEditor::TextEditor ( ) : current_file_path_(""), unsaved_changes_(false) {
 
     }
