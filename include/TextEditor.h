@@ -5,31 +5,34 @@
 #include <vector>
 
 namespace BreadBin {
-    class TextEditor {
-        public:
-            TextEditor ( );
-            ~TextEditor ( );
+class TextEditor {
+ public:
+  TextEditor();
+  ~TextEditor();
 
-            bool OpenFile (const std::string& filepath);
-            bool SaveFile (const std::string& filepath);
-            bool CloseFile ( );
-            void SetContent (const std::string& content);
-            [[nodiscard]] std::string GetContent ( ) const;
-            void InsertText (int line, int column, const std::string& text);
-            void DeleteText (int start_line, int start_column, int end_line, int end_column);
-            void ReplaceText (int start_line, int start_column, int end_line, int end_column, const std::string& text);
-            [[nodiscard]] int GetLineCount ( ) const;
-            [[nodiscard]] std::string GetLine (int line_number) const;
-            bool Find (const std::string& search_text, int& line, int& column);
-            int ReplaceAll (const std::string& search_text, const std::string& replace_text);
-            [[nodiscard]] bool HasUnsavedChanges ( ) const;
-            [[nodiscard]] std::string GetCurrentFilePath ( ) const;
+  bool OpenFile(const std::string& filepath);
+  bool SaveFile(const std::string& filepath);
+  bool CloseFile();
+  void SetContent(const std::string& content);
+  [[nodiscard]] std::string GetContent() const;
+  void InsertText(int line, int column, const std::string& text);
+  void DeleteText(int start_line, int start_column, int end_line,
+                  int end_column);
+  void ReplaceText(int start_line, int start_column, int end_line,
+                   int end_column, const std::string& text);
+  [[nodiscard]] int GetLineCount() const;
+  [[nodiscard]] std::string GetLine(int line_number) const;
+  bool Find(const std::string& search_text, int& line, int& column);
+  int ReplaceAll(const std::string& search_text,
+                 const std::string& replace_text);
+  [[nodiscard]] bool HasUnsavedChanges() const;
+  [[nodiscard]] std::string GetCurrentFilePath() const;
 
-        private:
-            std::vector<std::string> lines_;
-            std::string current_file_path_;
-            bool unsaved_changes_;
-    };
-} // namespace BreadBin
+ private:
+  std::vector<std::string> lines_;
+  std::string current_file_path_;
+  bool unsaved_changes_;
+};
+}  // namespace BreadBin
 
-#endif // TEXT_EDITOR_H
+#endif  // TEXT_EDITOR_H
